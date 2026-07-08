@@ -84,16 +84,14 @@ function RevealImage({ children, className }: { children: React.ReactNode; class
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setShown(true); obs.disconnect(); } },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
   return (
-    <div ref={ref} className={`${className ?? ''} ${shown ? 'revealed' : ''}`} style={{ display: 'contents' }}>
-      <div className={s.aboutImgWrap + (shown ? ' revealed' : '')}>
-        {children}
-      </div>
+    <div ref={ref} className={`${s.aboutImgWrap} ${className ?? ''} ${shown ? 'revealed' : ''}`}>
+      {children}
     </div>
   );
 }

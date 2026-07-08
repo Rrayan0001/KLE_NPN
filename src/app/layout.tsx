@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   description: 'Accredited at "A" with 3.10 CGPA in 4th Cycle by NAAC. Established in 1961.',
   keywords: ["GI Bagewadi College", "KLE Nipani", "KLE College Nipani", "Admissions 2026", "Nipani College"],
   icons: {
-    icon: '/images/logo.png',
-    shortcut: '/images/logo.png',
-    apple: '/images/logo.png',
+    icon: '/images/main_logo.png',
+    shortcut: '/images/main_logo.png',
+    apple: '/images/main_logo.png',
   },
 };
 

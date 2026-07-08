@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function CommPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Comm">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -223,6 +222,6 @@ Ph.D awarded to two faculty members Shri C V Koppad and Shri B M Hiremath in the
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

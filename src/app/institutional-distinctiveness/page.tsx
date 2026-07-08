@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function InstitutionalDistinctivenessPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="InstitutionalDistinctiveness">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -67,6 +66,6 @@ export default function InstitutionalDistinctivenessPage() {
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

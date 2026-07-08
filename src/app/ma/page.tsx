@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function MaPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Ma">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -105,6 +104,6 @@ PG course in English is introduced in the year 2018-19 which is a feather in the
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

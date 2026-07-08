@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function AqardocsPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Aqardocs">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -1081,6 +1080,6 @@ environment</td>
 </div>
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

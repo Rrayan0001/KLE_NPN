@@ -9,25 +9,34 @@ interface WelcomeAnimationProps {
 export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) {
   const [visible, setVisible] = useState(true);
   const [phase, setPhase] = useState<'draw' | 'hold' | 'exit'>('draw');
+  const [variant, setVariant] = useState<'full' | 'mini'>('full');
 
   useEffect(() => {
-    // Check system preferences or session storage to skip animation if needed
     const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const seen = typeof window !== 'undefined' && sessionStorage.getItem('kle-intro-seen');
 
-    if (prefersReduced || seen) {
+    if (prefersReduced) {
       setVisible(false);
       onComplete();
       return;
     }
 
-    const t1 = setTimeout(() => setPhase('hold'), 1200);
-    const t2 = setTimeout(() => setPhase('exit'), 1800);
+    if (seen) {
+      setVariant('mini');
+    }
+
+    const isMini = seen;
+    const drawDuration = isMini ? 600 : 1200;
+    const holdDuration = isMini ? 300 : 600;
+    const exitDuration = isMini ? 500 : 1100;
+
+    const t1 = setTimeout(() => setPhase('hold'), drawDuration);
+    const t2 = setTimeout(() => setPhase('exit'), drawDuration + holdDuration);
     const t3 = setTimeout(() => {
       setVisible(false);
       sessionStorage.setItem('kle-intro-seen', '1');
       onComplete();
-    }, 2900); // 1100ms duration for exit transition to complete fully
+    }, drawDuration + holdDuration + exitDuration);
 
     return () => {
       clearTimeout(t1);
@@ -38,8 +47,10 @@ export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) 
 
   if (!visible) return null;
 
+  const isMini = variant === 'mini';
+
   return (
-    <div className={`welcome-overlay ${phase === 'exit' ? 'exit-active' : ''}`}>
+    <div className={`welcome-overlay ${phase === 'exit' ? 'exit-active' : ''} ${isMini ? 'welcome-mini' : ''}`}>
       <style>{`
         .welcome-overlay {
           position: fixed;
@@ -59,9 +70,18 @@ export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) 
           pointer-events: none;
         }
 
+        .welcome-overlay.welcome-mini {
+          clip-path: circle(100% at 50% 50%);
+          transition: clip-path 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .welcome-overlay.welcome-mini.exit-active {
+          clip-path: circle(0% at 50% 50%);
+        }
+
         .welcome-svg {
-          width: 140px;
-          height: 80px;
+          width: ${isMini ? '80px' : '140px'};
+          height: ${isMini ? '46px' : '80px'};
         }
 
         @keyframes strokeDraw {
@@ -70,53 +90,102 @@ export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) 
           }
         }
 
-        /* SVG line drawing animations */
-        .path-k-vertical {
+        /* SVG line drawing animations - Full version */
+        .welcome-overlay:not(.welcome-mini) .path-k-vertical {
           stroke-dasharray: 48;
           stroke-dashoffset: 48;
           animation: strokeDraw 0.4s ease forwards 0.1s;
         }
 
-        .path-k-diag-top {
+        .welcome-overlay:not(.welcome-mini) .path-k-diag-top {
           stroke-dasharray: 34;
           stroke-dashoffset: 34;
           animation: strokeDraw 0.25s ease forwards 0.4s;
         }
 
-        .path-k-diag-bottom {
+        .welcome-overlay:not(.welcome-mini) .path-k-diag-bottom {
           stroke-dasharray: 34;
           stroke-dashoffset: 34;
           animation: strokeDraw 0.25s ease forwards 0.5s;
         }
 
-        .path-l {
+        .welcome-overlay:not(.welcome-mini) .path-l {
           stroke-dasharray: 72;
           stroke-dashoffset: 72;
           animation: strokeDraw 0.45s ease forwards 0.7s;
         }
 
-        .path-e-vertical {
+        .welcome-overlay:not(.welcome-mini) .path-e-vertical {
           stroke-dasharray: 48;
           stroke-dashoffset: 48;
           animation: strokeDraw 0.4s ease forwards 1.05s;
         }
 
-        .path-e-top {
+        .welcome-overlay:not(.welcome-mini) .path-e-top {
           stroke-dasharray: 24;
           stroke-dashoffset: 24;
           animation: strokeDraw 0.2s ease forwards 1.25s;
         }
 
-        .path-e-middle {
+        .welcome-overlay:not(.welcome-mini) .path-e-middle {
           stroke-dasharray: 18;
           stroke-dashoffset: 18;
           animation: strokeDraw 0.15s ease forwards 1.35s;
         }
 
-        .path-e-bottom {
+        .welcome-overlay:not(.welcome-mini) .path-e-bottom {
           stroke-dasharray: 24;
           stroke-dashoffset: 24;
           animation: strokeDraw 0.2s ease forwards 1.45s;
+        }
+
+        /* SVG line drawing animations - Mini version (faster) */
+        .welcome-mini .path-k-vertical {
+          stroke-dasharray: 48;
+          stroke-dashoffset: 48;
+          animation: strokeDraw 0.2s ease forwards 0.05s;
+        }
+
+        .welcome-mini .path-k-diag-top {
+          stroke-dasharray: 34;
+          stroke-dashoffset: 34;
+          animation: strokeDraw 0.15s ease forwards 0.2s;
+        }
+
+        .welcome-mini .path-k-diag-bottom {
+          stroke-dasharray: 34;
+          stroke-dashoffset: 34;
+          animation: strokeDraw 0.15s ease forwards 0.25s;
+        }
+
+        .welcome-mini .path-l {
+          stroke-dasharray: 72;
+          stroke-dashoffset: 72;
+          animation: strokeDraw 0.25s ease forwards 0.35s;
+        }
+
+        .welcome-mini .path-e-vertical {
+          stroke-dasharray: 48;
+          stroke-dashoffset: 48;
+          animation: strokeDraw 0.2s ease forwards 0.5s;
+        }
+
+        .welcome-mini .path-e-top {
+          stroke-dasharray: 24;
+          stroke-dashoffset: 24;
+          animation: strokeDraw 0.1s ease forwards 0.6s;
+        }
+
+        .welcome-mini .path-e-middle {
+          stroke-dasharray: 18;
+          stroke-dashoffset: 18;
+          animation: strokeDraw 0.1s ease forwards 0.65s;
+        }
+
+        .welcome-mini .path-e-bottom {
+          stroke-dasharray: 24;
+          stroke-dashoffset: 24;
+          animation: strokeDraw 0.1s ease forwards 0.7s;
         }
 
         /* Fade in up title */
@@ -133,14 +202,14 @@ export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) 
 
         .welcome-text {
           font-family: var(--font-dm-sans), sans-serif;
-          font-size: 10px;
+          font-size: ${isMini ? '8px' : '10px'};
           font-weight: 700;
           letter-spacing: 0.28em;
           color: rgba(248, 246, 240, 0.75);
-          margin-top: 22px;
+          margin-top: ${isMini ? '12px' : '22px'};
           text-transform: uppercase;
           opacity: 0;
-          animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.4s;
+          animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards ${isMini ? '0.5s' : '1.4s'};
         }
 
         /* Progress loading bar */
@@ -157,11 +226,11 @@ export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) 
           position: absolute;
           bottom: 0;
           left: 0;
-          height: 3px;
+          height: ${isMini ? '2px' : '3px'};
           width: 100%;
           background: linear-gradient(90deg, #E8722A, #2A9D6F);
           transform-origin: left;
-          animation: progressScale 1.8s linear forwards;
+          animation: progressScale ${isMini ? '0.9s' : '1.8s'} linear forwards;
         }
       `}</style>
 

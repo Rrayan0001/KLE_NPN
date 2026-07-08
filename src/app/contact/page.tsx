@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function ContactPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Contact">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -118,6 +117,6 @@ export default function ContactPage() {
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function LibraryPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Library">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -389,6 +388,6 @@ Library &amp; Information Centre organized National Librarians Day in 12th Augus
 	</div>
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

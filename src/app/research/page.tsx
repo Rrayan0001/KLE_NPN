@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function ResearchPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Research">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -598,6 +597,6 @@ The project is composed with five chapters; 1. Introduction, 2. Political Develo
 	</div>
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

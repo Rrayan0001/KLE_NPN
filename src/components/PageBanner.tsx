@@ -145,7 +145,7 @@ export default function PageBanner() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-16 pb-12 sm:pt-20 sm:pb-16">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-24 pb-14 sm:pt-28 sm:pb-16">
         {/* Eyebrow */}
         <div className="flex items-center gap-2 mb-3">
           <span

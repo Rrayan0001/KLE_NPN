@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function Criterian7Page() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Criterian7">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -812,6 +811,6 @@ Sensitization of students and employees of the institution to the constitutional
 </div>
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

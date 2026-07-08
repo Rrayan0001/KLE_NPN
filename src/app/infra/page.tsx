@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function InfraPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Infra">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -51,6 +50,6 @@ The institution is spread over 11.2 acres of lush green land along the old NH-4 
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

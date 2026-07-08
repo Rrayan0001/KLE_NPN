@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function NccPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Ncc">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -456,6 +455,6 @@ Participation In ISSF World Cup, Cairo, Egypt February-March 2022
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

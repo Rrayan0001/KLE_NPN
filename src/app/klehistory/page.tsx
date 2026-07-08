@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function KlehistoryPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Klehistory">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -67,6 +66,6 @@ Learning is an exciting journey, guided by dedicated educators who bring knowled
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

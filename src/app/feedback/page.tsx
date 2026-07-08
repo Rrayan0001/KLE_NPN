@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function FeedbackPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Feedback">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -73,6 +72,6 @@ Due care is given to analyze and disseminate the feedback inputs and implement t
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

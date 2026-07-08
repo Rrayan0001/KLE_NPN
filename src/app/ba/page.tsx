@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function BaPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Ba">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -611,6 +610,6 @@ Chief Guest Dr.VishnuvasamakarVilingadanDegree College, Sangali.  Maharashtra Pr
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

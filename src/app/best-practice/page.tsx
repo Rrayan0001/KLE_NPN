@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function BestPracticePage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="BestPractice">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -65,6 +64,6 @@ export default function BestPracticePage() {
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

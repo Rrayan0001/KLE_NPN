@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function IqacworkingcomitteePage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Iqacworkingcomittee">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -212,6 +211,6 @@ Best Practices<br /><br /><br /><br />
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function MilestonePage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Milestone">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -79,6 +78,6 @@ PG Programme MA English Started – 2018.</p><br /><br /><br />
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

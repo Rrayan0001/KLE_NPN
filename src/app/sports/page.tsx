@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function SportsPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Sports">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -482,6 +481,6 @@ The K.L.E. Society’s G. I. Bagewadi Arts, Science and Commerce College’s Phy
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

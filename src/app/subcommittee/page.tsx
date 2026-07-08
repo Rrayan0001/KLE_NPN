@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function SubcommitteePage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Subcommittee">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -40,6 +39,6 @@ export default function SubcommitteePage() {
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

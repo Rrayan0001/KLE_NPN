@@ -341,10 +341,15 @@ export default function Home() {
             </Link>
           </StaggerReveal>
           <StaggerReveal stagger={120} distance={40} duration={900} threshold={0.2}>
-            <RevealImage className={s.aboutRight2}>
-              <img src="/images/banner10_1.jpg" alt="KLE College Campus" className={s.aboutImg2} />
-              <div className={s.aboutImgOverlay} />
-            </RevealImage>
+            <div className={s.aboutImgContainer}>
+              <RevealImage className={s.aboutRight2}>
+                <img src="/images/ap-1.jpg" alt="KLE College Campus" className={s.aboutImg2} />
+                <div className={s.aboutImgOverlay} />
+              </RevealImage>
+              <div className={s.aboutImgSubCard}>
+                <img src="/images/gal2.jpg" alt="KLE College Activity" className={s.aboutImgSubImg} />
+              </div>
+            </div>
             <div className={s.aboutMiniStats}>
               {[{ val: '60+', lbl: 'Faculty' }, { val: '1,200+', lbl: 'Students' }, { val: '16+', lbl: 'Programmes' }].map((st, i) => (
                 <div key={i} className={s.miniStatBox}>

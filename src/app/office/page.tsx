@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function OfficePage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Office">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -117,6 +116,6 @@ Sr.No</th>
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

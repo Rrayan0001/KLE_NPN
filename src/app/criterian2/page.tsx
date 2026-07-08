@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function Criterian2Page() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Criterian2">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -847,6 +846,6 @@ And project assigned to advance learners
 </div>
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function HostelPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Hostel">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -254,6 +253,6 @@ At present there are total 43 rooms to accommodate 120 girl students to have a c
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function BscPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Bsc">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -840,6 +839,6 @@ entitled <strong>“Bioprospecting of some Endemic Plants of Western Ghats for t
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

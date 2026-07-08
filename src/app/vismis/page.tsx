@@ -1,13 +1,12 @@
 'use client';
 
-import PageBanner from '@/components/PageBanner';
+import SubpageLayout from '@/components/SubpageLayout';
+
 import Link from 'next/link';
 
 export default function VismisPage() {
   return (
-    <>
-      <PageBanner />
-      
+    <SubpageLayout breadcrumb="Vismis">
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -100,6 +99,6 @@ To impart the spirit of inquiry, promote scientific temperament, and encourage r
 	
         </div>
       </div>
-    </>
+    </SubpageLayout>
   );
 }

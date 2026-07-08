@@ -19,6 +19,7 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isAtTop, setIsAtTop] = useState(true);
   const pathname = usePathname();
   const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -43,9 +44,17 @@ export default function Header() {
 
   // Smart hide-on-scroll logic
   useEffect(() => {
+    setIsAtTop(window.scrollY < 50);
+
     const handleScroll = () => {
       if (isOpen || isSearchOpen || hoveredSection) return;
       const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 50) {
+        setIsAtTop(true);
+      } else {
+        setIsAtTop(false);
+      }
 
       if (currentScrollY > lastScrollY && currentScrollY > 120) {
         setVisible(false);
@@ -161,10 +170,12 @@ export default function Header() {
     { name: "CONTACT", href: "/contact" },
   ];
 
+  const isHeroState = pathname === "/" && isAtTop;
+
   return (
     <>
       {/* Top utility bar */}
-      <div className={s.topBar}>
+      <div className={`${s.topBar} ${isHeroState ? s.topBarHero : ""}`}>
         <div className={s.topBarInner}>
           <div className={s.topBarLeft}>Accredited at &apos;A&apos; Grade with 3.10 CGPA in the 4th Cycle by NAAC</div>
           <div className={s.topBarRight}>
@@ -178,11 +189,11 @@ export default function Header() {
       </div>
 
       {/* Main sticky header */}
-      <header className={`${s.header} ${visible ? s.headerVisible : s.headerHidden}`}>
+      <header className={`${s.header} ${visible ? s.headerVisible : s.headerHidden} ${isHeroState ? s.headerHero : ""}`}>
         <div className={s.mainNavInner}>
           
           {/* Logo & College Branding */}
-          <Link href="/" onClick={() => setIsOpen(false)} className={s.logoWrap}>
+          <Link href="/" onClick={() => setIsOpen(false)} className={`${s.logoWrap} ${isHeroState ? s.logoWrapHero : ""}`}>
             <img src="/images/logo.png" alt="KLE Logo" className={s.logoImg} />
             <div className={s.logoText}>
               <span className={s.logoSub}>KLE Society&apos;s</span>
@@ -197,7 +208,7 @@ export default function Header() {
             <button
               onClick={() => setIsSearchOpen(true)}
               aria-label="Open search modal"
-              className={s.searchTrigger}
+              className={`${s.searchTrigger} ${isHeroState ? s.searchTriggerHero : ""}`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className={s.searchTriggerIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -208,8 +219,9 @@ export default function Header() {
             <button
               onClick={() => setIsOpen(true)}
               aria-label="Open menu"
-              className={s.hamburgerBtn}
+              className={`${s.hamburgerBtn} ${isHeroState ? s.hamburgerBtnHero : ""}`}
             >
+              <span className={s.hamburgerText}>MENU</span>
               <svg xmlns="http://www.w3.org/2000/svg" className={s.hamburgerIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>

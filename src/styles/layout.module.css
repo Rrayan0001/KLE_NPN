@@ -1734,7 +1734,7 @@
   clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
   transition: clip-path 1.4s cubic-bezier(0.7, 0, 0.3, 1) 0.1s;
 }
-.aboutImgWrap.revealed .aboutImg2 { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+.aboutImgWrap:global(.revealed) .aboutImg2 { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 .aboutImgWrap { position: relative; }
 .aboutImgWrap::after {
   content: "";
@@ -1745,7 +1745,7 @@
   transform-origin: top;
   transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1) 0.4s;
 }
-.aboutImgWrap.revealed::after { transform: scaleY(1); }
+.aboutImgWrap:global(.revealed)::after { transform: scaleY(1); }
 
 /* ── 10. 3D tilt vision/mission cards ── */
 .vmCard {

@@ -110,14 +110,12 @@ export default function HeroSlider() {
                 alt={sl.title}
                 className={s.slideImg}
                 loading={i === 0 ? 'eager' : 'lazy'}
-                style={{ '--ken-origin': sl.kenOrigin } as React.CSSProperties}
-              />
-              <div
-                className={s.slideReveal}
                 style={{
+                  '--ken-origin': sl.kenOrigin,
                   clipPath: isOn ? dir.to : dir.from,
+                  transition: 'clip-path 1.1s cubic-bezier(0.7, 0, 0.3, 1)',
                   transitionDelay: isOn ? '0.05s' : '0s',
-                }}
+                } as React.CSSProperties}
               />
               <div className={s.slideShade} />
               <div className={s.slideGrain} />

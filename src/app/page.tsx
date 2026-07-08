@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import s from '@/styles/layout.module.css';
 import HeroSlider from '@/components/HeroSlider';
+import EditorialHero from '@/components/EditorialHero';
 import Announcements from '@/components/Announcements';
 import FacilitiesBar from '@/components/FacilitiesBar';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -263,7 +264,7 @@ export default function Home() {
 
   return (
     <>
-      <HeroSlider />
+      <EditorialHero />
       <Announcements />
 
       {/* Quick Access marquee */}

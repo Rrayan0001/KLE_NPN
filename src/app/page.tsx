@@ -401,7 +401,7 @@ export default function Home() {
           <div className={s.sliderViewport}>
             <div
               className={s.sliderTrack}
-              style={{ transform: `translate3d(-${progIndex * 324}px, 0, 0)` } as React.CSSProperties}
+              style={{ transform: `translate3d(-${progIndex * 294}px, 0, 0)` } as React.CSSProperties}
             >
               {courses.map((c, i) => (
                 <div key={i} className={s.progCard}>

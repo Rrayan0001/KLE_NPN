@@ -41,50 +41,49 @@ export default function EditorialHero({
   return (
     <>
       <div ref={rootRef} className="editorial-hero">
-        {/* ── 1. HEADER TYPOGRAPHY ── */}
-        <div
-          className="hero-head"
-          style={{ transform: mounted ? `translate3d(0, ${scrollY * -0.25}px, 0)` : undefined }}
-        >
-          <h1 className="hero-heading">
-            {heading.split('').map((ch, i) => (
-              <span
-                key={i}
-                className="hero-char"
-                style={{
-                  animationDelay: `${i * 0.05}s`,
-                  display: ch === ' ' ? 'inline-block' : 'inline-block',
-                  width: ch === ' ' ? '0.3em' : 'auto',
-                }}
-              >
-                {ch === ' ' ? '\u00A0' : ch}
-              </span>
-            ))}
-          </h1>
-        </div>
-
-        {/* ── 2. METADATA BAR ── */}
-        <div
-          className="hero-meta-bar"
-          style={{ transform: mounted ? `translate3d(0, ${scrollY * -0.18}px, 0)` : undefined }}
-        >
-          <span className="hero-meta">{leftMeta}</span>
-          <span className="hero-meta hero-meta-center">{centerMeta}</span>
-          <span className="hero-meta hero-meta-right">{rightMeta}</span>
-        </div>
-
-        {/* ── 3. MEDIA VIEWPORT ── */}
-        <div
-          className="hero-viewport"
-          style={{ transform: mounted ? `translate3d(0, ${scrollY * 0.12}px, 0)` : undefined }}
-        >
+        {/* ── 1. MEDIA VIEWPORT (BACKGROUND) ── */}
+        <div className="hero-viewport">
           <img
             src={image}
-            alt="KLE Bagewadi College Campus"
+            alt="KLE College Campus"
             className={`hero-img ${mounted ? 'zoomed' : ''}`}
             loading="eager"
           />
+          <div className="hero-top-overlay" />
           <div className="hero-gradient" />
+        </div>
+
+        {/* ── 2. OVERLAY CONTENT ── */}
+        <div className="hero-overlay-content">
+          <div
+            className="hero-head"
+            style={{ transform: mounted ? `translate3d(0, ${scrollY * -0.15}px, 0)` : undefined }}
+          >
+            <h1 className="hero-heading">
+              {heading.split('').map((ch, i) => (
+                <span
+                  key={i}
+                  className="hero-char"
+                  style={{
+                    animationDelay: `${i * 0.05}s`,
+                    display: 'inline-block',
+                    width: ch === ' ' ? '0.3em' : 'auto',
+                  }}
+                >
+                  {ch === ' ' ? '\u00A0' : ch}
+                </span>
+              ))}
+            </h1>
+          </div>
+
+          <div
+            className="hero-meta-bar"
+            style={{ transform: mounted ? `translate3d(0, ${scrollY * -0.1}px, 0)` : undefined }}
+          >
+            <span className="hero-meta">{leftMeta}</span>
+            <span className="hero-meta hero-meta-center">{centerMeta}</span>
+            <span className="hero-meta hero-meta-right">{rightMeta}</span>
+          </div>
         </div>
       </div>
 
@@ -95,10 +94,11 @@ export default function EditorialHero({
           --ek-green: #2A9D6F;
           --ek-paper: #F8F6F0;
           width: 100%;
-          height: calc(100vh - 80px);
-          display: flex;
-          flex-direction: column;
-          background: var(--ek-paper);
+          height: 100vh;
+          height: 100dvh;
+          position: relative;
+          overflow: hidden;
+          background: var(--ek-navy);
           will-change: transform;
           font-family: var(--font-dm-sans), sans-serif;
         }
@@ -106,7 +106,7 @@ export default function EditorialHero({
         /* ── 1. Typographic heading ── */
         .hero-head {
           width: 100%;
-          padding: 48px 0 20px;
+          padding: 24px 0 16px;
           overflow: hidden;
         }
         .hero-heading {
@@ -126,6 +126,7 @@ export default function EditorialHero({
           white-space: nowrap;
           padding: 0 16px;
           box-sizing: border-box;
+          text-shadow: 0 4px 30px rgba(10, 22, 40, 0.5);
         }
         .hero-char {
           display: inline-block;
@@ -143,15 +144,18 @@ export default function EditorialHero({
           display: flex;
           justify-content: space-between;
           align-items: center;
+          width: 100%;
+          max-width: 80rem;
           padding: 18px 32px;
-          border-top: 1px solid rgba(10, 22, 40, 0.1);
-          border-bottom: 1px solid rgba(10, 22, 40, 0.1);
+          box-sizing: border-box;
+          border-top: 1px solid rgba(248, 246, 240, 0.15);
+          border-bottom: 1px solid rgba(248, 246, 240, 0.15);
           font-family: var(--font-jetbrains-mono), monospace;
           font-size: 10px;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.15em;
-          color: rgba(10, 22, 40, 0.6);
+          color: rgba(248, 246, 240, 0.85);
           flex-wrap: nowrap;
           gap: 12px;
         }
@@ -166,13 +170,13 @@ export default function EditorialHero({
 
         /* ── 3. Media viewport ── */
         .hero-viewport {
-          position: relative;
+          position: absolute;
+          inset: 0;
           width: 100%;
-          flex-grow: 1;
-          height: auto;
-          min-height: 0;
+          height: 100%;
           overflow: hidden;
           background: var(--ek-navy);
+          z-index: 1;
         }
         .hero-img {
           width: 100%;
@@ -188,59 +192,50 @@ export default function EditorialHero({
           transform: scale(1);
           opacity: 1;
         }
+        .hero-top-overlay {
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 380px;
+          background: linear-gradient(to bottom, rgba(10, 22, 40, 0.85) 0%, rgba(10, 22, 40, 0.4) 60%, transparent 100%);
+          pointer-events: none;
+          z-index: 2;
+        }
         .hero-gradient {
           position: absolute;
           bottom: 0; left: 0; right: 0;
-          height: 50%;
-          background: linear-gradient(to top, rgba(10, 22, 40, 0.75) 0%, rgba(10, 22, 40, 0.1) 60%, transparent 100%);
+          height: 350px;
+          background: linear-gradient(to top, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0.4) 60%, transparent 100%);
           pointer-events: none;
+          z-index: 2;
         }
-        .hero-cta-wrap {
+        .hero-overlay-content {
           position: absolute;
-          bottom: 32px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 10;
-        }
-        .hero-cta {
-          display: inline-flex;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
           align-items: center;
-          gap: 9px;
-          background: var(--ek-orange);
-          color: #fff !important;
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          padding: 14px 28px;
-          border-radius: 6px;
-          text-decoration: none;
-          box-shadow: 0 6px 22px rgba(232, 114, 42, 0.4);
-          transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s, background 0.3s;
-        }
-        .hero-cta:hover {
-          transform: translateY(-2px);
-          background: var(--ek-navy);
-          box-shadow: 0 10px 28px rgba(10, 22, 40, 0.4);
+          justify-content: flex-start;
+          padding-top: 80px;
+          z-index: 5;
+          pointer-events: none;
         }
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-          .editorial-hero { height: calc(100vh - 64px); }
+          .editorial-hero { height: 100vh; height: 100dvh; }
+          .hero-overlay-content { padding-top: 48px; }
           .hero-heading { font-size: clamp(2.5rem, 11vw, 4rem); }
           .hero-meta-bar { padding: 14px 16px; font-size: 9px; letter-spacing: 0.1em; gap: 8px; }
           .hero-meta-center { display: none; }
-          .hero-viewport { height: auto; min-height: 0; flex-grow: 1; }
-          .hero-cta-wrap { bottom: 22px; }
-          .hero-cta { font-size: 10px; padding: 12px 22px; }
-          .hero-head { padding: 32px 0 16px; }
+          .hero-viewport { height: 100%; }
+          .hero-head { padding: 24px 0 12px; }
         }
         @media (max-width: 480px) {
-          .editorial-hero { height: calc(100vh - 64px); }
+          .editorial-hero { height: 100vh; height: 100dvh; }
+          .hero-overlay-content { padding-top: 36px; }
           .hero-heading { font-size: clamp(2rem, 12vw, 3rem); letter-spacing: -0.03em; padding: 0 10px; }
           .hero-meta-bar { font-size: 8px; padding: 12px 10px; }
           .hero-meta-right { display: none; }
-          .hero-viewport { height: auto; min-height: 0; flex-grow: 1; }
         }
 
         /* ── Reduced motion ── */

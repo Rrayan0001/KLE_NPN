@@ -237,7 +237,7 @@ export default function Home() {
         <div className={s.statsSectionInner}>
           <div className={s.sectionHeadCenter}>
             <span className={s.eyebrow}>By the Numbers</span>
-            <h2 className={s.sectionTitleLg}>Our <span className={s.accentText}>Impact</span></h2>
+            <h2 className={s.sectionTitleLgLight}>Our <span className={s.accentTextLight}>Impact</span></h2>
           </div>
           <div className={s.statsCountGrid}>
             <StatCounter value={60} suffix="+" label="Faculty Members" desc="Experienced educators" />

@@ -61,7 +61,7 @@ export default function Footer() {
             </p>
             <div className={s.footerAccredBadge}>
               <span className={s.footerAccredGrade}>A</span>
-              <div>
+              <div className={s.footerAccredText}>
                 <div className={s.footerAccredLabel}>NAAC Accredited</div>
                 <div className={s.footerAccredSub}>3.10 CGPA · 4th Cycle</div>
               </div>

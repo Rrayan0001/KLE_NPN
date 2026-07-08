@@ -304,7 +304,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="dark" flip /></div>
+      <div style={{ background: '#0A1628' }}><WaveDivider variant="light" flip /></div>
 
       {/* About */}
       <section className={s.aboutSection} id="about">
@@ -592,7 +592,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#fff' }}><WaveDivider variant="dark" flip /></div>
+      <div style={{ background: '#0A1628' }}><WaveDivider variant="white" flip /></div>
 
       {/* Partners */}
       <section className={s.partnersSection} id="partners">

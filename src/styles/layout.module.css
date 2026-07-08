@@ -761,7 +761,7 @@
 .miniStatLbl { display: block; font-size: 10px; color: rgba(248,246,240,.7); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-top: 5px; }
 
 /* ── PROGRAMMES SECTION (SLIDER OVERHAUL) ────────────────────── */
-.progsSection { padding: 100px 32px; background: #fff; border-top: 1px solid rgba(10,22,40,.06); overflow: hidden; }
+.progsSection { padding: 100px 32px; background: #fff; overflow: hidden; }
 .progsLayout { display: grid; grid-template-columns: 320px 1fr; gap: 48px; max-width: 80rem; margin: 0 auto; align-items: start; }
 .progsLeft { text-align: left; }
 .progsDesc { font-size: 15px; color: #5A6A7A; line-height: 1.8; margin: 20px 0 32px; font-family: var(--font-source-serif), Georgia, serif; }
@@ -1905,13 +1905,13 @@
   display: block;
   margin: 0;
 }
-.sectionDivider svg { display: block; width: 100%; height: 60px; }
+.sectionDivider svg { display: block; width: 100%; height: 70px; }
 .sectionDividerDark svg path { fill: #0A1628; }
 .sectionDividerLight svg path { fill: #FAFAFA; }
 .sectionDividerPaper svg path { fill: #F8F6F0; }
 .sectionDividerWhite svg path { fill: #ffffff; }
-.sectionDividerFlip svg { transform: scaleY(-1); }
-@media (max-width: 575px) { .sectionDivider svg { height: 40px; } }
+.sectionDividerFlip svg { display: none; } /* deprecated - direction now handled via SVG path */
+@media (max-width: 575px) { .sectionDivider svg { height: 48px; } }
 
 /* ── 21. Footer link underline slide ── */
 .footerLink {

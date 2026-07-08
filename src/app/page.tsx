@@ -135,12 +135,18 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
 }
 
 /* ── Section wave divider ─────────────────────────────────── */
-function WaveDivider({ variant = 'dark', flip = false }: { variant?: 'dark' | 'light' | 'paper' | 'white'; flip?: boolean }) {
-  const cls = `${s.sectionDivider} ${variant === 'dark' ? s.sectionDividerDark : variant === 'paper' ? s.sectionDividerPaper : variant === 'white' ? s.sectionDividerWhite : s.sectionDividerLight} ${flip ? s.sectionDividerFlip : ''}`;
+// Single consistent wave path used throughout: 2 full sine periods
+// 'down'  = wave crests point up, fill goes downward  (section above → section below)
+// 'up'    = wave crests point down, fill goes upward  (same curve, mirrored vertically)
+const WAVE_PATH_DOWN = "M0,20 C180,60 360,0 540,30 C720,60 900,0 1080,30 C1260,60 1380,10 1440,20 L1440,70 L0,70 Z";
+const WAVE_PATH_UP   = "M0,50 C180,10 360,70 540,40 C720,10 900,70 1080,40 C1260,10 1380,60 1440,50 L1440,0 L0,0 Z";
+
+function WaveDivider({ variant = 'dark', direction = 'down' }: { variant?: 'dark' | 'light' | 'paper' | 'white'; direction?: 'down' | 'up' }) {
+  const fillClass = variant === 'dark' ? s.sectionDividerDark : variant === 'paper' ? s.sectionDividerPaper : variant === 'white' ? s.sectionDividerWhite : s.sectionDividerLight;
   return (
-    <div className={cls} aria-hidden="true">
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" />
+    <div className={`${s.sectionDivider} ${fillClass}`} aria-hidden="true">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d={direction === 'up' ? WAVE_PATH_UP : WAVE_PATH_DOWN} />
       </svg>
     </div>
   );
@@ -304,7 +310,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#0A1628' }}><WaveDivider variant="light" flip /></div>
+      <div style={{ background: '#0A1628' }}><WaveDivider variant="light" direction="up" /></div>
 
       {/* About */}
       <section className={s.aboutSection} id="about">
@@ -362,7 +368,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="paper" /></div>
+      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="paper" direction="down" /></div>
 
       {/* Strategic Offerings */}
       <section className={s.offeringsSection}>
@@ -468,7 +474,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="white" /></div>
+      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="white" direction="down" /></div>
 
       {/* Programmes */}
       <section className={s.progsSection} id="programmes">
@@ -542,7 +548,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#ffffff' }}><WaveDivider variant="light" flip /></div>
+      <div style={{ background: '#ffffff' }}><WaveDivider variant="light" direction="up" /></div>
 
       {/* Facilities */}
       <section className={s.facilSection} id="facilities">
@@ -559,7 +565,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="dark" /></div>
+      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="dark" direction="down" /></div>
 
       {/* Chairman */}
       <section className={s.chairSection} id="chairman">
@@ -592,7 +598,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#0A1628' }}><WaveDivider variant="white" flip /></div>
+      <div style={{ background: '#0A1628' }}><WaveDivider variant="white" direction="up" /></div>
 
       {/* Partners */}
       <section className={s.partnersSection} id="partners">

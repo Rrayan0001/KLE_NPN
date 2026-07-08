@@ -1,0 +1,146 @@
+@layer legacy;
+
+@import "tailwindcss";
+
+/* Legacy styles go into the 'legacy' layer → lower priority than Tailwind utilities */
+@import "../styles/bootstrap.css" layer(legacy);
+@import "../styles/mislider.css" layer(legacy);
+@import "../styles/mislider-custom.css" layer(legacy);
+@import "../styles/style.css" layer(legacy);
+
+/* Font Awesome stays unlayered (icon glyphs, not layout conflicts) */
+@import "../styles/fontawesome-all.css";
+
+@theme {
+  --color-brand-maroon: #0A1628; /* Primary Navy */
+  --color-brand-yellow: #E8722A; /* Accent Derivative Orange */
+  --color-brand-yellow-hover: #2A9D6F; /* Accent Integral Green */
+  --color-brand-black: #0A1628;
+  --color-brand-gray: #F8F6F0; /* Primary Paper White */
+  --color-brand-text: #0A1628;
+}
+
+@layer base {
+  :root {
+    --brand-navy: #0A1628;
+    --brand-navy-light: #1B2A4A;
+    --brand-gold: #E8722A;
+    --brand-gold-light: #F28C38;
+    --brand-accent: #2A9D6F;
+    --brand-text-dark: #0A1628;
+    --brand-text-muted: #5A6A7A;
+    --background-color: #F8F6F0;
+  }
+
+  body {
+    background-color: var(--background-color);
+    /* Repeating millimeter-grid background overlay */
+    background-image: 
+      linear-gradient(rgba(10, 22, 40, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10, 22, 40, 0.12) 1px, transparent 1px),
+      linear-gradient(rgba(10, 22, 40, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10, 22, 40, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px, 20px 20px, 2px 2px, 2px 2px;
+    color: var(--brand-text-dark);
+    font-family: var(--font-source-serif), Georgia, serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  p {
+    font-size: 17.5px;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-dm-sans), sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Simple animations */
+@keyframes slideInFromLeft {
+  0% { transform: translateX(-30px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-slide-left {
+  animation: slideInFromLeft 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Hide scrollbars for carousels */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── GLOBAL TABLE MOBILE FIX ─────────────────────────────── */
+/* Wrap every table in a horizontally scrollable container on mobile */
+table { width: 100% !important; margin-bottom: 1.5rem; }
+th, td { padding: 0.75rem !important; }
+
+/* Table responsive wrapper — applied via wrapping container in pages */
+.table-responsive-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Global rule: any Bootstrap table inside a .container or .main-content gets scroll on mobile */
+@media (max-width: 768px) {
+  .main-content .container,
+  .container {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    overflow-x: hidden;
+  }
+
+  /* Make tables horizontally scrollable without breaking their display model */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Inner-page content padding */
+  .main-content { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+
+  /* Bootstrap breadcrumbs */
+  .breadcrumb { font-size: 12px; flex-wrap: wrap; padding: 0.5rem 0; }
+
+  /* Bootstrap containers */
+  .py-5 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+  .py-xl-5, .py-lg-3 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+
+  /* Generic img fluid fix */
+  .img-fluid { height: auto !important; max-width: 100%; }
+
+  /* Page banner (inner pages) */
+  .page-banner, .banner-section { min-height: 120px !important; }
+}
+
+@media (max-width: 480px) {
+  /* Tighter inner content on very small phones */
+  .main-content .container,
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  th, td { padding: 0.5rem !important; font-size: 12px !important; }
+  
+  h3.title, h2.title { font-size: 1.25rem !important; }
+
+  /* Fix paragraph text alignment on small screens */
+  p[align="justify"] { text-align: left !important; font-size: 14px !important; line-height: 1.7 !important; }
+}
+

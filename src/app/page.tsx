@@ -284,7 +284,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider variant="dark" />
+      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="dark" /></div>
 
       {/* Stats */}
       <section className={s.statsSection}>
@@ -304,7 +304,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider variant="dark" flip />
+      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="dark" flip /></div>
 
       {/* About */}
       <section className={s.aboutSection} id="about">
@@ -362,7 +362,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider variant="paper" />
+      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="paper" /></div>
 
       {/* Strategic Offerings */}
       <section className={s.offeringsSection}>
@@ -468,7 +468,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider variant="light" />
+      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="light" /></div>
 
       {/* Programmes */}
       <section className={s.progsSection} id="programmes">
@@ -542,7 +542,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider variant="paper" flip />
+      <div style={{ background: '#ffffff' }}><WaveDivider variant="light" flip /></div>
 
       {/* Facilities */}
       <section className={s.facilSection} id="facilities">
@@ -559,7 +559,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider variant="dark" />
+      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="dark" /></div>
 
       {/* Chairman */}
       <section className={s.chairSection} id="chairman">
@@ -592,7 +592,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WaveDivider variant="dark" flip />
+      <div style={{ background: '#fff' }}><WaveDivider variant="dark" flip /></div>
 
       {/* Partners */}
       <section className={s.partnersSection} id="partners">

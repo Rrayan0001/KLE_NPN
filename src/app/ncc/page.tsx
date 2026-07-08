@@ -55,7 +55,7 @@ export default function NccPage() {
 									A well Disciplined and well-managed Unit and its trained men are the foundation of Modern educational institution.</p>
 					
 				</div><div className="col-lg-5 right-abw3ls mt-lg-0 mt-sm-5 mt-4">
-					<br /><br /><img src="/images/ncc1.png" alt="" className="img-fluid" height="600px" width="400px" />
+					<br /><br /><img src="/images/ncc/ncc1.png" alt="" className="img-fluid" height="600px" width="400px" />
 				</div></div>
 				
 				

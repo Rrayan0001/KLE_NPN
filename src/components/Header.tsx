@@ -17,8 +17,6 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isAtTop, setIsAtTop] = useState(true);
   const pathname = usePathname();
   const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -42,33 +40,17 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // Smart hide-on-scroll logic
+  // Track whether user is at the top of the page (for hero transparent overlay)
   useEffect(() => {
     setIsAtTop(window.scrollY < 50);
 
     const handleScroll = () => {
-      if (isOpen || isSearchOpen || hoveredSection) return;
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 50) {
-        setIsAtTop(true);
-      } else {
-        setIsAtTop(false);
-      }
-
-      if (currentScrollY > lastScrollY && currentScrollY > 120) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-      setLastScrollY(currentScrollY);
+      setIsAtTop(window.scrollY < 50);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY, isOpen, isSearchOpen, hoveredSection]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks: NavLinkItem[] = [
     { name: "HOME", href: "/" },
@@ -189,7 +171,7 @@ export default function Header() {
       </div>
 
       {/* Main sticky header */}
-      <header className={`${s.header} ${visible ? s.headerVisible : s.headerHidden} ${isHeroState ? s.headerHero : ""} ${isHeroState ? s.headerHeroPad : ""}`}>
+      <header className={`${s.header} ${isHeroState ? s.headerHero : ""} ${isHeroState ? s.headerHeroPad : ""}`}>
         <div className={`${s.mainNavInner} ${isHeroState ? s.mainNavInnerHero : ""}`}>
           
           {/* Logo & College Branding */}

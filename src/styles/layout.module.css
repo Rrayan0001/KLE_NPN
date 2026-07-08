@@ -2049,8 +2049,16 @@
   margin-bottom: 56px;
   max-width: 52rem;
 }
+.offeringsEyebrow {
+  display: block;
+  font-size: clamp(13px, 1.6vw, 16px);
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #E8722A;
+}
 .offeringsTitle {
-  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  font-size: clamp(1.5rem, 2.5vw, 1.95rem);
   font-family: var(--font-dm-sans), sans-serif;
   color: #0A1628;
   font-weight: 800;

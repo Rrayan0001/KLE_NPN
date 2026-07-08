@@ -375,7 +375,7 @@ export default function Home() {
         <div className={s.offeringsInner}>
           <ScrollReveal direction="up" threshold={0.2}>
             <div className={s.offeringsHeader}>
-              <span className={s.eyebrow}>Strategic Services</span>
+              <span className={s.offeringsEyebrow}>Strategic Services</span>
               <h2 className={s.offeringsTitle}>
                 Your trusted partner for academic excellence across four major streams:
               </h2>

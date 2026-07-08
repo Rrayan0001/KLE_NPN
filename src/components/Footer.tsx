@@ -55,7 +55,14 @@ export default function Footer() {
 
           {/* Col 1 — Brand */}
           <div className={s.footerBrand}>
-            <img src="/images/logo.png" alt="KLE College Logo" className={s.footerLogo} />
+            <div className={s.footerLogoWrap}>
+              <img src="/images/logo.png" alt="KLE Logo" className={s.footerLogoImg} />
+              <div className={s.footerLogoText}>
+                <span className={s.footerLogoSub}>KLE Society&apos;s</span>
+                <span className={s.footerLogoTitle}>G.I.Bagewadi Arts, Science &amp; Commerce College, Nipani - 591237</span>
+                <span className={s.footerLogoEst}>Accredited at &apos;A&apos; Grade with 3.10 CGPA in the 4th Cycle by NAAC</span>
+              </div>
+            </div>
             <p className={s.footerDesc}>
               KLE Society&apos;s G.I.Bagewadi Arts, Science &amp; Commerce College, Nipani — a NAAC-accredited institution committed to quality education and student welfare since 1961.
             </p>

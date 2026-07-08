@@ -263,7 +263,7 @@ export default function Home() {
                 <div className={s.chairAvatar}>
                   <img src="/images/Amitkoreimage.jpg" alt="Shri Amit P. Kore" className={s.chairAvatarImg} />
                 </div>
-                <div>
+                <div className={s.chairInfo}>
                   <div className={s.chairName}>Shri Amit P. Kore</div>
                   <div className={s.chairRole}>Chairman, KLE Society, Belagavi</div>
                   <Link href="/chairman-msg" className={s.chairReadMore}>Read Full Message →</Link>

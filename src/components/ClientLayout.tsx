@@ -15,10 +15,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
     <>
       <WelcomeAnimation onComplete={() => setShowWelcome(false)} />
-      <div 
-        className="flex flex-col min-h-screen" 
-        style={{ visibility: showWelcome ? 'hidden' : 'visible' }}
-      >
+      <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

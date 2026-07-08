@@ -27,7 +27,7 @@ export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) 
       setVisible(false);
       sessionStorage.setItem('kle-intro-seen', '1');
       onComplete();
-    }, 2350);
+    }, 2900); // 1100ms duration for exit transition to complete fully
 
     return () => {
       clearTimeout(t1);
@@ -50,14 +50,12 @@ export default function WelcomeAnimation({ onComplete }: WelcomeAnimationProps) 
           align-items: center;
           justify-content: center;
           background-color: #0A1628;
-          opacity: 1;
-          transform: scale(1);
-          transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+          clip-path: circle(150% at 50% 50%);
+          transition: clip-path 1.1s cubic-bezier(0.76, 0, 0.24, 1);
         }
 
         .welcome-overlay.exit-active {
-          opacity: 0;
-          transform: scale(1.04);
+          clip-path: circle(0% at 50% 50%);
           pointer-events: none;
         }
 

@@ -45,8 +45,8 @@ export default function Footer() {
     <footer className={s.footer}>
       {/* Wavy SVG divider */}
       <div className={s.footerWave}>
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#0A1628" />
+        <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,20 C180,60 360,0 540,30 C720,60 900,0 1080,30 C1260,60 1380,10 1440,20 L1440,70 L0,70 Z" fill="#0A1628" />
         </svg>
       </div>
 

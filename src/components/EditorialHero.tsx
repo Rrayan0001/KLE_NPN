@@ -25,17 +25,28 @@ export default function EditorialHero({
   const [scrollY, setScrollY] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const mobileMql = window.matchMedia('(max-width: 768px)');
+    const updateMobile = () => setIsMobile(mobileMql.matches);
+    updateMobile();
+    mobileMql.addEventListener('change', updateMobile);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return () => mobileMql.removeEventListener('change', updateMobile);
+    }
     let raf = 0;
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(() => { setScrollY(window.scrollY); raf = 0; });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => { window.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      mobileMql.removeEventListener('change', updateMobile);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
@@ -57,7 +68,7 @@ export default function EditorialHero({
         <div className="hero-overlay-content">
           <div
             className="hero-head"
-            style={{ transform: mounted ? `translate3d(0, ${scrollY * -0.15}px, 0)` : undefined }}
+            style={{ transform: mounted ? `translate3d(0, ${scrollY * (isMobile ? -0.08 : -0.15)}px, 0)` : undefined }}
           >
             <h1 className="hero-heading">
               {heading.split('').map((ch, i) => (
@@ -78,7 +89,7 @@ export default function EditorialHero({
 
           <div
             className="hero-meta-bar"
-            style={{ transform: mounted ? `translate3d(0, ${scrollY * -0.1}px, 0)` : undefined }}
+            style={{ transform: mounted ? `translate3d(0, ${scrollY * (isMobile ? -0.05 : -0.1)}px, 0)` : undefined }}
           >
             <span className="hero-meta">{leftMeta}</span>
             <span className="hero-meta hero-meta-center">{centerMeta}</span>
@@ -88,8 +99,8 @@ export default function EditorialHero({
           {/* Scroll Down Indicator */}
           <div
             className="hero-scroll-indicator"
-            style={{ 
-              transform: mounted ? `translate3d(-50%, ${scrollY * -0.08}px, 0)` : 'translateX(-50%)',
+            style={{
+              transform: mounted ? `translate3d(-50%, ${scrollY * (isMobile ? -0.03 : -0.08)}px, 0)` : 'translateX(-50%)',
               opacity: mounted ? Math.max(1 - scrollY / 250, 0) : 0
             }}
           >
@@ -302,11 +313,15 @@ export default function EditorialHero({
           100% { transform: translateY(10px); opacity: 0; }
         }
 
+        @media (max-width: 480px) {
+          .hero-scroll-indicator { display: none; }
+        }
+
         /* ── Reduced motion ── */
         @media (prefers-reduced-motion: reduce) {
           .hero-char,
           .hero-img { animation: none !important; transform: none !important; opacity: 1 !important; }
-          .hero-head, .hero-meta-bar, .hero-viewport { transform: none !important; }
+          .hero-head, .hero-meta-bar, .hero-viewport, .hero-scroll-indicator { transform: none !important; }
         }
       `}</style>
     </>

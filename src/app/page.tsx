@@ -481,8 +481,8 @@ export default function Home() {
         <div className={s.progsLayout}>
           <ScrollReveal direction="left" threshold={0.2} className={s.progsLeft}>
             <div>
-              <span className={s.eyebrow}>Academic Offerings</span>
-              <h2 className={s.sectionTitleLg}>Academic <span className={s.accentText}>Programmes</span></h2>
+              <span className={s.progsEyebrow}>Academic Offerings</span>
+              <h2 className={s.progsTitle}>Academic <span className={s.accentText}>Programmes</span></h2>
               <div className={s.titleUnderline} />
               <p className={s.progsDesc}>
                 KLE Society&apos;s G.I.Bagewadi College offers a comprehensive suite of undergraduate and postgraduate courses, empowering students with the skills and knowledge for a successful career.

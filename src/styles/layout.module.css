@@ -764,6 +764,24 @@
 .progsSection { padding: 100px 32px; background: #fff; overflow: hidden; }
 .progsLayout { display: grid; grid-template-columns: 320px 1fr; gap: 48px; max-width: 80rem; margin: 0 auto; align-items: start; }
 .progsLeft { text-align: left; }
+.progsEyebrow {
+  display: block;
+  font-size: clamp(13px, 1.6vw, 16px);
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #E8722A;
+  margin-bottom: 12px;
+}
+.progsTitle {
+  font-size: clamp(1.5rem, 2.5vw, 1.95rem);
+  font-family: var(--font-dm-sans), sans-serif;
+  color: #0A1628;
+  font-weight: 800;
+  margin: 0 0 16px;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+}
 .progsDesc { font-size: 15px; color: #5A6A7A; line-height: 1.8; margin: 20px 0 32px; font-family: var(--font-source-serif), Georgia, serif; }
 .sliderCtrl { display: flex; gap: 12px; margin-top: 24px; }
 .sliderCtrlBtn { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid #0A1628; background: transparent; color: #0A1628; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }

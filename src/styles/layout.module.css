@@ -20,7 +20,9 @@
   padding: 0 32px;
   transition: border-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
               box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-              padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+              padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+              transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+              opacity 0.4s ease;
 }
 
 /* Scrolled/solid states styles */
@@ -54,6 +56,9 @@
   left: 0;
   right: 0;
   padding-left: 0 !important;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .headerHeroState::before {

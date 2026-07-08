@@ -42,13 +42,17 @@ export default function Header() {
 
   // Track whether user is at the top of the page (for hero transparent overlay)
   useEffect(() => {
-    setIsAtTop(window.scrollY < 50);
+    const getScrollTop = () => {
+      return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    };
+
+    setIsAtTop(getScrollTop() < 50);
 
     let rafId = 0;
     const handleScroll = () => {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
-        setIsAtTop(window.scrollY < 50);
+        setIsAtTop(getScrollTop() < 50);
         rafId = 0;
       });
     };

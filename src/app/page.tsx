@@ -71,28 +71,24 @@ function FadeSection({ children, className }: { children: React.ReactNode; class
 }
 
 export default function Home() {
+  const uniqueQuickLinks = [
+    { name: 'Admission', icon: '📋', desc: 'Apply for 2026-27', url: '/admission' },
+    { name: 'NAAC Docs', icon: '🏆', desc: 'Accreditation details', url: '/certificates' },
+    { name: 'Placements', icon: '💼', desc: 'Placement records', url: '/placements' },
+    { name: 'Library', icon: '📚', desc: 'Digital library', url: '/library' },
+    { name: 'Hostel', icon: '🏠', desc: 'Campus living', url: '/hostel' },
+    { name: 'IQAC', icon: '📊', desc: 'Quality assurance', url: '/iqacworkingcomittee' },
+    { name: 'Scholarships', icon: '🎓', desc: 'Financial aid', url: '/scholarship' },
+    { name: 'NSS / NCC', icon: '🌿', desc: 'Social & defence', url: '/nss' },
+    { name: 'Gallery', icon: '🖼️', desc: 'Events & campus', url: '/gallery' },
+    { name: 'Contact', icon: '📞', desc: 'Reach the college', url: '/contact' },
+  ];
+
   const quickLinks = [
-    { name: 'Admission', icon: '📋', desc: 'Apply for 2026-27', url: '/admission' },
-    { name: 'NAAC Docs', icon: '🏆', desc: 'Accreditation details', url: '/certificates' },
-    { name: 'Placements', icon: '💼', desc: 'Placement records', url: '/placements' },
-    { name: 'Library', icon: '📚', desc: 'Digital library', url: '/library' },
-    { name: 'Hostel', icon: '🏠', desc: 'Campus living', url: '/hostel' },
-    { name: 'IQAC', icon: '📊', desc: 'Quality assurance', url: '/iqacworkingcomittee' },
-    { name: 'Scholarships', icon: '🎓', desc: 'Financial aid', url: '/scholarship' },
-    { name: 'NSS / NCC', icon: '🌿', desc: 'Social & defence', url: '/nss' },
-    { name: 'Gallery', icon: '🖼️', desc: 'Events & campus', url: '/gallery' },
-    { name: 'Contact', icon: '📞', desc: 'Reach the college', url: '/contact' },
-    // Duplicated for seamless marquee
-    { name: 'Admission', icon: '📋', desc: 'Apply for 2026-27', url: '/admission' },
-    { name: 'NAAC Docs', icon: '🏆', desc: 'Accreditation details', url: '/certificates' },
-    { name: 'Placements', icon: '💼', desc: 'Placement records', url: '/placements' },
-    { name: 'Library', icon: '📚', desc: 'Digital library', url: '/library' },
-    { name: 'Hostel', icon: '🏠', desc: 'Campus living', url: '/hostel' },
-    { name: 'IQAC', icon: '📊', desc: 'Quality assurance', url: '/iqacworkingcomittee' },
-    { name: 'Scholarships', icon: '🎓', desc: 'Financial aid', url: '/scholarship' },
-    { name: 'NSS / NCC', icon: '🌿', desc: 'Social & defence', url: '/nss' },
-    { name: 'Gallery', icon: '🖼️', desc: 'Events & campus', url: '/gallery' },
-    { name: 'Contact', icon: '📞', desc: 'Reach the college', url: '/contact' },
+    ...uniqueQuickLinks,
+    ...uniqueQuickLinks,
+    ...uniqueQuickLinks,
+    ...uniqueQuickLinks,
   ];
 
   const courses = [
@@ -104,18 +100,21 @@ export default function Home() {
     { title: 'Master of Arts', short: 'MA', url: '/ma', color: '#0A1628' },
   ];
 
+  const uniquePartners = [
+    '/images/download_1.jpg',
+    '/images/download_2.png',
+    '/images/download_3.png',
+    '/images/download_4.png',
+    '/images/download_5.png',
+  ];
+
   const partnerImages = [
-    '/images/download_1.jpg',
-    '/images/download_2.png',
-    '/images/download_3.png',
-    '/images/download_4.png',
-    '/images/download_5.png',
-    // Duplicated for seamless loop
-    '/images/download_1.jpg',
-    '/images/download_2.png',
-    '/images/download_3.png',
-    '/images/download_4.png',
-    '/images/download_5.png',
+    ...uniquePartners,
+    ...uniquePartners,
+    ...uniquePartners,
+    ...uniquePartners,
+    ...uniquePartners,
+    ...uniquePartners,
   ];
 
   return (

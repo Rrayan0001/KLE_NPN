@@ -557,15 +557,15 @@ export default function Home() {
       {/* Chairman */}
       <section className={s.chairSection} id="chairman">
         <div className={s.chairSectionInner}>
-          <ScrollReveal direction="up" threshold={0.3}>
+          <StaggerReveal stagger={80} threshold={0.3}>
             <span className={s.eyebrowLight}>Leadership</span>
             <h2 className={s.sectionTitleLgLight}>A Message from Our <span className={s.accentTextLight}>Chairman</span></h2>
             <div className={s.titleUnderlineLight} />
-          </ScrollReveal>
+          </StaggerReveal>
           <ScrollReveal direction="scale" delay={120} duration={900} threshold={0.2}>
             <div className={s.chairCard}>
               <div className={s.chairQuoteMark}>&ldquo;</div>
-              <div className={s.chairContent}>
+              <StaggerReveal stagger={100} threshold={0.2}>
                 <p className={s.chairQuoteText}>
                   Our vision is to facilitate higher learning for rural and semi-urban youth, molding them into professional, competent global citizens while instilling moral values and a commitment to service excellence.
                 </p>
@@ -579,7 +579,7 @@ export default function Home() {
                     <Link href="/chairman-msg" className={s.chairReadMore}>Read Full Message →</Link>
                   </div>
                 </div>
-              </div>
+              </StaggerReveal>
             </div>
           </ScrollReveal>
         </div>
@@ -589,14 +589,12 @@ export default function Home() {
 
       {/* Partners */}
       <section className={s.partnersSection} id="partners">
-        <div className={s.partnersSectionInner}>
-          <ScrollReveal direction="up" threshold={0.3}>
-            <div className={s.sectionHeadCenter}>
-              <span className={s.eyebrow}>Hiring from Campus</span>
-              <h2 className={s.sectionTitleLg}>Our Placement <span className={s.accentText}>Partners</span></h2>
-              <div className={s.titleUnderline} />
-            </div>
-          </ScrollReveal>
+        <StaggerReveal className={s.partnersSectionInner} stagger={120} threshold={0.2}>
+          <div className={s.sectionHeadCenter}>
+            <span className={s.eyebrow}>Hiring from Campus</span>
+            <h2 className={s.sectionTitleLg}>Our Placement <span className={s.accentText}>Partners</span></h2>
+            <div className={s.titleUnderline} />
+          </div>
           <div className={s.partnerMarqueeWrap}>
             <div className={s.partnerMarqueeInner}>
               {partnerImages.map((img, i) => (
@@ -606,15 +604,13 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <ScrollReveal direction="up" delay={120}>
-            <div className={s.partnersFooter}>
-              <Link href="/placements" className={s.primaryBtn}>
-                View Placement Records
-                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
+          <div className={s.partnersFooter}>
+            <Link href="/placements" className={s.primaryBtn}>
+              View Placement Records
+              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </Link>
+          </div>
+        </StaggerReveal>
       </section>
     </>
   );

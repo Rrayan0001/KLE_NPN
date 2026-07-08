@@ -352,3 +352,135 @@ button[type="submit"] {
 }
 .facCardBody { padding: 16px 18px; }
 
+/* ================================================================
+   SUBPAGES PREMIUM STYLE OVERHAUL
+   ================================================================ */
+
+/* Hide duplicate top breadcrumb when an inner one exists in .main-content */
+main:has(.main-content nav[aria-label="breadcrumb"]) > nav[aria-label="breadcrumb"] {
+  display: none !important;
+}
+
+/* Modern Breadcrumbs */
+.breadcrumb {
+  background: rgba(10,22,40,0.02) !important;
+  padding: 12px 18px !important;
+  margin: 16px 0 24px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  list-style: none !important;
+  font-family: var(--font-dm-sans), sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(10,22,40,0.05) !important;
+}
+
+.breadcrumb-item {
+  display: flex !important;
+  align-items: center !important;
+  color: var(--brand-text-muted) !important;
+}
+
+.breadcrumb-item a {
+  color: var(--brand-navy) !important;
+  text-decoration: none !important;
+  transition: color 0.2s !important;
+}
+
+.breadcrumb-item a:hover {
+  color: var(--brand-gold) !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›" !important;
+  color: var(--brand-gold) !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  padding: 0 6px !important;
+}
+
+.breadcrumb-item.active {
+  color: var(--brand-text-muted) !important;
+  font-weight: 500 !important;
+}
+
+/* Premium Title Overhaul for inner pages */
+.about-page h3.title,
+.main-content h3.title,
+h3.title {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem) !important;
+  font-family: var(--font-dm-sans), sans-serif !important;
+  color: var(--brand-navy) !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  position: relative !important;
+  margin-top: 12px !important;
+  margin-bottom: 40px !important;
+  letter-spacing: -0.02em !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* Centered premium gold underline indicator */
+.about-page h3.title::after,
+.main-content h3.title::after,
+h3.title::after {
+  content: "" !important;
+  display: block !important;
+  width: 44px !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, var(--brand-gold), var(--brand-accent)) !important;
+  margin-top: 12px !important;
+  border-radius: 2px !important;
+}
+
+/* Elegant body text typography for inner pages */
+.main-content p,
+.about-page p,
+.about-page p font,
+.main-content p font,
+.about-page p strong,
+.main-content p strong {
+  font-family: var(--font-source-serif), Georgia, serif !important;
+  font-size: 15.5px !important;
+  color: #3A4556 !important; /* Soft charcoal grey for readability */
+  line-height: 1.85 !important;
+  margin-bottom: 20px !important;
+  text-align: justify !important;
+}
+
+/* Override inline styling offsets */
+.main-content p strong,
+.about-page p strong {
+  color: var(--brand-navy) !important;
+  font-weight: 700 !important;
+  font-size: 15.5px !important;
+}
+
+.main-content p font,
+.about-page p font {
+  color: #3A4556 !important;
+  font-size: 15.5px !important;
+}
+
+/* Grid layout updates */
+.about-head-wthree {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 36px !important;
+}
+
+.left-abw3ls img {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(10,22,40,0.06) !important;
+  transition: transform 0.3s ease !important;
+}
+
+.left-abw3ls img:hover {
+  transform: scale(1.01) !important;
+}
+

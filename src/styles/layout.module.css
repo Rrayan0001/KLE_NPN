@@ -146,7 +146,7 @@
 .facCard:hover .facCardFoot { color: #E8722A; }
 
 /* ── MENU DRAWER (MOBILE) ────────────────────────────────────── */
-.drawerOverlay { position: fixed; inset: 0; z-index: 50; overflow: hidden; display: flex; justify-content: flex-end; font-family: var(--font-dm-sans), sans-serif; }
+.drawerOverlay { position: fixed; inset: 0; z-index: 1000; overflow: hidden; display: flex; justify-content: flex-end; font-family: var(--font-dm-sans), sans-serif; }
 .drawerBg { position: absolute; inset: 0; background: rgba(10,22,40,.4); backdrop-filter: blur(4px); transition: opacity 0.3s ease; }
 .drawerWrap { position: absolute; inset-y: 0; right: 0; max-width: 100%; display: flex; }
 .drawerPanel { width: 100vw; max-width: 26rem; background: #F8F6F0; display: flex; flex-direction: column; box-shadow: -4px 0 32px rgba(10,22,40,.15); position: relative; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
@@ -184,7 +184,7 @@
 .drawerFooterText { font-size: 11px; color: #5A6A7A; margin-top: 2px; line-height: 1.4; }
 
 /* ── SEARCH MODAL ────────────────────────────────────────────── */
-.searchOverlay { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-start; justify-content: center; padding-top: 10vh; padding-left: 16px; padding-right: 16px; font-family: var(--font-dm-sans), sans-serif; }
+.searchOverlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: flex-start; justify-content: center; padding-top: 10vh; padding-left: 16px; padding-right: 16px; font-family: var(--font-dm-sans), sans-serif; }
 .searchBg { position: absolute; inset: 0; background: rgba(10,22,40,0.6); backdrop-filter: blur(8px); }
 .searchBox { position: relative; width: 100%; max-width: 42rem; background-color: #FFFFFF; border-radius: 6px; box-shadow: 0 25px 50px rgba(10,22,40,0.15); border: 1px solid rgba(10,22,40,0.08); overflow: hidden; display: flex; flex-direction: column; max-height: 70vh; }
 .searchHeader { display: flex; align-items: center; gap: 16px; padding: 16px 24px; border-bottom: 1px solid rgba(10,22,40,0.08); background-color: #FAFAF5; }

@@ -146,6 +146,7 @@ function WaveDivider({ variant = 'dark', flip = false }: { variant?: 'dark' | 'l
 }
 
 export default function Home() {
+  const [progIndex, setProgIndex] = useState(0);
   const uniqueQuickLinks = [
     { name: 'Admission', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>), desc: 'Apply for 2026-27', url: '/admission' },
     { name: 'NAAC Docs', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15a4 4 0 100-8 4 4 0 000 8zm0 0v4m-4 0h8M4 11h16"/></svg>), desc: 'Accreditation details', url: '/certificates' },
@@ -162,14 +163,96 @@ export default function Home() {
   const quickLinks = [...uniqueQuickLinks, ...uniqueQuickLinks, ...uniqueQuickLinks, ...uniqueQuickLinks];
 
   const courses = [
-    { title: 'Bachelor of Arts', short: 'BA', url: '/ba', color: '#E8722A' },
-    { title: 'Bachelor of Science', short: 'BSc', url: '/bsc', color: '#2A9D6F' },
-    { title: 'Bachelor of Commerce', short: 'BCom', url: '/comm', color: '#0A1628' },
-    { title: 'Master of Commerce', short: 'MCom', url: '/mcom', color: '#E8722A' },
-    { title: 'Master of Science', short: 'MSc', url: '/msc', color: '#2A9D6F' },
-    { title: 'Master of Arts', short: 'MA', url: '/ma', color: '#0A1628' },
-    { title: 'Bachelor of Computer App.', short: 'BCA', url: '/bca', color: '#E8722A' },
-    { title: 'Bachelor of Business Admin.', short: 'BBA', url: '/bba', color: '#2A9D6F' },
+    {
+      title: 'Bachelor of Arts',
+      short: 'B.A.',
+      url: '/ba',
+      color: '#E8722A',
+      image: '/images/c1.jpg',
+      duration: '4 Years (NEP)',
+      subjects: 'History · Economics · Political Science · English',
+      prospects: 'Civil Services, Media, Journalism, Education',
+      icon: (
+        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      )
+    },
+    {
+      title: 'Bachelor of Science',
+      short: 'B.Sc.',
+      url: '/bsc',
+      color: '#2A9D6F',
+      image: '/images/c2.jpg',
+      duration: '4 Years (NEP)',
+      subjects: 'Physics · Chemistry · Mathematics · Comp. Science',
+      prospects: 'Research Laboratories, IT Sector, Data Analytics',
+      icon: (
+        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.07 15.2l-1.022.547a2 2 0 00-.77 2.656l1.5 3a2 2 0 002.656.77l11.5-5.75a2 2 0 00.77-2.656l-1.5-3z" />
+        </svg>
+      )
+    },
+    {
+      title: 'Bachelor of Commerce',
+      short: 'B.Com.',
+      url: '/comm',
+      color: '#0A1628',
+      image: '/images/c3.jpg',
+      duration: '4 Years (NEP)',
+      subjects: 'Financial Accounting · Taxation · Law · Audit',
+      prospects: 'Chartered Accountancy, Banking, Corporate Finance',
+      icon: (
+        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v5.25c0 .621-.504 1.125-1.125 1.125h-2.25A1.125 1.125 0 013 18.375v-5.25zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125v-9.75zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v14.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+        </svg>
+      )
+    },
+    {
+      title: 'Master of Commerce',
+      short: 'M.Com.',
+      url: '/mcom',
+      color: '#E8722A',
+      image: '/images/c4.jpg',
+      duration: '2 Years Postgraduate',
+      subjects: 'Adv. Cost Accounting · Financial Mgmt · Commerce',
+      prospects: 'Management Audits, Investment Banking, Academia',
+      icon: (
+        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+        </svg>
+      )
+    },
+    {
+      title: 'Master of Science',
+      short: 'M.Sc.',
+      url: '/msc',
+      color: '#2A9D6F',
+      image: '/images/c5.jpg',
+      duration: '2 Years Postgraduate',
+      subjects: 'Organic Chemistry · Inorganic Chemistry · Analysis',
+      prospects: 'Pharmaceuticals, R&D Labs, Chemical Industries',
+      icon: (
+        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+        </svg>
+      )
+    },
+    {
+      title: 'Master of Arts',
+      short: 'M.A.',
+      url: '/ma',
+      color: '#0A1628',
+      image: '/images/c6.jpg',
+      duration: '2 Years Postgraduate',
+      subjects: 'British & American Literature · Linguistics · Poetry',
+      prospects: 'Publishing Houses, Journalism, Content Writing, Teaching',
+      icon: (
+        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+        </svg>
+      )
+    },
   ];
 
   const uniquePartners = [
@@ -282,45 +365,73 @@ export default function Home() {
 
       {/* Programmes */}
       <section className={s.progsSection} id="programmes">
-        <div className={s.progsSectionInner}>
-          <ScrollReveal direction="up" threshold={0.2}>
-            <div className={s.sectionHeadCenter}>
+        <div className={s.progsLayout}>
+          <ScrollReveal direction="left" threshold={0.2} className={s.progsLeft}>
+            <div>
               <span className={s.eyebrow}>Academic Offerings</span>
-              <h2 className={s.sectionTitleLg}>Our <span className={s.accentText}>Programmes</span></h2>
+              <h2 className={s.sectionTitleLg}>Academic <span className={s.accentText}>Programmes</span></h2>
               <div className={s.titleUnderline} />
-              <p className={s.sectionSubtitle}>Choose from our range of undergraduate and postgraduate programmes designed for modern careers.</p>
-            </div>
-          </ScrollReveal>
-          <div className={s.coursesScroll}>
-            {courses.map((c, i) => (
-              <ScrollReveal
-                key={i}
-                direction="up"
-                delay={i * 60}
-                distance={30}
-                threshold={0.15}
-                className=""
-              >
-                <Link
-                  href={c.url}
-                  className={s.courseCardNew}
-                  style={{ '--card-accent': c.color } as React.CSSProperties}
+              <p className={s.progsDesc}>
+                KLE Society&apos;s G.I.Bagewadi College offers a comprehensive suite of undergraduate and postgraduate courses, empowering students with the skills and knowledge for a successful career.
+              </p>
+              <div className={s.sliderCtrl}>
+                <button
+                  className={s.sliderCtrlBtn}
+                  onClick={() => setProgIndex(p => Math.max(p - 1, 0))}
+                  disabled={progIndex === 0}
+                  aria-label="Previous slide"
                 >
-                  <div className={s.courseCardAccentLine} />
-                  <div className={s.courseShortNew}>{c.short}</div>
-                  <div className={s.courseFullNew}>{c.title}</div>
-                  <div className={s.courseArrow}>
-                    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
-          <ScrollReveal direction="up" delay={120} threshold={0.2}>
-            <div className={s.progsFooter}>
-              <Link href="/acadmic" className={s.outlineBtn}>View All Programmes →</Link>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+                </button>
+                <button
+                  className={s.sliderCtrlBtn}
+                  onClick={() => setProgIndex(p => Math.min(p + 1, courses.length - 3))}
+                  disabled={progIndex >= courses.length - 3}
+                  aria-label="Next slide"
+                >
+                  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                </button>
+              </div>
+              <div style={{ marginTop: '32px' }}>
+                <Link href="/acadmic" className={s.outlineBtn}>View All Programmes →</Link>
+              </div>
             </div>
           </ScrollReveal>
+
+          <div className={s.sliderViewport}>
+            <div
+              className={s.sliderTrack}
+              style={{ transform: `translate3d(-${progIndex * 324}px, 0, 0)` } as React.CSSProperties}
+            >
+              {courses.map((c, i) => (
+                <div key={i} className={s.progCard}>
+                  <div className={s.progCardImgWrap}>
+                    <img src={c.image} alt={c.title} className={s.progCardImg} loading="lazy" />
+                  </div>
+                  <div className={s.progCardBody} style={{ background: c.color } as React.CSSProperties}>
+                    <div className={s.progCardHeader}>
+                      <h3 className={s.progCardTitle}>{c.title}</h3>
+                      <span className={s.progCardIcon}>{c.icon}</span>
+                    </div>
+                    <div className={s.progCardSpecs}>
+                      <div className={s.progCardSpec}>
+                        <span className={s.progCardSpecLabel}>Duration</span>
+                        <span className={s.progCardSpecVal}>{c.duration}</span>
+                      </div>
+                      <div className={s.progCardSpec}>
+                        <span className={s.progCardSpecLabel}>Major Subjects</span>
+                        <span className={s.progCardSpecVal}>{c.subjects}</span>
+                      </div>
+                      <div className={s.progCardSpec}>
+                        <span className={s.progCardSpecLabel}>Career Prospects</span>
+                        <span className={s.progCardSpecVal}>{c.prospects}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

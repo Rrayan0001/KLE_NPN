@@ -3,6 +3,33 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import s from '@/styles/layout.module.css';
 
+const SLIDE_DIRECTIONS = [
+  { from: 'polygon(0 0, 0 0, 0 100%, 0 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+  { from: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+  { from: 'polygon(0 100%, 0 100%, 100% 100%, 100% 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+];
+
+function SplitHeading({ text, highlight }: { text: string; highlight: string }) {
+  const allText = `${text} ${highlight}`;
+  const words = allText.split(' ');
+  return (
+    <h1 className={s.slideH1}>
+      {words.map((w, i) => (
+        <span
+          key={i}
+          className={`${s.slideWord} ${w === highlight ? s.slideWordAccent : ''}`}
+          style={{ animationDelay: `${0.25 + i * 0.08}s` }}
+        >
+          <span className={s.slideWordInner}>
+            {w === highlight && <span className={s.slideAccentSweep} aria-hidden="true" />}
+            {w}
+          </span>
+        </span>
+      ))}
+    </h1>
+  );
+}
+
 export default function HeroSlider() {
   const [cur, setCur] = useState(0);
   const [animKey, setAnimKey] = useState(0);
@@ -14,11 +41,12 @@ export default function HeroSlider() {
       tag: 'Est. 1961 · Nipani, Karnataka',
       title: 'Empowering',
       highlight: 'Minds',
-      sub: "KLE Society's G.I. Bagewadi Arts, Science and Commerce College — shaping futures and eradicating ignorance since 1961.",
+      sub: "KLE Society's G.I.Bagewadi Arts, Science and Commerce College — shaping futures and eradicating ignorance since 1961.",
       cta: 'Discover the College',
       url: '/aboutclg',
       secondaryLabel: 'Explore Programmes',
       secondaryUrl: '/acadmic',
+      kenOrigin: 'top left',
     },
     {
       image: '/images/bann2.jpg',
@@ -30,6 +58,7 @@ export default function HeroSlider() {
       url: '/certificates',
       secondaryLabel: 'Browse Campus',
       secondaryUrl: '/gallery',
+      kenOrigin: 'center',
     },
     {
       image: '/images/bann3.png',
@@ -41,6 +70,7 @@ export default function HeroSlider() {
       url: '/admission',
       secondaryLabel: 'Scholarships',
       secondaryUrl: '/scholarship',
+      kenOrigin: 'bottom right',
     },
   ];
 
@@ -66,53 +96,73 @@ export default function HeroSlider() {
 
   return (
     <section className={s.hero} aria-label="Hero Slideshow">
-      {/* Slides */}
       <div className={s.slideWrap}>
-        {slides.map((sl, i) => (
-          <div key={i} className={`${s.slide} ${i === cur ? s.slideOn : s.slideOff}`}>
-            <img src={sl.image} alt={sl.title} className={s.slideImg} loading={i === 0 ? 'eager' : 'lazy'} />
-            <div className={s.slideShade} />
-            <div className={s.slideGrain} />
-            <div className={s.slideBody}>
-              <div className={s.slideBodyInner} key={`content-${animKey}-${i}`}>
-                {i === cur && (
-                  <div className={s.slideText}>
-                    <span className={s.slideTag}>
-                      <span className={s.slideTagDot} />
-                      {sl.tag}
-                    </span>
-                    <h1 className={s.slideH1}>
-                      {sl.title}<br />
-                      <span className={s.slideAccent}>{sl.highlight}</span>
-                    </h1>
-                    <p className={s.slidePara}>{sl.sub}</p>
-                    <div className={s.slideActions}>
-                      <Link href={sl.url} className={s.slideCta}>
-                        {sl.cta}
-                        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-                      </Link>
-                      <Link href={sl.secondaryUrl} className={s.slideCtaGhost}>
-                        {sl.secondaryLabel}
-                        <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-                      </Link>
-                    </div>
-                    <div className={s.slideChips}>
-                      {chips.map((c, ci) => (
-                        <Link key={ci} href={c.url} className={s.slideChip}>
-                          <span className={s.slideChipDot} />
-                          {c.name}
+        {slides.map((sl, i) => {
+          const isOn = i === cur;
+          const dir = SLIDE_DIRECTIONS[i % SLIDE_DIRECTIONS.length];
+          return (
+            <div
+              key={i}
+              className={`${s.slide} ${isOn ? s.slideOn : s.slideOff}`}
+            >
+              <img
+                src={sl.image}
+                alt={sl.title}
+                className={s.slideImg}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                style={{ '--ken-origin': sl.kenOrigin } as React.CSSProperties}
+              />
+              <div
+                className={s.slideReveal}
+                style={{
+                  clipPath: isOn ? dir.to : dir.from,
+                  transitionDelay: isOn ? '0.05s' : '0s',
+                }}
+              />
+              <div className={s.slideShade} />
+              <div className={s.slideGrain} />
+              <div className={s.slideBody}>
+                <div className={s.slideBodyInner} key={`content-${animKey}-${i}`}>
+                  {isOn && (
+                    <div className={s.slideText}>
+                      <span className={s.slideTag}>
+                        <span className={s.slideTagDot} />
+                        {sl.tag}
+                      </span>
+                      <SplitHeading text={sl.title} highlight={sl.highlight} />
+                      <p className={s.slidePara}>{sl.sub}</p>
+                      <div className={s.slideActions}>
+                        <Link href={sl.url} className={s.slideCta}>
+                          {sl.cta}
+                          <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
                         </Link>
-                      ))}
+                        <Link href={sl.secondaryUrl} className={s.slideCtaGhost}>
+                          {sl.secondaryLabel}
+                          <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                        </Link>
+                      </div>
+                      <div className={s.slideChips}>
+                        {chips.map((c, ci) => (
+                          <Link
+                            key={ci}
+                            href={c.url}
+                            className={s.slideChip}
+                            style={{ animationDelay: `${0.7 + ci * 0.08}s` }}
+                          >
+                            <span className={s.slideChipDot} />
+                            {c.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      {/* Floating NAAC accreditation badge */}
       <div className={s.slideBadge} aria-label="NAAC A Grade Accreditation">
         <div className={s.slideBadgeGrade}>A</div>
         <div className={s.slideBadgeMeta}>
@@ -121,7 +171,6 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Nav Arrows */}
       <button className={s.prevBtn} onClick={() => goTo(cur - 1)} aria-label="Previous slide">
         <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
       </button>
@@ -129,7 +178,6 @@ export default function HeroSlider() {
         <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
       </button>
 
-      {/* Bottom bar: slide counter + dots + scroll cue */}
       <div className={s.heroFoot}>
         <div className={s.heroCounter}>
           <span className={s.heroCounterNum}>0{cur + 1}</span>
@@ -154,7 +202,6 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Top progress bar — restarts each slide via key */}
       <div className={s.heroProgress} aria-hidden="true">
         <div
           key={`progress-${animKey}`}

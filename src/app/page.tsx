@@ -5,16 +5,18 @@ import s from '@/styles/layout.module.css';
 import HeroSlider from '@/components/HeroSlider';
 import Announcements from '@/components/Announcements';
 import FacilitiesBar from '@/components/FacilitiesBar';
+import ScrollReveal from '@/components/ScrollReveal';
 
-/* ── Animated Count-Up Hook ─────────────────────────────────── */
+/* ── Odometer counter ─────────────────────────────────────── */
 function useCountUp(target: number, duration = 1800) {
-  const [count, setCount] = useState(0);
+  const reducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [count, setCount] = useState(reducedMotion ? target : 0);
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
-
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (reducedMotion) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
@@ -33,153 +35,131 @@ function useCountUp(target: number, duration = 1800) {
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [target, duration]);
-
+  }, [target, duration, reducedMotion]);
   return { count, ref };
 }
 
-function StatCounter({ value, suffix, label, desc }: { value: number; suffix: string; label: string; desc: string }) {
-  const { count, ref } = useCountUp(value);
+function OdometerDigits({ value }: { value: number }) {
+  const digits = String(value).split('');
   return (
-    <div className={s.statCountCard} ref={ref}>
-      <div className={s.statCountVal}>{count}{suffix}</div>
-      <div className={s.statCountLabel}>{label}</div>
-      <div className={s.statCountDesc}>{desc}</div>
-    </div>
+    <span className={s.odoValue}>
+      {digits.map((d, i) => (
+        <span key={i} className={s.odoDigit}>
+          <span
+            className={s.odoDigitInner}
+            style={{ ['--odo-target' as string]: d } as React.CSSProperties}
+          >
+            {Array.from({ length: 10 }, (_, n) => (
+              <span key={n}>{n}</span>
+            ))}
+          </span>
+        </span>
+      ))}
+    </span>
   );
 }
 
-/* ── Intersection Observer Fade-In ───────────────────────────── */
-function FadeSection({ children, className }: { children: React.ReactNode; className?: string }) {
+function StatCounter({ value, suffix, label, desc, idx }: { value: number; suffix: string; label: string; desc: string; idx: number }) {
+  const { count, ref } = useCountUp(value);
+  return (
+    <ScrollReveal direction="up" delay={idx * 90} duration={800} distance={36} threshold={0.2}>
+      <div className={s.statCountCard} ref={ref}>
+        <div className={s.statCountVal}>
+          <OdometerDigits value={count} />
+          {suffix}
+        </div>
+        <div className={s.statCountLabel}>{label}</div>
+        <div className={s.statCountDesc}>{desc}</div>
+      </div>
+    </ScrollReveal>
+  );
+}
+
+/* ── About image reveal via observer (class toggle) ───────── */
+function RevealImage({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [shown, setShown] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.1 }
+      ([e]) => { if (e.isIntersecting) { setShown(true); obs.disconnect(); } },
+      { threshold: 0.3 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
   return (
-    <div ref={ref} className={`${className ?? ''} ${visible ? s.fadeVisible : s.fadeHidden}`}>
+    <div ref={ref} className={`${className ?? ''} ${shown ? 'revealed' : ''}`} style={{ display: 'contents' }}>
+      <div className={s.aboutImgWrap + (shown ? ' revealed' : '')}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ── Tilt card (3D) on hover ──────────────────────────────── */
+function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const px = (x / rect.width - 0.5) * 12;
+    const py = (y / rect.height - 0.5) * -12;
+    el.style.setProperty('--mx', `${x}px`);
+    el.style.setProperty('--my', `${y}px`);
+    const card = el.querySelector('.vmCard') as HTMLElement | null;
+    if (card) card.style.transform = `perspective(900px) rotateY(${px}deg) rotateX(${py}deg) translateZ(0)`;
+  };
+  const onLeave = () => {
+    const el = ref.current;
+    if (!el) return;
+    const card = el.querySelector('.vmCard') as HTMLElement | null;
+    if (card) card.style.transform = '';
+  };
+  return (
+    <div
+      ref={ref}
+      className={`tilt-wrap ${className ?? ''}`}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      style={{ position: 'relative' }}
+    >
       {children}
+    </div>
+  );
+}
+
+/* ── Section wave divider ─────────────────────────────────── */
+function WaveDivider({ variant = 'dark', flip = false }: { variant?: 'dark' | 'light' | 'paper'; flip?: boolean }) {
+  const cls = `${s.sectionDivider} ${variant === 'dark' ? s.sectionDividerDark : variant === 'paper' ? s.sectionDividerPaper : s.sectionDividerLight} ${flip ? s.sectionDividerFlip : ''}`;
+  return (
+    <div className={cls} aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" />
+      </svg>
     </div>
   );
 }
 
 export default function Home() {
   const uniqueQuickLinks = [
-    {
-      name: 'Admission',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      ),
-      desc: 'Apply for 2026-27',
-      url: '/admission'
-    },
-    {
-      name: 'NAAC Docs',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 15a4 4 0 100-8 4 4 0 000 8zm0 0v4m-4 0h8M4 11h16" />
-        </svg>
-      ),
-      desc: 'Accreditation details',
-      url: '/certificates'
-    },
-    {
-      name: 'Placements',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      ),
-      desc: 'Placement records',
-      url: '/placements'
-    },
-    {
-      name: 'Library',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-      ),
-      desc: 'Digital library',
-      url: '/library'
-    },
-    {
-      name: 'Hostel',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      ),
-      desc: 'Campus living',
-      url: '/hostel'
-    },
-    {
-      name: 'IQAC',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2" />
-        </svg>
-      ),
-      desc: 'Quality assurance',
-      url: '/iqacworkingcomittee'
-    },
-    {
-      name: 'Scholarships',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-        </svg>
-      ),
-      desc: 'Financial aid',
-      url: '/scholarship'
-    },
-    {
-      name: 'NSS / NCC',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-        </svg>
-      ),
-      desc: 'Social & defence',
-      url: '/nss'
-    },
-    {
-      name: 'Gallery',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-      ),
-      desc: 'Events & campus',
-      url: '/gallery'
-    },
-    {
-      name: 'Contact',
-      icon: (
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-        </svg>
-      ),
-      desc: 'Reach the college',
-      url: '/contact'
-    },
+    { name: 'Admission', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>), desc: 'Apply for 2026-27', url: '/admission' },
+    { name: 'NAAC Docs', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15a4 4 0 100-8 4 4 0 000 8zm0 0v4m-4 0h8M4 11h16"/></svg>), desc: 'Accreditation details', url: '/certificates' },
+    { name: 'Placements', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>), desc: 'Placement records', url: '/placements' },
+    { name: 'Library', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>), desc: 'Digital library', url: '/library' },
+    { name: 'Hostel', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>), desc: 'Campus living', url: '/hostel' },
+    { name: 'IQAC', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg>), desc: 'Quality assurance', url: '/iqacworkingcomittee' },
+    { name: 'Scholarships', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>), desc: 'Financial aid', url: '/scholarship' },
+    { name: 'NSS / NCC', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>), desc: 'Social & defence', url: '/nss' },
+    { name: 'Gallery', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>), desc: 'Events & campus', url: '/gallery' },
+    { name: 'Contact', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>), desc: 'Reach the college', url: '/contact' },
   ];
 
-  const quickLinks = [
-    ...uniqueQuickLinks,
-    ...uniqueQuickLinks,
-    ...uniqueQuickLinks,
-    ...uniqueQuickLinks,
-  ];
+  const quickLinks = [...uniqueQuickLinks, ...uniqueQuickLinks, ...uniqueQuickLinks, ...uniqueQuickLinks];
 
   const courses = [
     { title: 'Bachelor of Arts', short: 'BA', url: '/ba', color: '#E8722A' },
@@ -188,34 +168,22 @@ export default function Home() {
     { title: 'Master of Commerce', short: 'MCom', url: '/mcom', color: '#E8722A' },
     { title: 'Master of Science', short: 'MSc', url: '/msc', color: '#2A9D6F' },
     { title: 'Master of Arts', short: 'MA', url: '/ma', color: '#0A1628' },
+    { title: 'Bachelor of Computer App.', short: 'BCA', url: '/bca', color: '#E8722A' },
+    { title: 'Bachelor of Business Admin.', short: 'BBA', url: '/bba', color: '#2A9D6F' },
   ];
 
   const uniquePartners = [
-    '/images/download_1.jpg',
-    '/images/download_2.png',
-    '/images/download_3.png',
-    '/images/download_4.png',
-    '/images/download_5.png',
+    '/images/download_1.jpg', '/images/download_2.png', '/images/download_3.png',
+    '/images/download_4.png', '/images/download_5.png',
   ];
-
-  const partnerImages = [
-    ...uniquePartners,
-    ...uniquePartners,
-    ...uniquePartners,
-    ...uniquePartners,
-    ...uniquePartners,
-    ...uniquePartners,
-  ];
+  const partnerImages = [...uniquePartners, ...uniquePartners, ...uniquePartners, ...uniquePartners, ...uniquePartners, ...uniquePartners];
 
   return (
     <>
-      {/* ── 1. HERO ─────────────────────────────────────────────── */}
       <HeroSlider />
-
-      {/* ── 2. ANNOUNCEMENTS ────────────────────────────────────── */}
       <Announcements />
 
-      {/* ── 3. QUICK ACCESS — Scrolling Marquee ─────────────────── */}
+      {/* Quick Access marquee */}
       <section className={s.quickSection}>
         <div className={s.sectionLabel}>
           <span className={s.sectionLabelText}>Quick Access</span>
@@ -232,145 +200,192 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. STATS ─────────────────────────────────────────────── */}
+      <WaveDivider variant="dark" />
+
+      {/* Stats */}
       <section className={s.statsSection}>
         <div className={s.statsSectionInner}>
-          <div className={s.sectionHeadCenter}>
-            <span className={s.eyebrow}>By the Numbers</span>
-            <h2 className={s.sectionTitleLgLight}>Our <span className={s.accentTextLight}>Impact</span></h2>
-          </div>
+          <ScrollReveal direction="up" threshold={0.3}>
+            <div className={s.sectionHeadCenter}>
+              <span className={s.eyebrow}>By the Numbers</span>
+              <h2 className={s.sectionTitleLgLight}>Our <span className={s.accentTextLight}>Impact</span></h2>
+            </div>
+          </ScrollReveal>
           <div className={s.statsCountGrid}>
-            <StatCounter value={60} suffix="+" label="Faculty Members" desc="Experienced educators" />
-            <StatCounter value={1200} suffix="+" label="Students Enrolled" desc="Across all programmes" />
-            <StatCounter value={16} suffix="+" label="Programmes Offered" desc="UG, PG & ITEP degrees" />
-            <StatCounter value={90} suffix="%+" label="Placement Success" desc="Consistent track record" />
+            <StatCounter idx={0} value={60}  suffix="+" label="Faculty Members" desc="Experienced educators" />
+            <StatCounter idx={1} value={1200} suffix="+" label="Students Enrolled" desc="Across all programmes" />
+            <StatCounter idx={2} value={16} suffix="+" label="Programmes Offered" desc="UG, PG & ITEP degrees" />
+            <StatCounter idx={3} value={90} suffix="%+" label="Placement Success" desc="Consistent track record" />
           </div>
         </div>
       </section>
 
-      {/* ── 5. ABOUT ─────────────────────────────────────────────── */}
+      <WaveDivider variant="dark" flip />
+
+      {/* About */}
       <section className={s.aboutSection} id="about">
         <div className={s.aboutSectionInner}>
-          <FadeSection className={s.aboutLeft}>
-            <span className={s.eyebrow}>Est. 1961 · Nipani, Karnataka</span>
-            <h2 className={s.sectionTitleLg}>
-              About <span className={s.accentText}>Us</span>
-            </h2>
-            <div className={s.titleUnderline} />
-            <p className={s.aboutParagraph}>
-              In 1961, KLE Society founded an Arts and Science College at Nipani to eradicate ignorance and illiteracy in the region. Today, the college offers a comprehensive range of UG, PG, and ITEP programmes and stands as the premier institution for Belagavi and Vijayapur districts.
-            </p>
-            <div className={s.visionMissionRow}>
-              <div className={s.vmCard}>
-                <div className={s.vmCardIcon}>🎯</div>
-                <h4 className={s.vmCardTitle}>Our Vision</h4>
-                <p className={s.vmCardText}>To be a frontline institution disseminating quality education that adapts to changing global perspectives.</p>
+          <ScrollReveal direction="left" duration={900} distance={50}>
+            <div className={s.aboutLeft}>
+              <span className={s.eyebrow}>Est. 1961 · Nipani, Karnataka</span>
+              <h2 className={s.sectionTitleLg}>About <span className={s.accentText}>Us</span></h2>
+              <div className={s.titleUnderline} />
+              <p className={s.aboutParagraph}>
+                In 1961, KLE Society founded an Arts and Science College at Nipani to eradicate ignorance and illiteracy in the region. Today, the college offers a comprehensive range of UG, PG, and ITEP programmes and stands as the premier institution for Belagavi and Vijayapur districts.
+              </p>
+              <div className={s.visionMissionRow}>
+                <ScrollReveal direction="up" delay={150}>
+                  <TiltCard className={s.vmCard}>
+                    <div className={s.vmCardGlow} />
+                    <div className={s.vmCardIcon}>🎯</div>
+                    <h4 className={s.vmCardTitle}>Our Vision</h4>
+                    <p className={s.vmCardText}>To be a frontline institution disseminating quality education that adapts to changing global perspectives.</p>
+                  </TiltCard>
+                </ScrollReveal>
+                <ScrollReveal direction="up" delay={280}>
+                  <TiltCard className={s.vmCard}>
+                    <div className={s.vmCardGlow} />
+                    <div className={s.vmCardIcon}>🚀</div>
+                    <h4 className={s.vmCardTitle}>Our Mission</h4>
+                    <p className={s.vmCardText}>To produce competent, skilled youth with educational empowerment maintaining equity, equality, and social justice.</p>
+                  </TiltCard>
+                </ScrollReveal>
               </div>
-              <div className={s.vmCard}>
-                <div className={s.vmCardIcon}>🚀</div>
-                <h4 className={s.vmCardTitle}>Our Mission</h4>
-                <p className={s.vmCardText}>To produce competent, skilled youth with educational empowerment maintaining equity, equality, and social justice.</p>
-              </div>
+              <ScrollReveal direction="up" delay={400}>
+                <Link href="/aboutclg" className={s.primaryBtn}>
+                  Know More
+                  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                </Link>
+              </ScrollReveal>
             </div>
-            <Link href="/aboutclg" className={s.primaryBtn}>
-              Know More
-              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </Link>
-          </FadeSection>
-          <FadeSection className={s.aboutRight2}>
-            <div className={s.aboutImgWrap}>
+          </ScrollReveal>
+          <ScrollReveal direction="right" duration={900} distance={50}>
+            <RevealImage className={s.aboutRight2}>
               <img src="/images/banner10_1.jpg" alt="KLE College Campus" className={s.aboutImg2} />
               <div className={s.aboutImgOverlay} />
-            </div>
-            <div className={s.aboutMiniStats}>
-              {[{ val: '60+', lbl: 'Faculty' }, { val: '1,200+', lbl: 'Students' }, { val: '16+', lbl: 'Programmes' }].map((st, i) => (
-                <div key={i} className={s.miniStatBox}>
-                  <span className={s.miniStatVal}>{st.val}</span>
-                  <span className={s.miniStatLbl}>{st.lbl}</span>
-                </div>
-              ))}
-            </div>
-          </FadeSection>
+            </RevealImage>
+            <ScrollReveal direction="up" delay={300}>
+              <div className={s.aboutMiniStats}>
+                {[{ val: '60+', lbl: 'Faculty' }, { val: '1,200+', lbl: 'Students' }, { val: '16+', lbl: 'Programmes' }].map((st, i) => (
+                  <div key={i} className={s.miniStatBox}>
+                    <span className={s.miniStatVal}>{st.val}</span>
+                    <span className={s.miniStatLbl}>{st.lbl}</span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* ── 6. PROGRAMMES ─────────────────────────────────────────── */}
+      <WaveDivider variant="light" />
+
+      {/* Programmes */}
       <section className={s.progsSection} id="programmes">
         <div className={s.progsSectionInner}>
-          <FadeSection className={s.sectionHeadCenter}>
-            <span className={s.eyebrow}>Academic Offerings</span>
-            <h2 className={s.sectionTitleLg}>Our <span className={s.accentText}>Programmes</span></h2>
-            <div className={s.titleUnderline} />
-            <p className={s.sectionSubtitle}>Choose from our range of undergraduate and postgraduate programmes designed for modern careers.</p>
-          </FadeSection>
+          <ScrollReveal direction="up" threshold={0.2}>
+            <div className={s.sectionHeadCenter}>
+              <span className={s.eyebrow}>Academic Offerings</span>
+              <h2 className={s.sectionTitleLg}>Our <span className={s.accentText}>Programmes</span></h2>
+              <div className={s.titleUnderline} />
+              <p className={s.sectionSubtitle}>Choose from our range of undergraduate and postgraduate programmes designed for modern careers.</p>
+            </div>
+          </ScrollReveal>
           <div className={s.coursesScroll}>
             {courses.map((c, i) => (
-              <Link key={i} href={c.url} className={s.courseCardNew} style={{ '--card-accent': c.color } as React.CSSProperties}>
-                <div className={s.courseCardAccentLine} />
-                <div className={s.courseShortNew}>{c.short}</div>
-                <div className={s.courseFullNew}>{c.title}</div>
-                <div className={s.courseArrow}>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-                </div>
-              </Link>
+              <ScrollReveal
+                key={i}
+                direction="up"
+                delay={i * 60}
+                distance={30}
+                threshold={0.15}
+                className=""
+              >
+                <Link
+                  href={c.url}
+                  className={s.courseCardNew}
+                  style={{ '--card-accent': c.color } as React.CSSProperties}
+                >
+                  <div className={s.courseCardAccentLine} />
+                  <div className={s.courseShortNew}>{c.short}</div>
+                  <div className={s.courseFullNew}>{c.title}</div>
+                  <div className={s.courseArrow}>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                  </div>
+                </Link>
+              </ScrollReveal>
             ))}
           </div>
-          <div className={s.progsFooter}>
-            <Link href="/acadmic" className={s.outlineBtn}>View All Programmes →</Link>
-          </div>
+          <ScrollReveal direction="up" delay={120} threshold={0.2}>
+            <div className={s.progsFooter}>
+              <Link href="/acadmic" className={s.outlineBtn}>View All Programmes →</Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* ── 7. FACILITIES ──────────────────────────────────────────── */}
+      <WaveDivider variant="paper" flip />
+
+      {/* Facilities */}
       <section className={s.facilSection} id="facilities">
         <div className={s.facilSectionInner}>
-          <FadeSection className={s.sectionHeadCenter}>
-            <span className={s.eyebrow}>World-Class Infrastructure</span>
-            <h2 className={s.sectionTitleLg}>Campus <span className={s.accentText}>Facilities</span></h2>
-            <div className={s.titleUnderline} />
-            <p className={s.sectionSubtitle}>Explore state-of-the-art facilities built to support comprehensive learning and well-being.</p>
-          </FadeSection>
+          <ScrollReveal direction="up" threshold={0.2}>
+            <div className={s.sectionHeadCenter}>
+              <span className={s.eyebrow}>World-Class Infrastructure</span>
+              <h2 className={s.sectionTitleLg}>Campus <span className={s.accentText}>Facilities</span></h2>
+              <div className={s.titleUnderline} />
+              <p className={s.sectionSubtitle}>Explore state-of-the-art facilities built to support comprehensive learning and well-being.</p>
+            </div>
+          </ScrollReveal>
           <FacilitiesBar />
         </div>
       </section>
 
-      {/* ── 8. CHAIRMAN ────────────────────────────────────────────── */}
+      <WaveDivider variant="dark" />
+
+      {/* Chairman */}
       <section className={s.chairSection} id="chairman">
         <div className={s.chairSectionInner}>
-          <FadeSection>
+          <ScrollReveal direction="up" threshold={0.3}>
             <span className={s.eyebrowLight}>Leadership</span>
             <h2 className={s.sectionTitleLgLight}>A Message from Our <span className={s.accentTextLight}>Chairman</span></h2>
             <div className={s.titleUnderlineLight} />
-          </FadeSection>
-          <FadeSection className={s.chairCard}>
-            <div className={s.chairQuoteMark}>&ldquo;</div>
-            <div className={s.chairContent}>
-              <p className={s.chairQuoteText}>
-                Our vision is to facilitate higher learning for rural and semi-urban youth, molding them into professional, competent global citizens while instilling moral values and a commitment to service excellence.
-              </p>
-              <div className={s.chairPerson}>
-                <div className={s.chairAvatar}>
-                  <img src="/images/Amitkoreimage.jpg" alt="Shri Amit P. Kore" className={s.chairAvatarImg} />
-                </div>
-                <div className={s.chairInfo}>
-                  <div className={s.chairName}>Shri Amit P. Kore</div>
-                  <div className={s.chairRole}>Chairman, KLE Society, Belagavi</div>
-                  <Link href="/chairman-msg" className={s.chairReadMore}>Read Full Message →</Link>
+          </ScrollReveal>
+          <ScrollReveal direction="scale" delay={120} duration={900} threshold={0.2}>
+            <div className={s.chairCard}>
+              <div className={s.chairQuoteMark}>&ldquo;</div>
+              <div className={s.chairContent}>
+                <p className={s.chairQuoteText}>
+                  Our vision is to facilitate higher learning for rural and semi-urban youth, molding them into professional, competent global citizens while instilling moral values and a commitment to service excellence.
+                </p>
+                <div className={s.chairPerson}>
+                  <div className={s.chairAvatar}>
+                    <img src="/images/Amitkoreimage.jpg" alt="Shri Amit P. Kore" className={s.chairAvatarImg} />
+                  </div>
+                  <div className={s.chairInfo}>
+                    <div className={s.chairName}>Shri Amit P. Kore</div>
+                    <div className={s.chairRole}>Chairman, KLE Society, Belagavi</div>
+                    <Link href="/chairman-msg" className={s.chairReadMore}>Read Full Message →</Link>
+                  </div>
                 </div>
               </div>
             </div>
-          </FadeSection>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* ── 9. PLACEMENT PARTNERS — Infinite Marquee ──────────────── */}
+      <WaveDivider variant="dark" flip />
+
+      {/* Partners */}
       <section className={s.partnersSection} id="partners">
         <div className={s.partnersSectionInner}>
-          <FadeSection className={s.sectionHeadCenter}>
-            <span className={s.eyebrow}>Hiring from Campus</span>
-            <h2 className={s.sectionTitleLg}>Our Placement <span className={s.accentText}>Partners</span></h2>
-            <div className={s.titleUnderline} />
-          </FadeSection>
+          <ScrollReveal direction="up" threshold={0.3}>
+            <div className={s.sectionHeadCenter}>
+              <span className={s.eyebrow}>Hiring from Campus</span>
+              <h2 className={s.sectionTitleLg}>Our Placement <span className={s.accentText}>Partners</span></h2>
+              <div className={s.titleUnderline} />
+            </div>
+          </ScrollReveal>
           <div className={s.partnerMarqueeWrap}>
             <div className={s.partnerMarqueeInner}>
               {partnerImages.map((img, i) => (
@@ -380,12 +395,14 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className={s.partnersFooter}>
-            <Link href="/placements" className={s.primaryBtn}>
-              View Placement Records
-              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </Link>
-          </div>
+          <ScrollReveal direction="up" delay={120}>
+            <div className={s.partnersFooter}>
+              <Link href="/placements" className={s.primaryBtn}>
+                View Placement Records
+                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </>

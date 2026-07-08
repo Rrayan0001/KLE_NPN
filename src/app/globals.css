@@ -328,3 +328,28 @@ button[type="submit"] {
   }
 }
 
+/* ================================================================
+   GLOBAL PREMIUM OVERHAUL — reduced-motion + facility card styles
+   ================================================================ */
+
+/* Global reduced-motion: instant state changes */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Facility card name now lives in body (overlay reveals on hover) */
+.facCardNameInline {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0A1628;
+  margin: 0;
+  font-family: var(--font-dm-sans), sans-serif;
+  letter-spacing: 0.01em;
+}
+.facCardBody { padding: 16px 18px; }
+

@@ -13,24 +13,22 @@ export default function FacilitiesBar() {
   return (
     <section className={s.facs}>
       <div className={s.facsInner}>
-        <div className={s.secHead}>
-          <h2 className={s.secTitle}>Campus <span className={s.secTitleGold}>Facilities</span></h2>
-          <p className={s.secSub}>Explore our state-of-the-art facilities built to support comprehensive learning and well-being.</p>
-        </div>
         <div className={s.facsGrid}>
           {facs.map((f, i) => (
-            <a key={i} href={f.url} className={s.facCard}>
+            <a key={i} href={f.url} className={s.facCard} style={{ ['--i' as string]: i } as React.CSSProperties}>
               <div className={s.facImgWrap}>
                 <img src={f.image} alt={f.name} className={s.facImg} loading="lazy" />
                 <div className={s.facImgShade} />
-                <h3 className={s.facCardName}>{f.name}</h3>
+                <div className={s.facOverlay}>
+                  <p className={s.facCardDesc}>{f.desc}</p>
+                  <span className={s.facOverlayLink}>
+                    View Details
+                    <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                  </span>
+                </div>
               </div>
               <div className={s.facCardBody}>
-                <p className={s.facCardDesc}>{f.desc}</p>
-                <div className={s.facCardFoot}>
-                  <span>View Details</span>
-                  <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-                </div>
+                <h3 className={s.facCardNameInline}>{f.name}</h3>
               </div>
             </a>
           ))}

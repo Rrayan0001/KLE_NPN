@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   title: "KLE Society's G.I.Bagewadi Arts, Science and Commerce College, Nipani",
   description: 'Accredited at "A" with 3.10 CGPA in 4th Cycle by NAAC. Established in 1961.',
   keywords: ["GI Bagewadi College", "KLE Nipani", "KLE College Nipani", "Admissions 2026", "Nipani College"],
+  icons: {
+    icon: '/images/logo.png',
+    shortcut: '/images/logo.png',
+    apple: '/images/logo.png',
+  },
 };
 
 export const viewport = {

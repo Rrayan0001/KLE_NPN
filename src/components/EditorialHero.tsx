@@ -121,7 +121,6 @@ export default function EditorialHero({
           width: 100%;
           height: 100vh;
           height: 100dvh;
-          margin-top: -80px;
           position: relative;
           overflow: hidden;
           background: var(--ek-navy);

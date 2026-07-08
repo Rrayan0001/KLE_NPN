@@ -928,3 +928,671 @@ nav[aria-label="breadcrumb"]:not(.banner-breadcrumb),
   display: none !important;
 }
 
+/* ================================================================
+   MILLION-DOLLAR PREMIUM SUBPAGE OVERRIDES — v2
+   Elevates every subpage to editorial/prestige standard.
+   ================================================================ */
+
+/* ── 1. Banner hero typography ───────────────────────────── */
+h3.title,
+.about-page h3.title,
+.main-content h3.title {
+  font-family: var(--font-dm-sans), sans-serif !important;
+  font-size: clamp(1.5rem, 3vw, 2.1rem) !important;
+  font-weight: 800 !important;
+  color: #0A1628 !important;
+  letter-spacing: -0.03em !important;
+  text-align: left !important;
+  text-transform: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 32px !important;
+  position: relative !important;
+  display: block !important;
+  flex-direction: unset !important;
+  align-items: unset !important;
+  padding-bottom: 18px !important;
+  border-bottom: 1px solid rgba(10,22,40,0.07) !important;
+}
+
+h3.title::after,
+.about-page h3.title::after,
+.main-content h3.title::after {
+  content: "" !important;
+  display: block !important;
+  width: 40px !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, #E8722A 0%, #2A9D6F 100%) !important;
+  border-radius: 2px !important;
+  margin-top: 14px !important;
+  position: static !important;
+}
+
+/* ── 2. Paragraph text — editorial grade ─────────────────── */
+.main-content p,
+.about-page p {
+  font-family: var(--font-source-serif), Georgia, serif !important;
+  font-size: 16px !important;
+  line-height: 1.92 !important;
+  color: #374151 !important;
+  margin-bottom: 22px !important;
+  text-align: left !important;
+}
+
+/* Lead / intro paragraph — larger */
+.main-content p:first-of-type,
+.about-page p:first-of-type {
+  font-size: 17px !important;
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+  line-height: 1.85 !important;
+}
+
+/* ── 3. Headings inside content ──────────────────────────── */
+.main-content h4,
+.about-page h4 {
+  font-size: clamp(1.05rem, 2vw, 1.3rem) !important;
+  font-weight: 700 !important;
+  color: #0A1628 !important;
+  margin-bottom: 10px !important;
+  font-family: var(--font-dm-sans), sans-serif !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Person name / sub-heading under principal photo */
+.right-abw3ls h4 {
+  font-size: clamp(1.1rem, 2vw, 1.4rem) !important;
+  font-weight: 800 !important;
+  color: #0A1628 !important;
+  border-bottom: 2px solid rgba(232,114,42,0.2) !important;
+  padding-bottom: 14px !important;
+  margin-bottom: 16px !important;
+  text-align: left !important;
+  font-style: normal !important;
+}
+
+/* ── 4. Premium two-col image layout ─────────────────────── */
+.about-head-wthree {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: clamp(28px, 4vw, 60px) !important;
+  align-items: flex-start !important;
+}
+
+.left-abw3ls {
+  flex: 0 0 42% !important;
+  max-width: 42% !important;
+  position: relative !important;
+}
+
+.right-abw3ls {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+}
+
+/* Shadow depth offset behind image */
+.left-abw3ls::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 14px !important;
+  left: 14px !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, rgba(232,114,42,0.1), rgba(42,157,111,0.06)) !important;
+  border-radius: 18px !important;
+  z-index: 0 !important;
+}
+
+.left-abw3ls img {
+  position: relative !important;
+  z-index: 1 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 56px rgba(10,22,40,0.14), 0 4px 14px rgba(10,22,40,0.07) !important;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.left-abw3ls img:hover {
+  transform: scale(1.015) translateY(-5px) !important;
+  box-shadow: 0 32px 72px rgba(10,22,40,0.18), 0 8px 24px rgba(10,22,40,0.1) !important;
+}
+
+@media (max-width: 768px) {
+  .about-head-wthree {
+    flex-direction: column !important;
+  }
+  .left-abw3ls,
+  .right-abw3ls {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .left-abw3ls::before {
+    display: none !important;
+  }
+}
+
+/* ── 5. Tables — premium with hover rows ─────────────────── */
+.main-content table,
+.about-page table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-family: var(--font-dm-sans), sans-serif !important;
+  font-size: 14px !important;
+  margin-bottom: 36px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(10,22,40,0.06) !important;
+}
+
+.main-content table th,
+.about-page table th {
+  background: #0A1628 !important;
+  color: #F8F6F0 !important;
+  padding: 14px 18px !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+  font-size: 11.5px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+.main-content table td,
+.about-page table td {
+  padding: 13px 18px !important;
+  border-bottom: 1px solid rgba(10,22,40,0.05) !important;
+  color: #374151 !important;
+  vertical-align: top !important;
+  transition: background 0.15s !important;
+}
+
+.main-content table tr:nth-child(even) td,
+.about-page table tr:nth-child(even) td {
+  background: rgba(248,246,240,0.6) !important;
+}
+
+.main-content table tr:hover td,
+.about-page table tr:hover td {
+  background: rgba(232,114,42,0.05) !important;
+}
+
+/* ── 6. Strong / bold text ───────────────────────────────── */
+.main-content strong,
+.main-content b,
+.about-page strong,
+.about-page b,
+.main-content p strong,
+.about-page p strong {
+  color: #0A1628 !important;
+  font-weight: 700 !important;
+  font-size: inherit !important;
+}
+
+/* ── 7. Content zone background & reading width ──────────── */
+.subpage-body {
+  background: linear-gradient(180deg, #f9f8f6 0%, #ffffff 80px) !important;
+  padding: 0 !important;
+}
+
+.main-content {
+  background: transparent !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.main-content .container,
+.about-page .container {
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.main-content .py-5,
+.about-page .py-5,
+.main-content .py-xl-5,
+.about-page .py-xl-5,
+.main-content .py-lg-3,
+.about-page .py-lg-3,
+.main-content .py-5.container,
+.main-content .about-page {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ── 8. Images ───────────────────────────────────────────── */
+.main-content img,
+.about-page img {
+  border-radius: 12px !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* ── 9. List items ───────────────────────────────────────── */
+.main-content ul li,
+.about-page ul li,
+.main-content ol li,
+.about-page ol li {
+  color: #374151 !important;
+  font-size: 15.5px !important;
+  line-height: 1.8 !important;
+  margin-bottom: 8px !important;
+}
+
+/* ── 10. Mobile responsive ───────────────────────────────── */
+@media (max-width: 768px) {
+  .subpage-two-col {
+    flex-direction: column !important;
+  }
+  .subpage-two-col > * {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  h3.title,
+  .about-page h3.title,
+  .main-content h3.title {
+    font-size: 1.35rem !important;
+  }
+}
+
+/* ================================================================
+   TABLE LAYOUT & ALIGNMENT RESOLUTION
+   ================================================================ */
+
+/* Force table-containing left-abw3ls columns to fill full container width */
+.left-abw3ls:has(table) {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  margin-top: 0 !important;
+}
+
+.left-abw3ls:has(table)::before {
+  display: none !important;
+}
+
+/* Reset table container to full width and handle row wrapping cleanly */
+.main-content table,
+.about-page table {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-collapse: collapse !important;
+  margin-bottom: 36px !important;
+  display: table !important;
+}
+
+.main-content table tr,
+.about-page table tr {
+  height: auto !important;
+  display: table-row !important;
+}
+
+.main-content table td,
+.about-page table td,
+.main-content table th,
+.about-page table th {
+  padding: 14px 18px !important;
+  height: auto !important;
+  line-height: 1.6 !important;
+  vertical-align: middle !important;
+  display: table-cell !important;
+  white-space: normal !important;
+  word-break: normal !important;
+}
+
+.main-content table th,
+.about-page table th {
+  background: #0A1628 !important;
+  color: #F8F6F0 !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+/* ================================================================
+   COMPREHENSIVE MOBILE OPTIMIZATION — Subpages & Global
+   ================================================================ */
+
+/* ── PageBanner mobile ── */
+@media (max-width: 768px) {
+  .pb-banner {
+    padding-top: 0 !important;
+  }
+  .banner-breadcrumb {
+    margin-bottom: 10px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .banner-breadcrumb ol {
+    padding: 5px 10px !important;
+    gap: 2px !important;
+  }
+  .banner-breadcrumb li a,
+  .banner-breadcrumb li span {
+    font-size: 9.5px !important;
+    letter-spacing: 0.04em !important;
+  }
+  .banner-breadcrumb li {
+    font-size: 9.5px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-breadcrumb ol {
+    padding: 4px 8px !important;
+  }
+  .banner-breadcrumb li a,
+  .banner-breadcrumb li span {
+    font-size: 9px !important;
+  }
+}
+
+/* ── SubpageLayout content ── */
+@media (max-width: 768px) {
+  .subpage-content {
+    padding: 0 16px 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .subpage-content {
+    padding: 0 12px 12px !important;
+  }
+}
+
+/* ── Legacy Bootstrap grid → mobile single column ── */
+@media (max-width: 768px) {
+  .subpage-body .row,
+  .subpage-content .row,
+  .main-content .row,
+  .about-page .row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .subpage-body .row > [class*="col-"],
+  .subpage-content .row > [class*="col-"],
+  .main-content .row > [class*="col-"],
+  .about-page .row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* ── Two-column about layout → stacked ── */
+@media (max-width: 768px) {
+  .about-head-wthree {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+  .left-abw3ls,
+  .right-abw3ls {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .left-abw3ls::before {
+    display: none !important;
+  }
+}
+
+/* ── Images — responsive & capped ── */
+@media (max-width: 768px) {
+  .main-content img,
+  .about-page img,
+  .subpage-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 14px rgba(10,22,40,0.06) !important;
+    margin: 12px 0 !important;
+  }
+  .left-abw3ls img {
+    max-height: 260px !important;
+    object-fit: cover !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-abw3ls img {
+    max-height: 200px !important;
+  }
+}
+
+/* ── Tables — horizontal scroll on mobile ── */
+@media (max-width: 768px) {
+  .main-content .bs-docs-example,
+  .about-page .bs-docs-example,
+  .main-content .bs-example,
+  .about-page .bs-example {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px !important;
+  }
+
+  .main-content table,
+  .about-page table {
+    font-size: 12.5px !important;
+    margin-bottom: 20px !important;
+    min-width: 500px !important;
+  }
+
+  .main-content table th,
+  .about-page table th {
+    padding: 10px 12px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  .main-content table td,
+  .about-page table td {
+    padding: 9px 12px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content table,
+  .about-page table {
+    font-size: 11.5px !important;
+    min-width: 400px !important;
+  }
+  .main-content table th,
+  .about-page table th {
+    padding: 8px 10px !important;
+  }
+  .main-content table td,
+  .about-page table td {
+    padding: 7px 10px !important;
+  }
+}
+
+/* ── Tabs — stacked pills on mobile ── */
+@media (max-width: 768px) {
+  .main-content .nav-tabs,
+  .about-page .nav-tabs {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin: 12px 0 !important;
+  }
+  .main-content .nav-tabs a,
+  .about-page .nav-tabs a {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+  }
+  .main-content .nav-tabs li,
+  .about-page .nav-tabs li {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content .nav-tabs a,
+  .about-page .nav-tabs a {
+    padding: 7px 12px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* ── Headings — mobile sizes ── */
+@media (max-width: 768px) {
+  h3.title,
+  .about-page h3.title,
+  .main-content h3.title {
+    font-size: 1.3rem !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 12px !important;
+  }
+  h3.title::after,
+  .about-page h3.title::after,
+  .main-content h3.title::after {
+    width: 32px !important;
+    margin-top: 10px !important;
+  }
+  .main-content h4,
+  .about-page h4 {
+    font-size: 1rem !important;
+    margin-bottom: 8px !important;
+  }
+  .right-abw3ls h4 {
+    font-size: 1.05rem !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h3.title,
+  .about-page h3.title,
+  .main-content h3.title {
+    font-size: 1.15rem !important;
+    margin-bottom: 16px !important;
+  }
+  .main-content h4,
+  .about-page h4 {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ── Paragraphs — readable on mobile ── */
+@media (max-width: 768px) {
+  .main-content p,
+  .about-page p {
+    font-size: 14.5px !important;
+    line-height: 1.75 !important;
+    margin-bottom: 16px !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content p,
+  .about-page p {
+    font-size: 14px !important;
+    line-height: 1.72 !important;
+    margin-bottom: 14px !important;
+  }
+}
+
+/* ── List items ── */
+@media (max-width: 768px) {
+  .main-content ul li,
+  .about-page ul li,
+  .main-content ol li,
+  .about-page ol li {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin-bottom: 6px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content ul li,
+  .about-page ul li,
+  .main-content ol li,
+  .about-page ol li {
+    font-size: 13px !important;
+  }
+}
+
+/* ── List group items ── */
+@media (max-width: 768px) {
+  .main-content .list-group-item,
+  .about-page .list-group-item {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    margin-bottom: 6px !important;
+    border-radius: 6px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content .list-group-item,
+  .about-page .list-group-item {
+    padding: 9px 12px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ── Contact page grids ── */
+@media (max-width: 768px) {
+  .contact-grids1 .row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+  .contact-grid1 {
+    text-align: center !important;
+  }
+  .con-ic {
+    margin: 0 auto 8px !important;
+  }
+}
+
+/* ── Break tag cleanup ── */
+@media (max-width: 768px) {
+  .main-content br + br,
+  .about-page br + br {
+    display: none !important;
+  }
+}
+
+/* ── Overflow safety ── */
+@media (max-width: 768px) {
+  .subpage-body,
+  .subpage-content,
+  .main-content,
+  .about-page,
+  .main-content .container,
+  .about-page .container {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ── Very small phones (360px) ── */
+@media (max-width: 360px) {
+  .main-content p,
+  .about-page p {
+    font-size: 13px !important;
+  }
+  h3.title,
+  .about-page h3.title,
+  .main-content h3.title {
+    font-size: 1.05rem !important;
+  }
+  .main-content table,
+  .about-page table {
+    font-size: 11px !important;
+    min-width: 350px !important;
+  }
+}
+

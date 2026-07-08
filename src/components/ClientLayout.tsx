@@ -20,7 +20,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <CursorGlow />
       <div className="flex flex-col min-h-screen overflow-x-hidden w-full relative">
         <Header />
-        <main className="flex-grow" style={{ paddingTop: '80px' }}>{children}</main>
+        <main className="flex-grow" style={{ paddingTop: '0px' }}>{children}</main>
         <Footer />
       </div>
       <BackToTop />

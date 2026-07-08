@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import PageBanner from './PageBanner';
 
 interface SubpageLayoutProps {
@@ -8,57 +7,45 @@ interface SubpageLayoutProps {
   children: React.ReactNode;
 }
 
-export default function SubpageLayout({ breadcrumb, children }: SubpageLayoutProps) {
+export default function SubpageLayout({ children }: SubpageLayoutProps) {
   return (
     <>
       <PageBanner />
 
-      <nav
-        aria-label="breadcrumb"
-        style={{
-          background: '#F8F6F0',
-          borderBottom: '1px solid rgba(10,22,40,0.06)',
-          padding: '10px 0',
-        }}
-      >
-        <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 24px' }}>
-          <ol
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              listStyle: 'none',
-              margin: 0,
-              padding: 0,
-              fontSize: '13px',
-              fontFamily: 'var(--font-dm-sans), sans-serif',
-              fontWeight: 600,
-            }}
-          >
-            <li>
-              <Link href="/" style={{ color: '#0A1628', textDecoration: 'none' }}>
-                Home
-              </Link>
-            </li>
-            {breadcrumb && (
-              <>
-                <li style={{ color: '#E8722A', fontSize: '15px', lineHeight: 1 }}>›</li>
-                <li style={{ color: '#5A6A7A' }}>{breadcrumb}</li>
-              </>
-            )}
-          </ol>
-        </div>
-      </nav>
-
+      {/* Premium content zone */}
       <main
         className="subpage-body"
         style={{
-          maxWidth: '80rem',
-          margin: '0 auto',
-          padding: '56px 24px 80px',
+          background: 'linear-gradient(180deg, #f9f8f6 0%, #ffffff 120px)',
+          minHeight: '60vh',
+          position: 'relative',
         }}
       >
-        {children}
+        {/* Top-edge shimmer line */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent 0%, #E8722A 30%, #2A9D6F 70%, transparent 100%)',
+            opacity: 0.6,
+          }}
+        />
+
+        {/* Inner reading column */}
+        <div
+          className="subpage-content"
+          style={{
+            maxWidth: '1120px',
+            margin: '0 auto',
+            padding: '0px clamp(16px, 3vw, 40px) clamp(16px, 2vw, 24px)',
+          }}
+        >
+          {children}
+        </div>
       </main>
     </>
   );

@@ -310,7 +310,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#0A1628' }}><WaveDivider variant="light" direction="up" /></div>
+      <div style={{ background: '#0A1628' }}><WaveDivider variant="light" direction="down" /></div>
 
       {/* About */}
       <section className={s.aboutSection} id="about">
@@ -548,7 +548,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#ffffff' }}><WaveDivider variant="light" direction="up" /></div>
+      <div style={{ background: '#ffffff' }}><WaveDivider variant="light" direction="down" /></div>
 
       {/* Facilities */}
       <section className={s.facilSection} id="facilities">
@@ -565,7 +565,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="dark" direction="down" /></div>
+      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="dark" direction="down" /></div>
 
       {/* Chairman */}
       <section className={s.chairSection} id="chairman">
@@ -598,7 +598,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#0A1628' }}><WaveDivider variant="white" direction="up" /></div>
+      <div style={{ background: '#0A1628' }}><WaveDivider variant="white" direction="down" /></div>
 
       {/* Partners */}
       <section className={s.partnersSection} id="partners">

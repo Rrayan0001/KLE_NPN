@@ -171,11 +171,11 @@ export default function Header() {
       </div>
 
       {/* Main sticky header */}
-      <header className={`${s.header} ${isHeroState ? s.headerHero : ""} ${isHeroState ? s.headerHeroPad : ""}`}>
-        <div className={`${s.mainNavInner} ${isHeroState ? s.mainNavInnerHero : ""}`}>
+      <header className={`${s.header} ${isHeroState ? s.headerHeroState : ""}`}>
+        <div className={s.mainNavInner}>
           
           {/* Logo & College Branding */}
-          <Link href="/" onClick={() => setIsOpen(false)} className={`${s.logoWrap} ${isHeroState ? s.logoWrapHero : ""}`}>
+          <Link href="/" onClick={() => setIsOpen(false)} className={s.logoWrap}>
             <img src="/images/logo.png" alt="KLE Logo" className={s.logoImg} />
             <div className={s.logoText}>
               <span className={s.logoSub}>KLE Society&apos;s</span>
@@ -190,7 +190,7 @@ export default function Header() {
             <button
               onClick={() => setIsSearchOpen(true)}
               aria-label="Open search modal"
-              className={`${s.searchTrigger} ${isHeroState ? s.searchTriggerHero : ""}`}
+              className={s.searchTrigger}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className={s.searchTriggerIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -201,7 +201,7 @@ export default function Header() {
             <button
               onClick={() => setIsOpen(true)}
               aria-label="Open menu"
-              className={`${s.hamburgerBtn} ${isHeroState ? s.hamburgerBtnHero : ""}`}
+              className={s.hamburgerBtn}
             >
               <span className={s.hamburgerText}>MENU</span>
               <svg xmlns="http://www.w3.org/2000/svg" className={s.hamburgerIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

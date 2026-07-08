@@ -362,6 +362,112 @@ export default function Home() {
         </div>
       </section>
 
+      <WaveDivider variant="paper" />
+
+      {/* Strategic Offerings */}
+      <section className={s.offeringsSection}>
+        <div className={s.offeringsInner}>
+          <ScrollReveal direction="up" threshold={0.2}>
+            <div className={s.offeringsHeader}>
+              <span className={s.eyebrow}>Strategic Services</span>
+              <h2 className={s.offeringsTitle}>
+                Your trusted partner for academic excellence across four major streams:
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className={s.offeringsGrid}>
+            {/* Column 01: Arts */}
+            <ScrollReveal direction="up" delay={50} threshold={0.1} className={s.offeringsCard}>
+              <div className={s.cardNumBackdrop}>01</div>
+              <div className={s.cardInner}>
+                <div className={s.cardImgWrap}>
+                  <img src="/images/gal1.jpeg" alt="Humanities & Social Sciences" className={s.cardImg} />
+                </div>
+                <div className={s.cardLabel}>Arts Division</div>
+                <div className={s.cardTitleWrap}>
+                  <h3 className={s.cardTitle}>Humanities &amp; Sciences</h3>
+                  <Link href="/ba" className={s.cardBtn} aria-label="Explore Arts division">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </Link>
+                </div>
+                <p className={s.cardDesc}>
+                  Empowering students with deep critical thinking, cultural appreciation, and creative expression through languages, literature, and history.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Column 02: Science */}
+            <ScrollReveal direction="up" delay={150} threshold={0.1} className={s.offeringsCard}>
+              <div className={s.cardNumBackdrop}>02</div>
+              <div className={s.cardInner}>
+                <div className={s.cardImgWrap}>
+                  <img src="/images/gal2.jpeg" alt="Scientific Discovery" className={s.cardImg} />
+                </div>
+                <div className={s.cardLabel}>Science Division</div>
+                <div className={s.cardTitleWrap}>
+                  <h3 className={s.cardTitle}>Scientific Discovery</h3>
+                  <Link href="/bsc" className={s.cardBtn} aria-label="Explore Science division">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </Link>
+                </div>
+                <p className={s.cardDesc}>
+                  Fostering rigorous research, analytical skills, and technological innovation across mathematics, physics, chemistry, and life sciences.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Column 03: Commerce */}
+            <ScrollReveal direction="up" delay={250} threshold={0.1} className={s.offeringsCard}>
+              <div className={s.cardNumBackdrop}>03</div>
+              <div className={s.cardInner}>
+                <div className={s.cardImgWrap}>
+                  <img src="/images/gal3.jpeg" alt="Business & Finance" className={s.cardImg} />
+                </div>
+                <div className={s.cardLabel}>Commerce Division</div>
+                <div className={s.cardTitleWrap}>
+                  <h3 className={s.cardTitle}>Business &amp; Finance</h3>
+                  <Link href="/mcom" className={s.cardBtn} aria-label="Explore Commerce division">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </Link>
+                </div>
+                <p className={s.cardDesc}>
+                  Molding next-generation business leaders, accountants, and finance managers with practical accounting skills and economic insights.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Column 04: ITEP */}
+            <ScrollReveal direction="up" delay={350} threshold={0.1} className={s.offeringsCard}>
+              <div className={s.cardNumBackdrop}>04</div>
+              <div className={s.cardInner}>
+                <div className={s.cardImgWrap}>
+                  <img src="/images/gal4.jpeg" alt="Teacher Education" className={s.cardImg} />
+                </div>
+                <div className={s.cardLabel}>ITEP Programme</div>
+                <div className={s.cardTitleWrap}>
+                  <h3 className={s.cardTitle}>Teacher Education</h3>
+                  <Link href="/itep" className={s.cardBtn} aria-label="Explore Teacher Education program">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </Link>
+                </div>
+                <p className={s.cardDesc}>
+                  Nurturing professional, competent educators through the prestigious Integrated Teacher Education Programme to shape future classrooms.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
       <WaveDivider variant="light" />
 
       {/* Programmes */}

@@ -29,18 +29,11 @@
     --brand-accent: #2A9D6F;
     --brand-text-dark: #0A1628;
     --brand-text-muted: #5A6A7A;
-    --background-color: #F8F6F0;
+    --background-color: #FAFAFA;
   }
 
   body {
     background-color: var(--background-color);
-    /* Repeating millimeter-grid background overlay */
-    background-image: 
-      linear-gradient(rgba(10, 22, 40, 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10, 22, 40, 0.12) 1px, transparent 1px),
-      linear-gradient(rgba(10, 22, 40, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10, 22, 40, 0.05) 1px, transparent 1px);
-    background-size: 20px 20px, 20px 20px, 2px 2px, 2px 2px;
     color: var(--brand-text-dark);
     font-family: var(--font-source-serif), Georgia, serif;
     overflow-x: hidden;
@@ -48,8 +41,8 @@
   }
 
   p {
-    font-size: 17.5px;
-    line-height: 1.65;
+    font-size: 17px;
+    line-height: 1.7;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -58,6 +51,53 @@
     letter-spacing: -0.02em;
   }
 }
+
+/* ── GLOBAL KEYFRAMES ─────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-up   { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-in   { animation: fadeIn 0.5s ease both; }
+.animate-slide-left { animation: slideInFromLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Stagger helpers */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
 
 /* Simple animations */
 @keyframes slideInFromLeft {

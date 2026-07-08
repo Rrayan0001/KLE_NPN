@@ -189,8 +189,8 @@ export default function Header() {
       </div>
 
       {/* Main sticky header */}
-      <header className={`${s.header} ${visible ? s.headerVisible : s.headerHidden} ${isHeroState ? s.headerHero : ""}`}>
-        <div className={s.mainNavInner}>
+      <header className={`${s.header} ${visible ? s.headerVisible : s.headerHidden} ${isHeroState ? s.headerHero : ""} ${isHeroState ? s.headerHeroPad : ""}`}>
+        <div className={`${s.mainNavInner} ${isHeroState ? s.mainNavInnerHero : ""}`}>
           
           {/* Logo & College Branding */}
           <Link href="/" onClick={() => setIsOpen(false)} className={`${s.logoWrap} ${isHeroState ? s.logoWrapHero : ""}`}>

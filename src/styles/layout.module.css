@@ -1909,6 +1909,7 @@
 .sectionDividerDark svg path { fill: #0A1628; }
 .sectionDividerLight svg path { fill: #FAFAFA; }
 .sectionDividerPaper svg path { fill: #F8F6F0; }
+.sectionDividerWhite svg path { fill: #ffffff; }
 .sectionDividerFlip svg { transform: scaleY(-1); }
 @media (max-width: 575px) { .sectionDivider svg { height: 40px; } }
 
@@ -2052,6 +2053,9 @@
 }
 .offeringsCard:hover .cardImg {
   transform: scale(1.06) rotate(0.5deg);
+}
+.offeringsCard:nth-child(2) .cardImg {
+  filter: sepia(0.12) saturate(1.2) contrast(1.05) brightness(0.96);
 }
 .cardLabel {
   margin-top: 20px;

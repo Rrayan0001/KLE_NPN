@@ -135,8 +135,8 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
 }
 
 /* ── Section wave divider ─────────────────────────────────── */
-function WaveDivider({ variant = 'dark', flip = false }: { variant?: 'dark' | 'light' | 'paper'; flip?: boolean }) {
-  const cls = `${s.sectionDivider} ${variant === 'dark' ? s.sectionDividerDark : variant === 'paper' ? s.sectionDividerPaper : s.sectionDividerLight} ${flip ? s.sectionDividerFlip : ''}`;
+function WaveDivider({ variant = 'dark', flip = false }: { variant?: 'dark' | 'light' | 'paper' | 'white'; flip?: boolean }) {
+  const cls = `${s.sectionDivider} ${variant === 'dark' ? s.sectionDividerDark : variant === 'paper' ? s.sectionDividerPaper : variant === 'white' ? s.sectionDividerWhite : s.sectionDividerLight} ${flip ? s.sectionDividerFlip : ''}`;
   return (
     <div className={cls} aria-hidden="true">
       <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -468,7 +468,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="light" /></div>
+      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="white" /></div>
 
       {/* Programmes */}
       <section className={s.progsSection} id="programmes">

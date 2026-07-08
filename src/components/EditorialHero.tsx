@@ -84,6 +84,20 @@ export default function EditorialHero({
             <span className="hero-meta hero-meta-center">{centerMeta}</span>
             <span className="hero-meta hero-meta-right">{rightMeta}</span>
           </div>
+
+          {/* Scroll Down Indicator */}
+          <div
+            className="hero-scroll-indicator"
+            style={{ 
+              transform: mounted ? `translate3d(-50%, ${scrollY * -0.08}px, 0)` : 'translateX(-50%)',
+              opacity: mounted ? Math.max(1 - scrollY / 250, 0) : 0
+            }}
+          >
+            <span className="scroll-text">Scroll Down</span>
+            <div className="scroll-mouse">
+              <div className="scroll-wheel" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -237,6 +251,55 @@ export default function EditorialHero({
           .hero-heading { font-size: clamp(2rem, 12vw, 3rem); letter-spacing: -0.03em; padding: 0 10px; }
           .hero-meta-bar { font-size: 8px; padding: 12px 10px; }
           .hero-meta-right { display: none; }
+        }
+
+        /* ── Scroll Down Indicator ── */
+        .hero-scroll-indicator {
+          position: absolute;
+          bottom: 24px;
+          left: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          z-index: 30;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+
+        .scroll-text {
+          font-size: 9px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.22em;
+          color: rgba(248, 246, 240, 0.75);
+          font-family: var(--font-dm-sans), sans-serif;
+        }
+
+        .scroll-mouse {
+          width: 22px;
+          height: 36px;
+          border: 2px solid rgba(248, 246, 240, 0.4);
+          border-radius: 12px;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          padding-top: 6px;
+        }
+
+        .scroll-wheel {
+          width: 4px;
+          height: 8px;
+          background-color: var(--ek-orange);
+          border-radius: 2px;
+          animation: scrollWheelAnim 1.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+
+        @keyframes scrollWheelAnim {
+          0% { transform: translateY(0); opacity: 0; }
+          20% { opacity: 1; }
+          60% { transform: translateY(10px); opacity: 0; }
+          100% { transform: translateY(10px); opacity: 0; }
         }
 
         /* ── Reduced motion ── */

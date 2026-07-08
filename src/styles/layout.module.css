@@ -11,18 +11,21 @@
   border-bottom: 1px solid transparent;
   box-shadow: none;
   font-family: var(--font-dm-sans), sans-serif;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   height: 80px;
   display: flex;
   align-items: center;
   padding: 0 32px;
-  transition: border-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-              box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-              padding-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-              transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-              opacity 0.4s ease;
+  will-change: transform, opacity;
+  transition: border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              padding-left 0.35s ease,
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s ease;
 }
 
 /* Scrolled/solid states styles */
@@ -49,12 +52,8 @@
 .headerHidden { transform: translateY(-100%); }
 .headerVisible { transform: translateY(0); }
 
-/* Hero top state modifier */
+/* Hero top state modifier — only toggles composited props, no layout shift */
 .headerHeroState {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
   padding-left: 0 !important;
   transform: translateY(-100%);
   opacity: 0;

@@ -879,3 +879,52 @@ h3.title {
   }
 }
 
+/* ================================================================
+   SUBPAGE HEADER GAP COLLAPSE & BREADCRUMB HIDING
+   ================================================================ */
+
+/* Hide all legacy breadcrumbs completely */
+nav[aria-label="breadcrumb"]:not(.banner-breadcrumb),
+.breadcrumb,
+.main-content .breadcrumb,
+.about-page .breadcrumb {
+  display: none !important;
+}
+
+/* Collapse excessive paddings, margins, and gaps on inner pages */
+.main-content {
+  padding-top: 24px !important;
+  padding-bottom: 48px !important;
+}
+
+.about-page {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.about-page .container,
+.main-content .container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Collapse Bootstrap py-5 spacers inside the main content wrapper */
+.main-content .py-5,
+.about-page .py-5,
+.main-content .py-xl-5,
+.about-page .py-xl-5,
+.main-content .py-lg-3,
+.about-page .py-lg-3 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Override any hardcoded top break lines */
+.main-content br:first-of-type,
+.about-page br:first-of-type,
+.main-content .container > br {
+  display: none !important;
+}
+

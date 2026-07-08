@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} antialiased`} suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -54,7 +54,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-full bg-white text-gray-900" suppressHydrationWarning>
+      <body className="bg-white text-gray-900" suppressHydrationWarning>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

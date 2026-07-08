@@ -55,9 +55,9 @@
 /* Hero top state modifier — only toggles composited props, no layout shift */
 .headerHeroState {
   padding-left: 0 !important;
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
+  transform: translateY(-100%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .headerHeroState::before {

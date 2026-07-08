@@ -1,5 +1,6 @@
 'use client';
 import s from '@/styles/layout.module.css';
+import StaggerReveal from './StaggerReveal';
 
 export default function FacilitiesBar() {
   const facs = [
@@ -13,7 +14,7 @@ export default function FacilitiesBar() {
   return (
     <section className={s.facs}>
       <div className={s.facsInner}>
-        <div className={s.facsGrid}>
+        <StaggerReveal className={s.facsGrid} stagger={100} threshold={0.1}>
           {facs.map((f, i) => (
             <a key={i} href={f.url} className={s.facCard} style={{ ['--i' as string]: i } as React.CSSProperties}>
               <div className={s.facImgWrap}>
@@ -32,7 +33,7 @@ export default function FacilitiesBar() {
               </div>
             </a>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

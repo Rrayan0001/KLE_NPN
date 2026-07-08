@@ -1,0 +1,46 @@
+/* StaggerReveal — scroll-triggered staggered reveal for lists, grids, and content blocks */
+
+.staggerReveal {}
+
+.hidden > * {
+  opacity: 0;
+  transform: translate3d(0, var(--stagger-distance, 32px), 0);
+}
+
+.visible > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity var(--stagger-duration, 700ms) cubic-bezier(0.22, 1, 0.36, 1) var(--stagger-offset, 0ms),
+    transform var(--stagger-duration, 700ms) cubic-bezier(0.22, 1, 0.36, 1) var(--stagger-offset, 0ms);
+  will-change: opacity, transform;
+}
+
+/* Stagger delays for up to 16 direct children */
+.visible > :nth-child(1)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 0); }
+.visible > :nth-child(2)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 1); }
+.visible > :nth-child(3)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 2); }
+.visible > :nth-child(4)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 3); }
+.visible > :nth-child(5)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 4); }
+.visible > :nth-child(6)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 5); }
+.visible > :nth-child(7)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 6); }
+.visible > :nth-child(8)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 7); }
+.visible > :nth-child(9)  { --stagger-offset: calc(var(--stagger-delay, 80ms) * 8); }
+.visible > :nth-child(10) { --stagger-offset: calc(var(--stagger-delay, 80ms) * 9); }
+.visible > :nth-child(11) { --stagger-offset: calc(var(--stagger-delay, 80ms) * 10); }
+.visible > :nth-child(12) { --stagger-offset: calc(var(--stagger-delay, 80ms) * 11); }
+.visible > :nth-child(13) { --stagger-offset: calc(var(--stagger-delay, 80ms) * 12); }
+.visible > :nth-child(14) { --stagger-offset: calc(var(--stagger-delay, 80ms) * 13); }
+.visible > :nth-child(15) { --stagger-offset: calc(var(--stagger-delay, 80ms) * 14); }
+.visible > :nth-child(16) { --stagger-offset: calc(var(--stagger-delay, 80ms) * 15); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hidden > * {
+    opacity: 1;
+    transform: none;
+  }
+  .visible > * {
+    transition: none;
+  }
+}

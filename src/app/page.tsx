@@ -7,6 +7,7 @@ import EditorialHero from '@/components/EditorialHero';
 import Announcements from '@/components/Announcements';
 import FacilitiesBar from '@/components/FacilitiesBar';
 import ScrollReveal from '@/components/ScrollReveal';
+import StaggerReveal from '@/components/StaggerReveal';
 
 /* ── Odometer counter ─────────────────────────────────────── */
 function useCountUp(target: number, duration = 1800) {
@@ -60,19 +61,17 @@ function OdometerDigits({ value }: { value: number }) {
   );
 }
 
-function StatCounter({ value, suffix, label, desc, idx }: { value: number; suffix: string; label: string; desc: string; idx: number }) {
+function StatCounter({ value, suffix, label, desc }: { value: number; suffix: string; label: string; desc: string }) {
   const { count, ref } = useCountUp(value);
   return (
-    <ScrollReveal direction="up" delay={idx * 90} duration={800} distance={36} threshold={0.2}>
-      <div className={s.statCountCard} ref={ref}>
-        <div className={s.statCountVal}>
-          <OdometerDigits value={count} />
-          {suffix}
-        </div>
-        <div className={s.statCountLabel}>{label}</div>
-        <div className={s.statCountDesc}>{desc}</div>
+    <div className={s.statCountCard} ref={ref}>
+      <div className={s.statCountVal}>
+        <OdometerDigits value={count} />
+        {suffix}
       </div>
-    </ScrollReveal>
+      <div className={s.statCountLabel}>{label}</div>
+      <div className={s.statCountDesc}>{desc}</div>
+    </div>
   );
 }
 
@@ -301,12 +300,12 @@ export default function Home() {
               <h2 className={s.sectionTitleLgLight}>Our <span className={s.accentTextLight}>Impact</span></h2>
             </div>
           </ScrollReveal>
-          <div className={s.statsCountGrid}>
-            <StatCounter idx={0} value={60}  suffix="+" label="Faculty Members" desc="Experienced educators" />
-            <StatCounter idx={1} value={1200} suffix="+" label="Students Enrolled" desc="Across all programmes" />
-            <StatCounter idx={2} value={16} suffix="+" label="Programmes Offered" desc="UG, PG & ITEP degrees" />
-            <StatCounter idx={3} value={90} suffix="%+" label="Placement Success" desc="Consistent track record" />
-          </div>
+          <StaggerReveal className={s.statsCountGrid} stagger={90} distance={36} duration={800} threshold={0.2}>
+            <StatCounter value={60}  suffix="+" label="Faculty Members" desc="Experienced educators" />
+            <StatCounter value={1200} suffix="+" label="Students Enrolled" desc="Across all programmes" />
+            <StatCounter value={16} suffix="+" label="Programmes Offered" desc="UG, PG & ITEP degrees" />
+            <StatCounter value={90} suffix="%+" label="Placement Success" desc="Consistent track record" />
+          </StaggerReveal>
         </div>
       </section>
 
@@ -315,56 +314,46 @@ export default function Home() {
       {/* About */}
       <section className={s.aboutSection} id="about">
         <div className={s.aboutSectionInner}>
-          <ScrollReveal direction="left" duration={900} distance={50}>
-            <div className={s.aboutLeft}>
-              <span className={s.eyebrow}>Est. 1961 · Nipani, Karnataka</span>
-              <h2 className={s.sectionTitleLg}>About <span className={s.accentText}>Us</span></h2>
-              <div className={s.titleUnderline} />
-              <p className={s.aboutParagraph}>
-                In 1961, KLE Society founded an Arts and Science College at Nipani to eradicate ignorance and illiteracy in the region. Today, the college offers a comprehensive range of UG, PG, and ITEP programmes and stands as the premier institution for Belagavi and Vijayapur districts.
-              </p>
-              <div className={s.visionMissionRow}>
-                <ScrollReveal direction="up" delay={150}>
-                  <TiltCard className={s.vmCard}>
-                    <div className={s.vmCardGlow} />
-                    <div className={s.vmCardIcon}>🎯</div>
-                    <h4 className={s.vmCardTitle}>Our Vision</h4>
-                    <p className={s.vmCardText}>To be a frontline institution disseminating quality education that adapts to changing global perspectives.</p>
-                  </TiltCard>
-                </ScrollReveal>
-                <ScrollReveal direction="up" delay={280}>
-                  <TiltCard className={s.vmCard}>
-                    <div className={s.vmCardGlow} />
-                    <div className={s.vmCardIcon}>🚀</div>
-                    <h4 className={s.vmCardTitle}>Our Mission</h4>
-                    <p className={s.vmCardText}>To produce competent, skilled youth with educational empowerment maintaining equity, equality, and social justice.</p>
-                  </TiltCard>
-                </ScrollReveal>
-              </div>
-              <ScrollReveal direction="up" delay={400}>
-                <Link href="/aboutclg" className={s.primaryBtn}>
-                  Know More
-                  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-                </Link>
-              </ScrollReveal>
+          <StaggerReveal className={s.aboutLeft} stagger={100} distance={40} duration={800} threshold={0.2}>
+            <span className={s.eyebrow}>Est. 1961 · Nipani, Karnataka</span>
+            <h2 className={s.sectionTitleLg}>About <span className={s.accentText}>Us</span></h2>
+            <div className={s.titleUnderline} />
+            <p className={s.aboutParagraph}>
+              In 1961, KLE Society founded an Arts and Science College at Nipani to eradicate ignorance and illiteracy in the region. Today, the college offers a comprehensive range of UG, PG, and ITEP programmes and stands as the premier institution for Belagavi and Vijayapur districts.
+            </p>
+            <div className={s.visionMissionRow}>
+              <TiltCard className={s.vmCard}>
+                <div className={s.vmCardGlow} />
+                <div className={s.vmCardIcon}>🎯</div>
+                <h4 className={s.vmCardTitle}>Our Vision</h4>
+                <p className={s.vmCardText}>To be a frontline institution disseminating quality education that adapts to changing global perspectives.</p>
+              </TiltCard>
+              <TiltCard className={s.vmCard}>
+                <div className={s.vmCardGlow} />
+                <div className={s.vmCardIcon}>🚀</div>
+                <h4 className={s.vmCardTitle}>Our Mission</h4>
+                <p className={s.vmCardText}>To produce competent, skilled youth with educational empowerment maintaining equity, equality, and social justice.</p>
+              </TiltCard>
             </div>
-          </ScrollReveal>
-          <ScrollReveal direction="right" duration={900} distance={50}>
+            <Link href="/aboutclg" className={s.primaryBtn}>
+              Know More
+              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </Link>
+          </StaggerReveal>
+          <StaggerReveal stagger={120} distance={40} duration={900} threshold={0.2}>
             <RevealImage className={s.aboutRight2}>
               <img src="/images/banner10_1.jpg" alt="KLE College Campus" className={s.aboutImg2} />
               <div className={s.aboutImgOverlay} />
             </RevealImage>
-            <ScrollReveal direction="up" delay={300}>
-              <div className={s.aboutMiniStats}>
-                {[{ val: '60+', lbl: 'Faculty' }, { val: '1,200+', lbl: 'Students' }, { val: '16+', lbl: 'Programmes' }].map((st, i) => (
-                  <div key={i} className={s.miniStatBox}>
-                    <span className={s.miniStatVal}>{st.val}</span>
-                    <span className={s.miniStatLbl}>{st.lbl}</span>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-          </ScrollReveal>
+            <div className={s.aboutMiniStats}>
+              {[{ val: '60+', lbl: 'Faculty' }, { val: '1,200+', lbl: 'Students' }, { val: '16+', lbl: 'Programmes' }].map((st, i) => (
+                <div key={i} className={s.miniStatBox}>
+                  <span className={s.miniStatVal}>{st.val}</span>
+                  <span className={s.miniStatLbl}>{st.lbl}</span>
+                </div>
+              ))}
+            </div>
+          </StaggerReveal>
         </div>
       </section>
 
@@ -382,9 +371,9 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <div className={s.offeringsGrid}>
+          <StaggerReveal className={s.offeringsGrid} stagger={120} threshold={0.1}>
             {/* Column 01: Arts */}
-            <ScrollReveal direction="up" delay={50} threshold={0.1} className={s.offeringsCard}>
+            <div className={`${s.offeringsCard} ${s.cardInner}`}>
               <div className={s.cardNumBackdrop}>01</div>
               <div className={s.cardInner}>
                 <div className={s.cardImgWrap}>
@@ -403,10 +392,10 @@ export default function Home() {
                   Empowering students with deep critical thinking, cultural appreciation, and creative expression through languages, literature, and history.
                 </p>
               </div>
-            </ScrollReveal>
+            </div>
 
             {/* Column 02: Science */}
-            <ScrollReveal direction="up" delay={150} threshold={0.1} className={s.offeringsCard}>
+            <div className={`${s.offeringsCard} ${s.cardInner}`}>
               <div className={s.cardNumBackdrop}>02</div>
               <div className={s.cardInner}>
                 <div className={s.cardImgWrap}>
@@ -425,10 +414,10 @@ export default function Home() {
                   Fostering rigorous research, analytical skills, and technological innovation across mathematics, physics, chemistry, and life sciences.
                 </p>
               </div>
-            </ScrollReveal>
+            </div>
 
             {/* Column 03: Commerce */}
-            <ScrollReveal direction="up" delay={250} threshold={0.1} className={s.offeringsCard}>
+            <div className={`${s.offeringsCard} ${s.cardInner}`}>
               <div className={s.cardNumBackdrop}>03</div>
               <div className={s.cardInner}>
                 <div className={s.cardImgWrap}>
@@ -447,10 +436,10 @@ export default function Home() {
                   Molding next-generation business leaders, accountants, and finance managers with practical accounting skills and economic insights.
                 </p>
               </div>
-            </ScrollReveal>
+            </div>
 
             {/* Column 04: ITEP */}
-            <ScrollReveal direction="up" delay={350} threshold={0.1} className={s.offeringsCard}>
+            <div className={`${s.offeringsCard} ${s.cardInner}`}>
               <div className={s.cardNumBackdrop}>04</div>
               <div className={s.cardInner}>
                 <div className={s.cardImgWrap}>
@@ -469,8 +458,8 @@ export default function Home() {
                   Nurturing professional, competent educators through the prestigious Integrated Teacher Education Programme to shape future classrooms.
                 </p>
               </div>
-            </ScrollReveal>
-          </div>
+            </div>
+          </StaggerReveal>
         </div>
       </section>
 
@@ -479,37 +468,35 @@ export default function Home() {
       {/* Programmes */}
       <section className={s.progsSection} id="programmes">
         <div className={s.progsLayout}>
-          <ScrollReveal direction="left" threshold={0.2} className={s.progsLeft}>
-            <div>
-              <span className={s.progsEyebrow}>Academic Offerings</span>
-              <h2 className={s.progsTitle}>Academic <span className={s.accentText}>Programmes</span></h2>
-              <div className={s.titleUnderline} />
-              <p className={s.progsDesc}>
-                KLE Society&apos;s G.I.Bagewadi College offers a comprehensive suite of undergraduate and postgraduate courses, empowering students with the skills and knowledge for a successful career.
-              </p>
-              <div className={s.sliderCtrl}>
-                <button
-                  className={s.sliderCtrlBtn}
-                  onClick={() => setProgIndex(p => Math.max(p - 1, 0))}
-                  disabled={progIndex === 0}
-                  aria-label="Previous slide"
-                >
-                  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-                </button>
-                <button
-                  className={s.sliderCtrlBtn}
-                  onClick={() => setProgIndex(p => Math.min(p + 1, courses.length - 3))}
-                  disabled={progIndex >= courses.length - 3}
-                  aria-label="Next slide"
-                >
-                  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                </button>
-              </div>
-              <div style={{ marginTop: '32px' }}>
-                <Link href="/acadmic" className={s.outlineBtn}>View All Programmes →</Link>
-              </div>
+          <StaggerReveal className={s.progsLeft} stagger={100} distance={36} duration={800} threshold={0.2}>
+            <span className={s.progsEyebrow}>Academic Offerings</span>
+            <h2 className={s.progsTitle}>Academic <span className={s.accentText}>Programmes</span></h2>
+            <div className={s.titleUnderline} />
+            <p className={s.progsDesc}>
+              KLE Society&apos;s G.I.Bagewadi College offers a comprehensive suite of undergraduate and postgraduate courses, empowering students with the skills and knowledge for a successful career.
+            </p>
+            <div className={s.sliderCtrl}>
+              <button
+                className={s.sliderCtrlBtn}
+                onClick={() => setProgIndex(p => Math.max(p - 1, 0))}
+                disabled={progIndex === 0}
+                aria-label="Previous slide"
+              >
+                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+              </button>
+              <button
+                className={s.sliderCtrlBtn}
+                onClick={() => setProgIndex(p => Math.min(p + 1, courses.length - 3))}
+                disabled={progIndex >= courses.length - 3}
+                aria-label="Next slide"
+              >
+                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+              </button>
             </div>
-          </ScrollReveal>
+            <div style={{ marginTop: '32px' }}>
+              <Link href="/acadmic" className={s.outlineBtn}>View All Programmes →</Link>
+            </div>
+          </StaggerReveal>
 
           <div className={s.sliderViewport}>
             <div

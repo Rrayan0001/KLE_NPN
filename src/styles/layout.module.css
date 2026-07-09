@@ -1539,7 +1539,7 @@
 
   /* Header: auto height to expand with full content, padding adjusted */
   .header {
-    height: auto;
+    height: auto !important;
     padding: 10px 12px;
     overflow: visible;
   }
@@ -1588,7 +1588,7 @@
 
 /* ── Phones (640px) ── */
 @media (max-width: 640px) {
-  .header { padding: 8px 10px; }
+  .header { padding: 8px 10px; height: auto !important; }
   .logoImg { height: 44px; }
   .logoSub { font-size: 9px; }
   .logoTitle { font-size: 11px; max-width: 55vw; }
@@ -1602,7 +1602,7 @@
 
 /* ── Small phones (480px) ── */
 @media (max-width: 480px) {
-  .header { padding: 8px 8px; }
+  .header { padding: 8px 8px; height: auto !important; }
   .mainNav { padding: 0; }
   .logoImg { height: 42px; }
   .logoSub { font-size: 8.5px; }
@@ -1615,7 +1615,7 @@
 
 /* ── Very small (360px) ── */
 @media (max-width: 360px) {
-  .header { padding: 6px; }
+  .header { padding: 6px; height: auto !important; }
   .logoWrap { gap: 6px; padding-right: 4px; }
   .headerHeroState .logoWrap { padding-left: 8px; }
   .logoImg { height: 38px; }

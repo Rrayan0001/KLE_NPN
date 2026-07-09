@@ -41,7 +41,7 @@ export default function PrincipalPage() {
 					<img src="/images/gibprincipal.JPG" alt="" className="img-fluid" />
 				</div>
 				<div className="col-lg-6 right-abw3ls mt-lg-0 mt-sm-5 mt-4">
-					<h4 className="font-italic border-bottom text-center font-weight-bold pb-3 mb-4">Dr. M.M Hurali<br /><span  style={{ "color": "#537b8e", "fontSize": "0.7em" }}>Principal, G.I.Bagewadi College, Nipani</span></h4>
+					<h4 className="font-italic border-bottom text-center font-weight-bold pb-3 mb-4">Dr. M.M Hurali<br /><span  style={{ "color": "#537b8e", "fontSize": "0.7em", "display": "block", "marginTop": "8px" }}>Principal, G.I.Bagewadi College, Nipani</span></h4>
 					
 					</div>
 			</div><br /><br /><br />

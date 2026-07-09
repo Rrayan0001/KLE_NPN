@@ -41,7 +41,7 @@ export default function ChairmanMsgPage() {
 					<img src="/images/Amitkoreimage.jpg" alt="" className="img-fluid" />
 				</div>
 				<div className="col-lg-6 right-abw3ls mt-lg-0 mt-sm-5 mt-4">
-					<h4 className="font-italic border-bottom text-center font-weight-bold pb-3 mb-4">Shri. Amit Prabhakar Kore<br /><span  style={{ "color": "#537b8e", "fontSize": "0.7em" }}>Hon’ble Chairman, Board of Management, KLE Society</span></h4>
+					<h4 className="font-italic border-bottom text-center font-weight-bold pb-3 mb-4">Shri. Amit Prabhakar Kore<br /><span  style={{ "color": "#537b8e", "fontSize": "0.7em", "display": "block", "marginTop": "8px" }}>Hon’ble Chairman, Board of Management, KLE Society</span></h4>
 					
 					</div>
 			</div><br /><br /><br />

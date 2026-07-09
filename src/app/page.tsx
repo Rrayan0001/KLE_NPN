@@ -555,40 +555,53 @@ export default function Home() {
         </div>
       </section>
 
-      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="dark" direction="down" /></div>
+      <div style={{ background: '#FAFAFA' }}><WaveDivider variant="paper" direction="down" /></div>
 
       {/* Chairman */}
       <section className={s.chairSection} id="chairman">
         <div className={s.chairSectionInner}>
-          <StaggerReveal stagger={80} threshold={0.3}>
-            <span className={s.eyebrowLight}>Leadership</span>
-            <h2 className={s.sectionTitleLgLight}>A Message from Our <span className={s.accentTextLight}>Chairman</span></h2>
-            <div className={s.titleUnderlineLight} />
-          </StaggerReveal>
-          <ScrollReveal direction="scale" delay={120} duration={900} threshold={0.2}>
-            <div className={s.chairCard}>
-              <div className={s.chairQuoteMark}>&ldquo;</div>
-              <StaggerReveal stagger={100} threshold={0.2}>
-                <p className={s.chairQuoteText}>
-                  Our vision is to facilitate higher learning for rural and semi-urban youth, molding them into professional, competent global citizens while instilling moral values and a commitment to service excellence.
-                </p>
-                <div className={s.chairPerson}>
-                  <div className={s.chairAvatar}>
-                    <img src="/images/Amitkoreimage.jpg" alt="Shri Amit P. Kore" className={s.chairAvatarImg} />
-                  </div>
-                  <div className={s.chairInfo}>
-                    <div className={s.chairName}>Shri Amit P. Kore</div>
-                    <div className={s.chairRole}>Chairman, KLE Society, Belagavi</div>
-                    <Link href="/chairman-msg" className={s.chairReadMore}>Read Full Message →</Link>
-                  </div>
+          <div className={s.chairRedesignGrid}>
+            <ScrollReveal direction="left" delay={100} duration={800} threshold={0.2}>
+              <div className={s.chairImageFrame}>
+                <div className={s.chairImageBg} />
+                <div className={s.chairImageContainer}>
+                  <img src="/images/Amitkoreimage.jpg" alt="Shri Amit P. Kore" className={s.chairImage} />
                 </div>
-              </StaggerReveal>
-            </div>
-          </ScrollReveal>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="right" delay={150} duration={800} threshold={0.2}>
+              <div className={s.chairContent}>
+                <span className={s.chairEyebrowRedesign}>
+                  ABOUT THE CHAIRMAN
+                </span>
+                <h2 className={s.chairTitleRedesign}>A Legacy of Academic &amp; Service Excellence</h2>
+                
+                <p className={s.chairParagraphStrong}>
+                  Shri Amit Prabhakar Kore is the Hon’ble Chairman of the Board of Management, KLE Society. Under his visionary leadership, the society carries forward a legacy of educational empowerment.
+                </p>
+                
+                <p className={s.chairParagraphRedesign}>
+                  &ldquo;Our vision is to facilitate higher learning for rural and semi-urban youth, molding them into professional, competent global citizens while instilling moral values and a commitment to service excellence.&rdquo;
+                </p>
+
+                <p className={s.chairParagraphRedesign}>
+                  By prioritizing high-quality education and building world-class campus facilities, Shri Amit Kore has steered the institutions of the KLE Society to achieve national recognition and continue their commitment to society.
+                </p>
+
+                <Link href="/chairman-msg" className={s.chairReadMoreRedesign}>
+                  Read Full Message
+                  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" style={{ marginLeft: '6px' }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                  </svg>
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
-      <div style={{ background: '#0A1628' }}><WaveDivider variant="white" direction="down" /></div>
+      <div style={{ background: '#F8F6F0' }}><WaveDivider variant="white" direction="down" /></div>
 
       {/* Partners */}
       <section className={s.partnersSection} id="partners">

@@ -922,9 +922,10 @@ nav[aria-label="breadcrumb"]:not(.banner-breadcrumb),
 }
 
 /* Override any hardcoded top break lines */
-.main-content br:first-of-type,
-.about-page br:first-of-type,
-.main-content .container > br {
+.main-content > br:first-of-type,
+.about-page > br:first-of-type,
+.main-content .container > br,
+.about-page .container > br {
   display: none !important;
 }
 

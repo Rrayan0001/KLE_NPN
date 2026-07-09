@@ -18,6 +18,7 @@ export default function Header() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [isSticky, setIsSticky] = useState(false);
   const pathname = usePathname();
   const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -40,28 +41,13 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // Track whether user is at the top of the page (for hero transparent overlay)
+  // Track scroll position for sticky menu bar
   useEffect(() => {
-    const getScrollTop = () => {
-      return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    };
-
-    setIsAtTop(getScrollTop() < 50);
-
-    let rafId = 0;
     const handleScroll = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(() => {
-        setIsAtTop(getScrollTop() < 50);
-        rafId = 0;
-      });
+      setIsSticky(window.scrollY > 120);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks: NavLinkItem[] = [
@@ -168,62 +154,196 @@ export default function Header() {
 
   return (
     <>
-      {/* Top utility bar */}
-      <div className={`${s.topBar} ${isHeroState ? s.topBarHero : ""}`}>
-        <div className={s.topBarInner}>
-          <div className={s.topBarLeft}>Accredited at &apos;A&apos; Grade with 3.10 CGPA in the 4th Cycle by NAAC</div>
-          <div className={s.topBarRight}>
-            <a href="mailto:klegib_npn@yahoo.co.in" className={s.topLink}>klegib_npn@yahoo.co.in</a>
-            <span className={s.topDivider}>|</span>
-            <a href="https://uucms.karnataka.gov.in/" target="_blank" rel="noopener noreferrer" className={s.topLink}>UUCMS Portal</a>
-            <span className={s.topDivider}>|</span>
-            <Link href="/itep" className={s.topBadge}>ITEP Admission</Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Main sticky header */}
-      <header className={`${s.header} ${isHeroState ? s.headerHeroState : ""}`}>
-        <div className={s.mainNavInner}>
-          
-          {/* Logo & College Branding */}
-          <Link href="/" onClick={() => setIsOpen(false)} className={s.logoWrap}>
-            <img src="/images/logo.png" alt="KLE Logo" className={s.logoImg} />
-            <div className={s.logoText}>
-              <span className={s.logoSub}>KLE Society&apos;s</span>
-              <span className={s.logoTitle}>G.I.Bagewadi Arts, Science &amp; Commerce College, Nipani - 591237</span>
-              <span className={s.logoEst}>Accredited at &apos;A&apos; Grade with 3.10 CGPA in the 4th Cycle by NAAC</span>
-            </div>
+      <div className={s.headerWrapper}>
+        
+        {/* DESKTOP HEADER (Top bar) */}
+        <div className={s.topHeader}>
+          {/* Logo Badge (Overlapping) */}
+          <Link href="/" className={s.logoBadge} onClick={() => setIsOpen(false)}>
+            <img src="/images/logos/navbar_logo_bgrmeoved.png" className={s.logoBadgeImg} alt="KLE Logo" />
           </Link>
 
-          {/* Right area actions */}
-          <div className={s.actionWrap}>
-            {/* Search Modal Toggle */}
+          {/* Symmetrical branding titles */}
+          <div className={s.brandingCenter}>
+            <h2 className={s.titleMain}>
+              <span className={s.titleSchool}>KLE Society&apos;s</span>
+              <span className={s.titleChandan}>G.I.Bagewadi Arts, Science &amp; Commerce College, Nipani</span>
+            </h2>
+            <div className={s.subtitleSlogan}>Accredited at &apos;A&apos; Grade with 3.10 CGPA in the 4th Cycle by NAAC</div>
+            <div className={s.subtextInstitution}>
+              An Institution of Karnatak Lingayat Education Society, Belagavi | Affiliated to Rani Channamma University, Belagavi
+            </div>
+          </div>
+
+          {/* Badges block + Select Language */}
+          <div className={s.headerRight}>
+            <div className={s.headerRightRow1}>
+              <span className={s.headerBadge}>ESTD 1961</span>
+              <span className={s.headerBadge}>NAAC &apos;A&apos; GRADE</span>
+            </div>
+            
+            <div className={s.headerRightRow2}>
+              <div className={s.phoneInfo}>PHONE: 08338 - 220116</div>
+              
+              {/* Language Selector styled select dropdown */}
+              <div className={s.languageSelector}>
+                <select
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#fff',
+                    outline: 'none',
+                    fontWeight: 800,
+                    fontSize: 'inherit',
+                    cursor: 'pointer',
+                    paddingRight: '4px'
+                  }}
+                  defaultValue="en"
+                  onChange={(e) => {
+                    if (e.target.value === "kn") {
+                      alert("Language translation functionality (Kannada) can be integrated here.");
+                    }
+                  }}
+                >
+                  <option value="en" style={{ color: '#0A1628' }}>Select Language</option>
+                  <option value="kn" style={{ color: '#0A1628' }}>ಕನ್ನಡ (Kannada)</option>
+                </select>
+                <svg className={s.languageChevron} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* DESKTOP MENU BAR */}
+        <nav className={`${s.menuBar} ${isSticky ? s.menuBarSticky : ""}`}>
+          <ul className={s.navLinksList}>
+            {navLinks.map((link) => (
+              <li key={link.name} className={s.navItem}>
+                {link.sublinks ? (
+                  <>
+                    <button className={`${s.navLink} ${pathname.startsWith(link.href) ? s.navLinkActive : ""}`}>
+                      {link.name}
+                      <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" style={{ marginLeft: '2px' }}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </button>
+                    <div className={s.dropdownPanel}>
+                      {link.sublinks.map((sub) => (
+                        <Link key={sub.name} href={sub.href} className={s.dropdownItem}>
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <Link href={link.href} className={`${s.navLink} ${pathname === link.href ? s.navLinkActive : ""}`}>
+                    {link.name}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Socials Block + Search Trigger */}
+          <div className={s.socialsBlock}>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={`${s.socialCircle} ${s.socialFB}`} aria-label="Facebook">
+              <i className="fab fa-facebook-f" style={{ fontSize: '12px' }} />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={`${s.socialCircle} ${s.socialIG}`} aria-label="Instagram">
+              <i className="fab fa-instagram" style={{ fontSize: '12px' }} />
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className={`${s.socialCircle} ${s.socialYT}`} aria-label="YouTube">
+              <i className="fab fa-youtube" style={{ fontSize: '11px' }} />
+            </a>
+            
+            <span style={{ height: '20px', width: '1px', background: 'rgba(10,22,40,0.15)', margin: '0 4px' }} />
+            
             <button
               onClick={() => setIsSearchOpen(true)}
               aria-label="Open search modal"
-              className={s.searchTrigger}
+              className={s.socialCircle}
+              style={{
+                border: '1.5px solid rgba(10,22,40,0.15)',
+                background: '#ffffff',
+                color: '#0A1628',
+                cursor: 'pointer'
+              }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className={s.searchTriggerIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+              <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '13px', height: '13px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
+          </div>
+        </nav>
 
-            {/* Mobile Hamburger menu toggle */}
+        {/* MOBILE HEADER */}
+        <div className={s.mobileHeader}>
+          <div className={s.logoBadgeMobile}>
+            <img src="/images/logos/navbar_logo_bgrmeoved.png" className={s.logoBadgeMobileImg} alt="KLE Logo" />
+          </div>
+          <div className={s.brandingMobile}>
+            <h3 className={s.titleMobile}>KLE Society&apos;s <span className={s.titleMobileSpan}>G.I.Bagewadi College</span></h3>
+            <div className={s.subtitleMobile}>Excellence Beyond Education</div>
+            <div className={s.subtextMobile}>Nipani · Estd. 1961</div>
+          </div>
+        </div>
+
+        {/* MOBILE BRAND / MENU BAR */}
+        <div className={`${s.mobileBrandBar} ${isSticky ? s.mobileBrandBarSticky : ""}`}>
+          <span className={s.mobileBrandText}>K.L.E. G.I.B.</span>
+          <div className={s.mobileActions}>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={s.tapTarget} aria-label="Facebook">
+              <span className={`${s.socialCircle} ${s.socialFB}`} style={{ width: '24px', height: '24px' }}>
+                <i className="fab fa-facebook-f" style={{ fontSize: '10px' }} />
+              </span>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={s.tapTarget} aria-label="Instagram">
+              <span className={`${s.socialCircle} ${s.socialIG}`} style={{ width: '24px', height: '24px' }}>
+                <i className="fab fa-instagram" style={{ fontSize: '10px' }} />
+              </span>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className={s.tapTarget} aria-label="YouTube">
+              <span className={`${s.socialCircle} ${s.socialYT}`} style={{ width: '24px', height: '24px' }}>
+                <i className="fab fa-youtube" style={{ fontSize: '9px' }} />
+              </span>
+            </a>
+
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Open search modal"
+              className={s.tapTarget}
+            >
+              <span className={s.socialCircle} style={{
+                width: '24px',
+                height: '24px',
+                border: '1.5px solid rgba(10,22,40,0.15)',
+                background: '#ffffff',
+                color: '#0A1628',
+                cursor: 'pointer'
+              }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '11px', height: '11px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </span>
+            </button>
+
             <button
               onClick={() => setIsOpen(true)}
               aria-label="Open menu"
-              className={s.hamburgerBtn}
+              className={s.mobileMenuBtn}
             >
-              <span className={s.hamburgerText}>MENU</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className={s.hamburgerIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg xmlns="http://www.w3.org/2000/svg" className={s.mobileMenuIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
+              <span>MENU</span>
             </button>
           </div>
-
         </div>
-      </header>
+
+      </div>
 
       {/* Navigation menu drawer (sliding right-side panel) */}
       <div
@@ -248,7 +368,7 @@ export default function Header() {
           {/* Drawer Header */}
           <div className={s.drawerHeader}>
             <img
-              src="/images/logo.png"
+              src="/images/logos/navbar_logo_bgrmeoved.png"
               alt="KLE Logo"
               className={s.drawerHeaderLogo}
             />

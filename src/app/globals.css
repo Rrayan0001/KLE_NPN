@@ -48,6 +48,11 @@
   p {
     font-size: 17px;
     line-height: 1.7;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -449,6 +454,10 @@ h3.title::after {
   line-height: 1.85 !important;
   margin-bottom: 20px !important;
   text-align: justify !important;
+  text-justify: inter-word !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
 }
 
 /* Override inline styling offsets */
@@ -550,7 +559,11 @@ main > nav[aria-label="breadcrumb"] {
 /* Readable, left-aligned body text (overrides inline justify) */
 .main-content p,
 .about-page p {
-  text-align: left !important;
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
   color: #3A4556 !important;
   font-size: 15.5px !important;
   line-height: 1.8 !important;
@@ -976,7 +989,11 @@ h3.title::after,
   line-height: 1.92 !important;
   color: #374151 !important;
   margin-bottom: 22px !important;
-  text-align: left !important;
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
 }
 
 /* Lead / intro paragraph — larger */
@@ -1490,7 +1507,11 @@ h3.title::after,
     font-size: 14.5px !important;
     line-height: 1.75 !important;
     margin-bottom: 16px !important;
-    text-align: left !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    hyphens: auto !important;
+    -webkit-hyphens: auto !important;
+    -ms-hyphens: auto !important;
   }
 }
 

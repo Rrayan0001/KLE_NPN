@@ -151,6 +151,8 @@ function WaveDivider({ variant = 'dark', direction = 'down' }: { variant?: 'dark
 
 export default function Home() {
   const [progIndex, setProgIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [visibleCards, setVisibleCards] = useState(3);
   const uniqueQuickLinks = [
     { name: 'Admission', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>), desc: 'Apply for 2026-27', url: '/admission' },
     { name: 'NAAC Docs', icon: (<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15a4 4 0 100-8 4 4 0 000 8zm0 0v4m-4 0h8M4 11h16"/></svg>), desc: 'Accreditation details', url: '/certificates' },
@@ -265,6 +267,33 @@ export default function Home() {
   ];
   const partnerImages = [...uniquePartners, ...uniquePartners, ...uniquePartners, ...uniquePartners, ...uniquePartners, ...uniquePartners];
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 640) {
+        setVisibleCards(1);
+      } else if (window.innerWidth <= 1024) {
+        setVisibleCards(2);
+      } else {
+        setVisibleCards(3);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      setProgIndex(prev => {
+        const maxIndex = courses.length - visibleCards;
+        if (maxIndex <= 0) return 0;
+        return prev >= maxIndex ? 0 : prev + 1;
+      });
+    }, 3800);
+    return () => clearInterval(timer);
+  }, [courses.length, isHovered, visibleCards]);
+
   return (
     <>
       <EditorialHero />
@@ -345,7 +374,7 @@ export default function Home() {
                 <div className={s.aboutImgOverlay} />
               </RevealImage>
               <div className={s.aboutImgSubCard}>
-                <img src="/images/gal2.jpg" alt="KLE College Activity" className={s.aboutImgSubImg} />
+                <img src="/images/main_logo.png" alt="KLE College Logo" className={s.aboutImgSubImg} />
               </div>
             </div>
             <div className={s.aboutMiniStats}>
@@ -489,8 +518,8 @@ export default function Home() {
               </button>
               <button
                 className={s.sliderCtrlBtn}
-                onClick={() => setProgIndex(p => Math.min(p + 1, courses.length - 3))}
-                disabled={progIndex >= courses.length - 3}
+                onClick={() => setProgIndex(p => Math.min(p + 1, courses.length - visibleCards))}
+                disabled={progIndex >= courses.length - visibleCards}
                 aria-label="Next slide"
               >
                 <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
@@ -501,7 +530,11 @@ export default function Home() {
             </div>
           </StaggerReveal>
 
-          <div className={s.sliderViewport}>
+          <div
+            className={s.sliderViewport}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <div
               className={s.sliderTrack}
               style={{ transform: `translate3d(-${progIndex * 294}px, 0, 0)` } as React.CSSProperties}

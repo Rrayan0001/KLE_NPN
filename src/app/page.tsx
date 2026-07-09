@@ -290,7 +290,7 @@ export default function Home() {
         if (maxIndex <= 0) return 0;
         return prev >= maxIndex ? 0 : prev + 1;
       });
-    }, 3800);
+    }, 2500);
     return () => clearInterval(timer);
   }, [courses.length, isHovered, visibleCards]);
 

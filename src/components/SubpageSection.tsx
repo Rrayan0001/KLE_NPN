@@ -212,10 +212,12 @@ export function BodyText({ children }: { children: React.ReactNode }) {
         lineHeight: 1.9,
         marginBottom: '22px',
         textAlign: 'justify',
-        'text-justify': 'inter-word',
+        'text-justify': 'auto',
         hyphens: 'auto',
         WebkitHyphens: 'auto',
         msHyphens: 'auto',
+        wordSpacing: '-1px',
+        textAlignLast: 'left',
       }}
     >
       {children}

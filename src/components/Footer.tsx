@@ -56,7 +56,7 @@ export default function Footer() {
           {/* Col 1 — Brand */}
           <div className={s.footerBrand}>
             <div className={s.footerLogoWrap}>
-              <img src="/images/logo.png" alt="KLE Logo" className={s.footerLogoImg} />
+              <img src="/images/logos/navbar_logo_bgrmeoved.png" alt="KLE Logo" className={s.footerLogoImg} />
               <div className={s.footerLogoText}>
                 <span className={s.footerLogoSub}>KLE Society&apos;s</span>
                 <span className={s.footerLogoTitle}>G.I.Bagewadi Arts, Science &amp; Commerce College, Nipani - 591237</span>

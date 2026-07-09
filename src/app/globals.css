@@ -49,10 +49,14 @@
     font-size: 17px;
     line-height: 1.7;
     text-align: justify;
-    text-justify: inter-word;
+    text-justify: auto;
     hyphens: auto;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    word-spacing: -1px;
+    text-align-last: left;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -154,11 +158,31 @@ th, td { padding: 0.75rem !important; }
     overflow-x: hidden;
   }
 
-  /* Make tables horizontally scrollable without breaking their display model */
-  table {
-    display: block;
+  /* Make any direct parent of a table scroll horizontally */
+  .main-content table,
+  .about-page table,
+  .container table {
+    display: table !important;
+    width: 100% !important;
+  }
+
+  /* Scroll wrapper: wraps around tables to contain horizontal overflow */
+  .table-scroll-wrapper {
+    width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  /* Any div/td/section directly containing a table should scroll */
+  .main-content > div:has(> table),
+  .main-content .container:has(> table),
+  .about-page > div:has(> table),
+  .left-abw3ls:has(table),
+  div:has(> table) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100vw;
   }
   
   /* Inner-page content padding */
@@ -454,10 +478,12 @@ h3.title::after {
   line-height: 1.85 !important;
   margin-bottom: 20px !important;
   text-align: justify !important;
-  text-justify: inter-word !important;
+  text-justify: auto !important;
   hyphens: auto !important;
   -webkit-hyphens: auto !important;
   -ms-hyphens: auto !important;
+  word-spacing: -1px !important;
+  text-align-last: left !important;
 }
 
 /* Override inline styling offsets */
@@ -560,7 +586,7 @@ main > nav[aria-label="breadcrumb"] {
 .main-content p,
 .about-page p {
   text-align: justify !important;
-  text-justify: inter-word !important;
+  text-justify: auto !important;
   hyphens: auto !important;
   -webkit-hyphens: auto !important;
   -ms-hyphens: auto !important;
@@ -568,6 +594,8 @@ main > nav[aria-label="breadcrumb"] {
   font-size: 15.5px !important;
   line-height: 1.8 !important;
   margin-bottom: 1.25rem !important;
+  word-spacing: -1px !important;
+  text-align-last: left !important;
 }
 
 /* Neutralise inline <font> / <strong> sizing/colours inside paragraphs */
@@ -990,10 +1018,12 @@ h3.title::after,
   color: #374151 !important;
   margin-bottom: 22px !important;
   text-align: justify !important;
-  text-justify: inter-word !important;
+  text-justify: auto !important;
   hyphens: auto !important;
   -webkit-hyphens: auto !important;
   -ms-hyphens: auto !important;
+  word-spacing: -1px !important;
+  text-align-last: left !important;
 }
 
 /* Lead / intro paragraph — larger */
@@ -1508,10 +1538,12 @@ h3.title::after,
     line-height: 1.75 !important;
     margin-bottom: 16px !important;
     text-align: justify !important;
-    text-justify: inter-word !important;
+    text-justify: auto !important;
     hyphens: auto !important;
     -webkit-hyphens: auto !important;
     -ms-hyphens: auto !important;
+    word-spacing: -1px !important;
+    text-align-last: left !important;
   }
 }
 

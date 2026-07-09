@@ -244,7 +244,7 @@
   box-shadow: 0 8px 24px rgba(10, 22, 40, 0.12);
   border: 1px solid rgba(10, 22, 40, 0.08);
   border-radius: 0 0 6px 6px;
-  min-width: 200px;
+  min-width: 260px;
   padding: 6px 0;
   opacity: 0;
   visibility: hidden;
@@ -261,12 +261,13 @@
 
 .dropdownItem {
   display: block;
-  padding: 8px 16px;
+  padding: 8px 20px;
   font-family: var(--font-dm-sans), sans-serif;
   font-size: 11.5px;
   font-weight: 700;
   color: #5A6A7A;
   text-decoration: none;
+  white-space: nowrap;
   transition: background-color 0.2s, color 0.2s;
 }
 .dropdownItem:hover {
@@ -445,6 +446,18 @@
     gap: 10px;
   }
   
+  .tapTarget {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
   .mobileMenuBtn {
     background: #fffdfc;
     border: 1.5px solid #7d1c1c;
@@ -1009,7 +1022,7 @@
 .vmCard:hover { border-color: #E8722A; box-shadow: 0 4px 16px rgba(232,114,42,.1); }
 .vmCardIcon { font-size: 22px; margin-bottom: 8px; }
 .vmCardTitle { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #0A1628; margin: 0 0 6px; font-family: var(--font-dm-sans),sans-serif; }
-.vmCardText { font-size: 12px; color: #5A6A7A; line-height: 1.6; margin: 0; font-family: var(--font-source-serif),Georgia,serif; text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; }
+.vmCardText { font-size: 12px; color: #5A6A7A; line-height: 1.6; margin: 0; font-family: var(--font-source-serif),Georgia,serif; text-align: justify; text-justify: auto; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; word-spacing: -1px; text-align-last: left; }
 .aboutRight2 { }
 .aboutImgContainer {
   position: relative;
@@ -1132,8 +1145,8 @@
 .chairEyebrowRedesign { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-dm-sans), sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #C59B6C; margin-bottom: 16px; }
 .chairEyebrowStar { font-size: 14px; color: #C59B6C; }
 .chairTitleRedesign { font-family: var(--font-source-serif), Georgia, serif; font-size: 40px; font-weight: 600; color: #0A1628; line-height: 1.25; margin: 0 0 24px; letter-spacing: -0.01em; }
-.chairParagraphRedesign { font-family: var(--font-dm-sans), sans-serif; font-size: 15.5px; color: #4A5568; line-height: 1.8; margin-bottom: 18px; text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; }
-.chairParagraphStrong { font-family: var(--font-dm-sans), sans-serif; font-size: 16px; color: #1A202C; line-height: 1.8; margin-bottom: 24px; font-weight: 500; text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; }
+.chairParagraphRedesign { font-family: var(--font-dm-sans), sans-serif; font-size: 15.5px; color: #4A5568; line-height: 1.8; margin-bottom: 18px; text-align: justify; text-justify: auto; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; word-spacing: -1px; text-align-last: left; }
+.chairParagraphStrong { font-family: var(--font-dm-sans), sans-serif; font-size: 16px; color: #1A202C; line-height: 1.8; margin-bottom: 24px; font-weight: 500; text-align: justify; text-justify: auto; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; word-spacing: -1px; text-align-last: left; }
 .chairReadMoreRedesign { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-dm-sans), sans-serif; font-size: 13px; font-weight: 700; color: #0A1628; text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 2px solid #C59B6C; padding-bottom: 4px; transition: all 0.2s ease; margin-top: 8px; }
 .chairReadMoreRedesign:hover { color: #C59B6C; border-bottom-color: #0A1628; }
 .chairReadMoreRedesign svg { transition: transform 0.2s ease; }
@@ -1165,7 +1178,7 @@
 .footerGrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
 .footerBrand { }
 .footerLogoWrap { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-.footerLogoImg { height: 48px; width: auto; object-fit: contain; flex-shrink: 0; }
+.footerLogoImg { height: 64px; width: auto; object-fit: contain; flex-shrink: 0; }
 .footerLogoText { display: flex; flex-direction: column; text-align: left; gap: 4px; }
 .footerLogoSub { font-size: 9.5px; color: rgba(248,246,240,0.6); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; white-space: nowrap; }
 .footerLogoTitle { font-size: 12.5px; font-weight: 800; color: #F8F6F0; line-height: 1.5; margin: 0; max-width: 320px; white-space: normal; }

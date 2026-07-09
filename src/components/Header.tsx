@@ -174,46 +174,6 @@ export default function Header() {
               An Institution of Karnatak Lingayat Education Society, Belagavi | Affiliated to Rani Channamma University, Belagavi
             </div>
           </div>
-
-          {/* Badges block + Select Language */}
-          <div className={s.headerRight}>
-            <div className={s.headerRightRow1}>
-              <span className={s.headerBadge}>ESTD 1961</span>
-              <span className={s.headerBadge}>NAAC &apos;A&apos; GRADE</span>
-            </div>
-            
-            <div className={s.headerRightRow2}>
-              <div className={s.phoneInfo}>PHONE: 08338 - 220116</div>
-              
-              {/* Language Selector styled select dropdown */}
-              <div className={s.languageSelector}>
-                <select
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: '#fff',
-                    outline: 'none',
-                    fontWeight: 800,
-                    fontSize: 'inherit',
-                    cursor: 'pointer',
-                    paddingRight: '4px'
-                  }}
-                  defaultValue="en"
-                  onChange={(e) => {
-                    if (e.target.value === "kn") {
-                      alert("Language translation functionality (Kannada) can be integrated here.");
-                    }
-                  }}
-                >
-                  <option value="en" style={{ color: '#0A1628' }}>Select Language</option>
-                  <option value="kn" style={{ color: '#0A1628' }}>ಕನ್ನಡ (Kannada)</option>
-                </select>
-                <svg className={s.languageChevron} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* DESKTOP MENU BAR */}

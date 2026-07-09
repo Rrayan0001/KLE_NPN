@@ -1537,33 +1537,32 @@
   /* Drawer panel: full width on tablets & phones */
   .drawerPanel { max-width: 100%; }
 
-  /* Header: taller for better touch targets */
+  /* Header: auto height to expand with full content, padding adjusted */
   .header {
-    height: 62px;
-    padding: 0 12px;
-    overflow: hidden;
+    height: auto;
+    padding: 10px 12px;
+    overflow: visible;
   }
   .mainNav { padding: 0 4px; background: transparent; border: none; }
-  .mainNavInner { gap: 8px; }
+  .mainNavInner { gap: 8px; align-items: center; }
 
-  /* Logo block: single compact row, clip the long college name */
-  .logoWrap { gap: 8px; padding: 0 8px 0 0; }
+  /* Logo block: show full college details in 3 lines */
+  .logoWrap { gap: 10px; padding: 0 8px 0 0; align-items: center; }
   .headerHeroState .logoWrap { padding-left: 12px; }
-  .logoImg { height: 38px; }
-  .logoText { min-width: 0; overflow: hidden; }
-  .logoSub { display: none; }                       /* hide "KLE Society's" eyebrow */
+  .logoImg { height: 48px; }
+  .logoText { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .logoSub { display: block; font-size: 9.5px; line-height: 1.1; font-weight: 800; color: #0A1628; text-transform: uppercase; letter-spacing: 0.08em; }
   .logoTitle {
     font-size: 12px;
-    line-height: 1.2;
-    max-width: 46vw;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    line-height: 1.35;
+    max-width: 58vw;
+    white-space: normal;
     display: block;
-    overflow: hidden;
+    overflow: visible;
+    font-weight: 800;
+    color: #0A1628;
   }
-  .logoEst { display: none; }                       /* hide NAAC line in header */
+  .logoEst { display: block; font-size: 9.5px; color: #E8722A; font-weight: 700; }
 
   /* Action buttons: larger 44px circles */
   .actionWrap { gap: 6px; }
@@ -1589,9 +1588,11 @@
 
 /* ── Phones (640px) ── */
 @media (max-width: 640px) {
-  .header { height: 58px; padding: 0 10px; }
-  .logoImg { height: 34px; }
-  .logoTitle { font-size: 12px; max-width: 44vw; }
+  .header { padding: 8px 10px; }
+  .logoImg { height: 44px; }
+  .logoSub { font-size: 9px; }
+  .logoTitle { font-size: 11px; max-width: 55vw; }
+  .logoEst { font-size: 9px; }
   .mainNavInner { gap: 4px; }
   .actionWrap { gap: 4px; }
   .searchTrigger, .hamburgerBtn { width: 42px; height: 42px; }
@@ -1601,10 +1602,12 @@
 
 /* ── Small phones (480px) ── */
 @media (max-width: 480px) {
-  .header { height: 54px; padding: 0 8px; }
+  .header { padding: 8px 8px; }
   .mainNav { padding: 0; }
-  .logoImg { height: 32px; }
-  .logoTitle { font-size: 11px; max-width: 42vw; }
+  .logoImg { height: 42px; }
+  .logoSub { font-size: 8.5px; }
+  .logoTitle { font-size: 10.5px; max-width: 52vw; }
+  .logoEst { font-size: 8.5px; }
   .searchTrigger, .hamburgerBtn { width: 40px; height: 40px; }
   .searchTriggerIcon { width: 19px; height: 19px; }
   .hamburgerIcon { width: 24px; height: 24px; }
@@ -1612,11 +1615,13 @@
 
 /* ── Very small (360px) ── */
 @media (max-width: 360px) {
-  .header { padding: 0 6px; }
+  .header { padding: 6px; }
   .logoWrap { gap: 6px; padding-right: 4px; }
   .headerHeroState .logoWrap { padding-left: 8px; }
-  .logoImg { height: 30px; }
-  .logoTitle { font-size: 10px; max-width: 40vw; }
+  .logoImg { height: 38px; }
+  .logoSub { font-size: 8px; }
+  .logoTitle { font-size: 9.5px; max-width: 50vw; }
+  .logoEst { font-size: 8px; }
   .searchTrigger, .hamburgerBtn { width: 38px; height: 38px; }
 }
 

@@ -291,139 +291,112 @@ export default function Header() {
             </button>
 
             <button
-              onClick={() => setIsOpen(true)}
-              aria-label="Open menu"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
               className={s.mobileMenuBtn}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className={s.mobileMenuIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {isOpen ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className={s.mobileMenuIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className={s.mobileMenuIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
               <span>MENU</span>
             </button>
           </div>
+
+          {/* Vertical Dropdown Menu */}
+          {isOpen && (
+            <div className={s.mobileDropdownContainer}>
+              <nav className={s.mobileDropdownList}>
+                {navLinks.map((link) => {
+                  const isSelected = activeSection === link.name;
+                  return (
+                    <div key={link.name} className={s.mobileDropdownItem}>
+                      {link.sublinks ? (
+                        <div style={{ width: '100%' }}>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveSection(isSelected ? "" : link.name);
+                            }}
+                            className={s.mobileDropdownBtn}
+                          >
+                            <span>{link.name}</span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                              viewBox="0 0 24 24"
+                              className={`${s.mobileDropdownChevron} ${isSelected ? s.mobileDropdownChevronOpen : ''}`}
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                          </button>
+                          {isSelected && (
+                            <div className={s.mobileDropdownSublinks}>
+                              {link.sublinks.map((sub) => (
+                                <Link
+                                  key={sub.name}
+                                  href={sub.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className={s.mobileDropdownSublink}
+                                >
+                                  {sub.name}
+                                </Link>
+                              ))}
+                              <Link
+                                href={link.href}
+                                onClick={() => setIsOpen(false)}
+                                className={s.mobileDropdownSublinkViewAll}
+                              >
+                                View All {link.name} →
+                              </Link>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className={s.mobileDropdownLink}
+                        >
+                          {link.name}
+                        </Link>
+                      )}
+                    </div>
+                  );
+                })}
+              </nav>
+            </div>
+          )}
         </div>
 
       </div>
 
-      {/* Navigation menu drawer (sliding right-side panel) */}
-      <div
-        className={s.drawerOverlay}
-        style={{ 
-          visibility: isOpen ? "visible" : "hidden",
-          pointerEvents: isOpen ? "auto" : "none"
-        }}
-      >
-        {/* Dark blur backdrop */}
+      {/* Backdrop overlay for mobile dropdown */}
+      {isOpen && (
         <div
-          className={s.drawerBg}
-          style={{ opacity: isOpen ? 1 : 0 }}
+          className={s.mobileDropdownOverlay}
+          style={{
+            position: 'fixed',
+            top: isSticky ? '48px' : '138px',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(10, 22, 40, 0.4)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 998,
+          }}
           onClick={() => setIsOpen(false)}
         />
-
-        {/* Drawer panel */}
-        <div
-          className={s.drawerPanel}
-          style={{ transform: isOpen ? "translateX(0)" : "translateX(100%)" }}
-        >
-          {/* Drawer Header */}
-          <div className={s.drawerHeader}>
-            <img
-              src="/images/logos/navbar_logo_bgrmeoved.png"
-              alt="KLE Logo"
-              className={s.drawerHeaderLogo}
-            />
-            <div className={s.drawerHeaderTitleBox}>
-              <span className={s.drawerHeaderSub}>KLE Society&apos;s</span>
-              <span className={s.drawerHeaderTitle}>G.I.Bagewadi College, Nipani</span>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              aria-label="Close menu"
-              className={s.drawerCloseBtn}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Scrollable menu body */}
-          <div className={s.drawerBody}>
-            <p className={s.drawerNavSection}>Navigation Menu</p>
-            <nav className={s.drawerList}>
-              {navLinks.map((link) => {
-                const isSelected = activeSection === link.name;
-                return (
-                  <div key={link.name} className={s.drawerItem}>
-                    {link.sublinks ? (
-                      <div>
-                        {/* Dropdown toggle */}
-                        <button
-                          onClick={() => setActiveSection(isSelected ? "" : link.name)}
-                          className={`${s.drawerItemBtn} ${isSelected ? s.drawerItemBtnActive : s.drawerItemBtnInactive}`}
-                        >
-                          <span>{link.name}</span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="14"
-                            height="14"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            viewBox="0 0 24 24"
-                            className={`${s.drawerChevron} ${isSelected ? s.drawerChevronOpen : ''}`}
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                          </svg>
-                        </button>
-
-                        {/* Collapsible Sublinks */}
-                        {isSelected && (
-                          <div className={s.drawerSublinks}>
-                            {link.sublinks.map((sub) => (
-                              <Link
-                                key={sub.name}
-                                href={sub.href}
-                                onClick={() => setIsOpen(false)}
-                                className={s.drawerSubLink}
-                              >
-                                {sub.name}
-                              </Link>
-                            ))}
-                            <Link
-                              href={link.href}
-                              onClick={() => setIsOpen(false)}
-                              className={s.drawerSubLinkViewAll}
-                            >
-                              View All {link.name} →
-                            </Link>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={s.drawerDirectLink}
-                      >
-                        {link.name}
-                      </Link>
-                    )}
-                  </div>
-                );
-              })}
-            </nav>
-          </div>
-
-          {/* Drawer Footer */}
-          <div className={s.drawerFooter}>
-            <p className={s.drawerFooterLabel}>KLE Society&apos;s</p>
-            <p className={s.drawerFooterText}>
-              G.I.Bagewadi Arts, Science and Commerce College, Nipani. Established in 1961.
-            </p>
-          </div>
-        </div>
-      </div>
+      )}
 
       {/* Search overlay modal */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />

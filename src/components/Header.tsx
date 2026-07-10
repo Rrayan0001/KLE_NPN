@@ -154,6 +154,16 @@ export default function Header() {
 
   return (
     <>
+      {/* Top Accreditation & Programme Announcement Bar */}
+      <div className={s.announcementBar}>
+        <div className={s.announcementText}>
+          ACCREDITED AT &apos;A&apos; WITH 3.10 CGPA IN 4th CYCLE BY NAAC
+        </div>
+        <div className={s.announcementText}>
+          INTEGRATED TEACHER EDUCATION PROGRAM (ITEP)
+        </div>
+      </div>
+
       <div className={s.headerWrapper}>
         
         {/* DESKTOP HEADER (Top bar) */}
@@ -165,11 +175,11 @@ export default function Header() {
 
           {/* Symmetrical branding titles */}
           <div className={s.brandingCenter}>
-            <h2 className={s.titleMain}>
-              <span className={s.titleSchool}>KLE Society&apos;s</span>
-              <span className={s.titleChandan}>G.I.Bagewadi Arts, Science &amp; Commerce College, Nipani</span>
-            </h2>
-            <div className={s.subtitleSlogan}>Accredited at &apos;A&apos; Grade with 3.10 CGPA in the 4th Cycle by NAAC</div>
+            <span className={s.titleSchool}>KLE Society&apos;s</span>
+            <h1 className={s.titleCollege}>
+              G.I.Bagewadi Arts, Science and Commerce College,
+            </h1>
+            <div className={s.titleAddress}>Nipani-591237 Dist:Belagavi, Karnataka, India</div>
             <div className={s.subtextInstitution}>
               An Institution of Karnatak Lingayat Education Society, Belagavi | Affiliated to Rani Channamma University, Belagavi
             </div>
@@ -240,13 +250,18 @@ export default function Header() {
 
         {/* MOBILE HEADER */}
         <div className={s.mobileHeader}>
-          <Link href="/" className={s.logoBadgeMobile} onClick={() => setIsOpen(false)}>
-            <img src="/images/logos/navbar_logo_bgrmeoved.png" className={s.logoBadgeMobileImg} alt="KLE Logo" />
-          </Link>
+          <div className={s.logoMobileWrapper}>
+            <img src="/images/KLES-Centenary-LOGO.png" className={s.centenaryLogoMobile} alt="KLE Centenary Logo" />
+            <Link href="/" onClick={() => setIsOpen(false)} className={s.shieldLogoMobileLink}>
+              <img src="/images/logos/navbar_logo_bgrmeoved.png" className={s.shieldLogoMobile} alt="KLE Shield Logo" />
+            </Link>
+          </div>
           <div className={s.brandingMobile}>
-            <h3 className={s.titleMobile}>KLE Society&apos;s <span className={s.titleMobileSpan}>G.I.Bagewadi College</span></h3>
-            <div className={s.subtitleMobile}>Excellence Beyond Education</div>
-            <div className={s.subtextMobile}>Nipani · Estd. 1961</div>
+            <span className={s.titleSchoolMobile}>KLE Society&apos;s</span>
+            <h1 className={s.titleCollegeMobile}>
+              G.I.Bagewadi Arts, Science and Commerce College,
+            </h1>
+            <div className={s.titleAddressMobile}>Nipani-591237 Dist:Belagavi, Karnataka, India</div>
           </div>
         </div>
 
@@ -386,7 +401,7 @@ export default function Header() {
           className={s.mobileDropdownOverlay}
           style={{
             position: 'fixed',
-            top: isSticky ? '48px' : '138px',
+            top: 0,
             left: 0,
             right: 0,
             bottom: 0,

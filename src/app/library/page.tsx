@@ -2,42 +2,18 @@
 
 import SubpageLayout from '@/components/SubpageLayout';
 
-import Link from 'next/link';
-
 export default function LibraryPage() {
   return (
     <SubpageLayout breadcrumb="Library">
-      {/* Breadcrumb Navigation */}
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link href="/">Home</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Library
-          </li>
-        </ol>
-      </nav>
-
       <div className="main-content py-5">
         <div className="container">
-          
-<nav aria-label="breadcrumb">
-		<ol className="breadcrumb">
-			<li className="breadcrumb-item">
-				<a href="/">Home</a>
-			</li>
-			<li className="breadcrumb-item active" aria-current="page">Library</li>
-		</ol>
-	</nav>
-	
-	<div className="about-page py-5">
+          <div className="about-page py-5">
 		<div className="container py-xl-5 py-lg-3">
 			<h3 className="title text-capitalize font-weight-light text-dark text-center mb-5">LIBRARY AND INFORMATION CENTER
 				<span className="font-weight-bold"></span>
 			
 			</h3>
-			<img src="/images/library.png" alt="" className="img-fluid" />
+			<img src="/images/library.png" alt="College library and information center" className="img-fluid" />
 				<br /><br /><br />
 				<div className="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 			<ul id="myTab" className="nav nav-tabs" role="tablist">
@@ -164,7 +140,7 @@ export default function LibraryPage() {
 <li className="list-group-item" style={{ "fontSize": "17px" }}><strong>SWAYAM				: <a href="https://swayam.gov.in/" target="_blank">	https://swayam.gov.in/ </a></strong></li>
 <li className="list-group-item" style={{ "backgroundColor": "#dce8fb", "fontSize": "17px" }}><strong>	SWAYAMPRABHA			: <a href="https://www.swayamprabha.gov.in/ e-PG PATHSHALA" target="_blank">	https://www.swayamprabha.gov.in/</a> e-PG PATHSHALA				:<a href="https://epgp.inflibnet.ac.in/" target="_blank"	>https://epgp.inflibnet.ac.in/</a></strong></li>
 <li className="list-group-item" style={{ "fontSize": "17px" }}><strong>NATIONAL DIGITAL LIBRARY	:<a href="https://ndl.iitkgp.ac.in/" target="_blank">		https://ndl.iitkgp.ac.in/</a></strong></li>
-<li className="list-group-item" style={{ "backgroundColor": "#dce8fb", "fontSize": "17px" }}><strong>	e-Content Courseware in UG subjects	:<a href="#" target="_blank">		http://cec.nic.in/cec/</strong></a></li>
+<li className="list-group-item" style={{ "backgroundColor": "#dce8fb", "fontSize": "17px" }}><strong>	e-Content Courseware in UG subjects	:<a href="http://cec.nic.in/cec/" target="_blank" rel="noopener noreferrer">		http://cec.nic.in/cec/</a></strong></li>
 <li className="list-group-item" style={{ "fontSize": "17px" }}><strong>E-YANTRA				:<a href="https://www.e-yantra.org/" target="_blank">		https://www.e-yantra.org/ </a></strong></li>
 <li className="list-group-item" style={{ "backgroundColor": "#dce8fb", "fontSize": "17px" }}><strong>	VIRTUAL LABS			:<a href="http://www.vlab.co.in/" target="_blank">		http://www.vlab.co.in/ </a></strong></li>
 <li className="list-group-item" style={{ "fontSize": "17px" }}><strong>SHODHGANGA			:	<a href="https://shodhganga.inflibnet.ac.in" target="_blank">	https://shodhganga.inflibnet.ac.in </a></strong></li>

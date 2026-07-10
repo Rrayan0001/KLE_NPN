@@ -2,36 +2,12 @@
 
 import SubpageLayout from '@/components/SubpageLayout';
 
-import Link from 'next/link';
-
 export default function ItepPage() {
   return (
-    <SubpageLayout breadcrumb="Itep">
-      {/* Breadcrumb Navigation */}
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link href="/">Home</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Itep
-          </li>
-        </ol>
-      </nav>
-
+    <SubpageLayout breadcrumb="ITEP">
       <div className="main-content py-5">
         <div className="container">
-          
-<nav aria-label="breadcrumb">
-		<ol className="breadcrumb">
-			<li className="breadcrumb-item">
-				<a href="/">Home</a>
-			</li>
-			<li className="breadcrumb-item active" aria-current="page">Integrated Teacher Education Program (ITEP)</li>
-		</ol>
-	</nav>
-	
-		<div className="about-page py-5">
+          <div className="about-page py-5">
 		<div className="container py-xl-5 py-lg-3">
 			<h3 className="title text-capitalize font-weight-light text-dark text-center mb-5">Integrated Teacher Education Program (ITEP)<span className="font-weight-bold"></span>
 			
@@ -48,7 +24,7 @@ export default function ItepPage() {
 							<li role="presentation"><a href="#menu3" role="tab" id="menu3-tab" data-toggle="tab" aria-controls="menu3"style={{ "fontSize": "1.2em" }}><strong>Disclosure</strong></a></li>&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp
 							
 	</ul><br /><br /><br />
-		<p><marquee><a href="https://ncte.gov.in" target="_blank"></a><strong>N C T E Website Link</marquee></strong></p>
+		<p><a href="https://ncte.gov.in" target="_blank" rel="noopener noreferrer"><strong>N C T E Website Link</strong></a></p>
 		<div id="myTabContent" className="tab-content">
 			<div role="tabpanel" className="tab-pane fade in active" id="home1" aria-labelledby="home-tab">
 				<h3 className="heading-agileinfo">LOI</h3>

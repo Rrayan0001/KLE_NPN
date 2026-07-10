@@ -20,7 +20,53 @@ export default function Header() {
   const [isAtTop, setIsAtTop] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
   const pathname = usePathname();
-  const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const headerRef = useRef<HTMLDivElement | null>(null);
+
+  // Measure visible header height and set CSS custom property
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (headerRef.current) {
+        let totalHeight = 0;
+        
+        // Measure announcement bar if present
+        const announcement = headerRef.current.querySelector(`.${s.announcementBar}`) as HTMLElement;
+        if (announcement) {
+          totalHeight += announcement.offsetHeight;
+        }
+
+        // Measure either desktop or mobile parts depending on viewport
+        const isDesktopMode = window.innerWidth > 1024;
+        if (isDesktopMode) {
+          const topHeader = headerRef.current.querySelector(`.${s.topHeader}`) as HTMLElement;
+          const menuBar = headerRef.current.querySelector(`.${s.menuBar}`) as HTMLElement;
+          if (topHeader) totalHeight += topHeader.offsetHeight;
+          if (menuBar) totalHeight += menuBar.offsetHeight;
+        } else {
+          const mobileHeader = headerRef.current.querySelector(`.${s.mobileHeader}`) as HTMLElement;
+          const mobileBrandBar = headerRef.current.querySelector(`.${s.mobileBrandBar}`) as HTMLElement;
+          if (mobileHeader) totalHeight += mobileHeader.offsetHeight;
+          if (mobileBrandBar) totalHeight += mobileBrandBar.offsetHeight;
+        }
+
+        if (totalHeight > 0) {
+          document.documentElement.style.setProperty('--header-total-height', `${totalHeight}px`);
+        }
+      }
+    };
+
+    updateHeaderHeight();
+    
+    // Add observers/listeners
+    window.addEventListener("resize", updateHeaderHeight);
+    
+    // Run after font/layout stabilizes
+    const timer = setTimeout(updateHeaderHeight, 300);
+
+    return () => {
+      window.removeEventListener("resize", updateHeaderHeight);
+      clearTimeout(timer);
+    };
+  }, [pathname, isSticky]);
 
   // Close menus on path change
   useEffect(() => {
@@ -153,7 +199,7 @@ export default function Header() {
   const isHeroState = pathname === "/" && isAtTop;
 
   return (
-    <>
+    <div ref={headerRef} style={{ width: '100%' }}>
       {/* Top Accreditation & Programme Announcement Bar */}
       <div className={s.announcementBar}>
         <div className={s.announcementText}>
@@ -415,6 +461,6 @@ export default function Header() {
 
       {/* Search overlay modal */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-    </>
+    </div>
   );
 }

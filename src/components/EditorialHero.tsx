@@ -119,8 +119,8 @@ export default function EditorialHero({
           --ek-green: #2A9D6F;
           --ek-paper: #F8F6F0;
           width: 100%;
-          height: calc(100vh - 170px);
-          height: calc(100dvh - 170px);
+          height: calc(100vh - var(--header-total-height, 170px));
+          height: calc(100dvh - var(--header-total-height, 170px));
           position: relative;
           overflow: hidden;
           background: var(--ek-navy);
@@ -247,7 +247,7 @@ export default function EditorialHero({
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-          .editorial-hero { height: calc(100vh - 138px); height: calc(100dvh - 138px); }
+          .editorial-hero { height: calc(100vh - var(--header-total-height, 270px)); height: calc(100dvh - var(--header-total-height, 270px)); }
           .hero-overlay-content { padding-top: 48px; }
           .hero-heading { font-size: clamp(2.5rem, 11vw, 4rem); }
           .hero-meta-bar { padding: 14px 16px; font-size: 9px; letter-spacing: 0.1em; gap: 8px; }
@@ -256,7 +256,7 @@ export default function EditorialHero({
           .hero-head { padding: 24px 0 12px; }
         }
         @media (max-width: 480px) {
-          .editorial-hero { height: calc(100vh - 138px); height: calc(100dvh - 138px); }
+          .editorial-hero { height: calc(100vh - var(--header-total-height, 270px)); height: calc(100dvh - var(--header-total-height, 270px)); }
           .hero-overlay-content { padding-top: 36px; }
           .hero-heading { font-size: clamp(2rem, 12vw, 3rem); letter-spacing: -0.03em; padding: 0 10px; }
           .hero-meta-bar { font-size: 8px; padding: 12px 10px; }

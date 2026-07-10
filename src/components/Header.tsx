@@ -240,9 +240,9 @@ export default function Header() {
 
         {/* MOBILE HEADER */}
         <div className={s.mobileHeader}>
-          <div className={s.logoBadgeMobile}>
+          <Link href="/" className={s.logoBadgeMobile} onClick={() => setIsOpen(false)}>
             <img src="/images/logos/navbar_logo_bgrmeoved.png" className={s.logoBadgeMobileImg} alt="KLE Logo" />
-          </div>
+          </Link>
           <div className={s.brandingMobile}>
             <h3 className={s.titleMobile}>KLE Society&apos;s <span className={s.titleMobileSpan}>G.I.Bagewadi College</span></h3>
             <div className={s.subtitleMobile}>Excellence Beyond Education</div>

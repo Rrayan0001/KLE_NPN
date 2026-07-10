@@ -274,7 +274,8 @@
   box-shadow: 0 8px 24px rgba(10, 22, 40, 0.12);
   border: 1px solid rgba(10, 22, 40, 0.08);
   border-radius: 0 0 6px 6px;
-  min-width: 260px;
+  min-width: 160px;
+  width: max-content;
   padding: 6px 0;
   opacity: 0;
   visibility: hidden;

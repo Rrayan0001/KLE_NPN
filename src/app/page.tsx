@@ -370,7 +370,7 @@ export default function Home() {
           <StaggerReveal stagger={120} distance={40} duration={900} threshold={0.2}>
             <div className={s.aboutImgContainer}>
               <RevealImage className={s.aboutRight2}>
-                <img src="/images/ap-1.jpg" alt="KLE College Campus" className={s.aboutImg2} />
+                <img src="/images/main_gallery/npn2.JPG" alt="KLE College Campus" className={s.aboutImg2} />
                 <div className={s.aboutImgOverlay} />
               </RevealImage>
               <div className={s.aboutImgSubCard}>

@@ -27,48 +27,37 @@ export default function AboutPage() {
 	<div className="about-page py-5">
 		<div className="container py-xl-5 py-lg-3">
 			<h3 className="title text-capitalize font-weight-light text-dark text-center mb-5">about
-				<span className="font-weight-bold">us</span>
-				</h3><h3 className="title text-capitalize font-weight-light text-dark text-center mb-5"><img src="/images/kore.jpg" alt="" className="img-fluid" />
-				<span className="font-weight-bold">us</span>
+				<span className="font-weight-bold"> us</span>
 			</h3>
 			<div className="row about-head-wthree">
 				<div className="col-lg-6 left-abw3ls">
-					<img src="/images/ap-1.jpg" alt="" className="img-fluid" />
+					<img src="/images/main_gallery/npn2.JPG" alt="KLE Campus" className="img-fluid" />
 				</div>
 				<div className="col-lg-6 right-abw3ls mt-lg-0 mt-sm-5 mt-4">
 					<h4 className="font-italic border-bottom text-center font-weight-bold pb-3 mb-4">Our History</h4>
-					<p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-						laboris nisi, Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-						ullamco laboris nisi. </p>
-					<p className="mt-3">Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi, Eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+					<p>Founded in 1961 by the KLE Society, G.I. Bagewadi College Nipani has provided quality higher education to generations of students across Belagavi and Vijayapur districts.</p>
+					<p className="mt-3">With accreditation and top academic results, the college offers diverse undergraduate, postgraduate, and professional programmes.</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-
 	
 	<div className="about-page-2 py-5">
 		<div className="container-fluid py-xl-5 py-lg-3">
 			<div className="row about-head-wthree-2">
 				<div className="col-lg-4 left-abw3ls text-lg-left text-center">
-					<img src="/images/ap-2.jpg" alt="" className="img-fluid" />
+					<img src="/images/main_gallery/npn3.JPG" alt="KLE Facilities" className="img-fluid" />
 				</div>
 				<div className="col-lg-4 right-abw3ls my-lg-0 my-sm-5 my-4">
 					<h4 className="font-italic border-bottom text-center font-weight-bold pb-3 mb-4">Our Mission</h4>
-					<p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-						laboris nisi. </p>
-					<p className="mt-3">Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi, Eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+					<p>To empower youth through educational excellence, technical competence, and ethical values while fostering inclusivity and social justice.</p>
 				</div>
 				<div className="col-lg-4 left-abw3ls text-lg-left text-center">
-					<img src="/images/ap-3.jpg" alt="" className="img-fluid" />
+					<img src="/images/main_gallery/npn4.jpg" alt="KLE Campus Life" className="img-fluid" />
 				</div>
 			</div>
 		</div>
 	</div>
-	
 
 	
 	<div className="team py-5">

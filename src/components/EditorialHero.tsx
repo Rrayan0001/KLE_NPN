@@ -1,12 +1,19 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
+const DEFAULT_IMAGES = [
+  '/images/main_gallery/npn21.JPG',
+  '/images/main_gallery/npn6.JPG',
+  '/images/main_gallery/npn1.JPG',
+];
+
 interface EditorialHeroProps {
   /** Defaults to KLE Bagewadi College branding */
   heading?: string;
   leftMeta?: string;
   centerMeta?: string;
   rightMeta?: string;
+  images?: string[];
   image?: string;
   ctaLabel?: string;
   ctaHref?: string;
@@ -17,7 +24,8 @@ export default function EditorialHero({
   leftMeta = 'ESTD. 1961 · NIPANI',
   centerMeta = 'NAAC ACCREDITED A GRADE',
   rightMeta = 'ADMISSIONS 2026–27',
-  image = '/images/herosection.png',
+  images,
+  image,
   ctaLabel = 'Discover the College',
   ctaHref = '/aboutclg',
 }: EditorialHeroProps) {
@@ -26,15 +34,19 @@ export default function EditorialHero({
   const [mounted, setMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
+
+  const heroImages = images || (image ? [image] : DEFAULT_IMAGES);
 
   useEffect(() => {
     setMounted(true);
-    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setReducedMotion(isReduced);
     const mobileMql = window.matchMedia('(max-width: 768px)');
     const updateMobile = () => setIsMobile(mobileMql.matches);
     updateMobile();
     mobileMql.addEventListener('change', updateMobile);
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (isReduced) {
       return () => mobileMql.removeEventListener('change', updateMobile);
     }
     let raf = 0;
@@ -49,17 +61,28 @@ export default function EditorialHero({
     };
   }, []);
 
+  useEffect(() => {
+    if (heroImages.length <= 1 || reducedMotion) return;
+    const interval = setInterval(() => {
+      setCurrentImgIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [heroImages.length, reducedMotion]);
+
   return (
     <>
       <div ref={rootRef} className="editorial-hero">
-        {/* ── 1. MEDIA VIEWPORT (BACKGROUND) ── */}
+        {/* ── 1. MEDIA VIEWPORT (BACKGROUND SLIDESHOW) ── */}
         <div className="hero-viewport">
-          <img
-            src={image}
-            alt="KLE College Campus"
-            className={`hero-img ${mounted ? 'zoomed' : ''}`}
-            loading="eager"
-          />
+          {heroImages.map((imgSrc, idx) => (
+            <img
+              key={imgSrc}
+              src={imgSrc}
+              alt={`KLE College Campus Slide ${idx + 1}`}
+              className={`hero-img ${idx === currentImgIndex ? 'active' : ''} ${mounted ? 'zoomed' : ''}`}
+              loading={idx === 0 ? 'eager' : 'lazy'}
+            />
+          ))}
           <div className="hero-top-overlay" />
           <div className="hero-gradient" />
         </div>
@@ -204,18 +227,24 @@ export default function EditorialHero({
           z-index: 1;
         }
         .hero-img {
+          position: absolute;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
           transform: scale(1.12);
           opacity: 0;
-          transition: transform 2.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s ease;
-          will-change: transform;
+          transition: transform 2.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.4s ease-in-out;
+          will-change: transform, opacity;
+          pointer-events: none;
         }
         .hero-img.zoomed {
           transform: scale(1);
+        }
+        .hero-img.active {
           opacity: 1;
+          z-index: 1;
         }
         .hero-top-overlay {
           position: absolute;

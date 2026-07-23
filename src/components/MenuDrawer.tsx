@@ -62,8 +62,10 @@ export default function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
       { name: 'Grievance Cell', url: '/cwc' },
       { name: 'Placements', url: '/placements' },
     ],
+    'Photo Gallery': [
+      { name: 'Campus & Event Gallery', url: '/gallery' },
+    ],
     'In Focus': [
-      { name: 'Photo Gallery', url: '/gallery' },
       { name: 'Events', url: '/events' },
       { name: 'Achievements', url: '/achivement' },
       { name: 'Research', url: '/research' },

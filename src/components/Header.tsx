@@ -172,11 +172,11 @@ export default function Header() {
         { name: "Placements Support", href: "/placements" },
       ],
     },
+    { name: "GALLERY", href: "/gallery" },
     {
       name: "IN FOCUS",
-      href: "/gallery",
+      href: "/events",
       sublinks: [
-        { name: "Photo Gallery", href: "/gallery" },
         { name: "Events Calendar", href: "/events" },
         { name: "Achievements Board", href: "/achivement" },
         { name: "Research Activities", href: "/research" },

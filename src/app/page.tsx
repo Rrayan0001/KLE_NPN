@@ -174,7 +174,7 @@ export default function Home() {
       short: 'B.A.',
       url: '/ba',
       color: '#E8722A',
-      image: '/images/c1.jpg',
+      image: '/images/programs_images/6. Bachelor of Arts (B.A.).png',
       duration: '4 Years (NEP)',
       subjects: 'History · Economics · Political Science · English',
       prospects: 'Civil Services, Media, Journalism, Education',
@@ -189,7 +189,7 @@ export default function Home() {
       short: 'B.Sc.',
       url: '/bsc',
       color: '#2A9D6F',
-      image: '/images/c2.jpg',
+      image: '/images/programs_images/5. Bachelor of Science (B.Sc.).png',
       duration: '4 Years (NEP)',
       subjects: 'Physics · Chemistry · Mathematics · Comp. Science',
       prospects: 'Research Laboratories, IT Sector, Data Analytics',
@@ -204,7 +204,7 @@ export default function Home() {
       short: 'B.Com.',
       url: '/comm',
       color: '#0A1628',
-      image: '/images/c3.jpg',
+      image: '/images/programs_images/4. Bachelor of Commerce (B.Com.).png',
       duration: '4 Years (NEP)',
       subjects: 'Financial Accounting · Taxation · Law · Audit',
       prospects: 'Chartered Accountancy, Banking, Corporate Finance',
@@ -219,7 +219,7 @@ export default function Home() {
       short: 'M.Com.',
       url: '/mcom',
       color: '#E8722A',
-      image: '/images/c4.jpg',
+      image: '/images/programs_images/1. Master of Commerce (M.Com.).png',
       duration: '2 Years Postgraduate',
       subjects: 'Adv. Cost Accounting · Financial Mgmt · Commerce',
       prospects: 'Management Audits, Investment Banking, Academia',
@@ -234,7 +234,7 @@ export default function Home() {
       short: 'M.Sc.',
       url: '/msc',
       color: '#2A9D6F',
-      image: '/images/c5.jpg',
+      image: '/images/programs_images/2. Master of Science (M.Sc.).png',
       duration: '2 Years Postgraduate',
       subjects: 'Organic Chemistry · Inorganic Chemistry · Analysis',
       prospects: 'Pharmaceuticals, R&D Labs, Chemical Industries',
@@ -249,7 +249,7 @@ export default function Home() {
       short: 'M.A.',
       url: '/ma',
       color: '#0A1628',
-      image: '/images/c6.jpg',
+      image: '/images/programs_images/3. Master of Arts (M.A.).png',
       duration: '2 Years Postgraduate',
       subjects: 'British & American Literature · Linguistics · Poetry',
       prospects: 'Publishing Houses, Journalism, Content Writing, Teaching',
@@ -259,6 +259,21 @@ export default function Home() {
         </svg>
       )
     },
+    {
+      title: 'ITEP Programme',
+      short: 'ITEP',
+      url: '/itep',
+      color: '#E8722A',
+      image: '/images/programs_images/7. ITEP (Integrated Teacher Education Programme).png',
+      duration: '4 Years (ITEP)',
+      subjects: 'B.A. B.Ed · B.Sc. B.Ed · Pedagogy · Teacher Education',
+      prospects: 'Schools, Educational Institutions, Academic Research',
+      icon: (
+        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-5.25 6.557c0 1.5 2.352 2.7 5.25 2.7s5.25-1.2 5.25-2.7" />
+        </svg>
+      )
+    }
   ];
 
   const uniquePartners = [

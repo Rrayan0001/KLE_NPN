@@ -4,12 +4,42 @@ import StaggerReveal from './StaggerReveal';
 
 export default function FacilitiesBar() {
   const facs = [
-    { name: 'Library & Info Center', desc: 'Spacious library hosting over 50,000 reference books, journals, and a modern digital reading room.', url: '/library', image: '/images/library.png' },
-    { name: 'Boys & Girls Hostels', desc: 'Safe, comfortable hostels with clean dining halls adjacent to the main college campus.', url: '/hostel', image: '/images/boys_hostel.png' },
-    { name: 'Gymnasium & Sports', desc: 'Modern gym equipment, indoor game halls, and fields supporting university-level sports programs.', url: '/gym', image: '/images/gym.png' },
-    { name: 'Swimming Pool', desc: 'Premium multi-lane swimming pool open for practice and inter-collegiate tournaments.', url: '/indoor', image: '/images/swimming pool.png' },
-    { name: 'Canteen Facility', desc: 'Hygiene-certified campus cafeteria offering fresh meals and snacks at student-friendly rates.', url: '/can', image: '/images/canteen1.png' },
-    { name: 'Classrooms & Labs', desc: '29 state-of-the-art classrooms and 11 well-equipped science laboratories for practical learning.', url: '/class', image: '/images/office.png' },
+    {
+      name: 'Indoor Sports Complex',
+      desc: 'State-of-the-art indoor sports facilities building housing badminton courts, table tennis, and physical fitness halls.',
+      url: '/gallery',
+      image: '/images/main_gallery/npn1.JPG'
+    },
+    {
+      name: 'Olympic-Standard Swimming Pool',
+      desc: 'Multi-lane athletic swimming pool host to inter-collegiate competitions, aquatic training, and student swimming sports.',
+      url: '/gallery',
+      image: '/images/main_gallery/npn4.jpg'
+    },
+    {
+      name: 'NCC & Cadet Corps Parade Ground',
+      desc: 'Dedicated parade grounds hosting National Cadet Corps (NCC) drills, Republic Day march past, and leadership training.',
+      url: '/gallery',
+      image: '/images/main_gallery/npn2.JPG'
+    },
+    {
+      name: 'Cultural & Performing Arts Stage',
+      desc: 'Vibrant cultural stage for classical dance, folk arts, theater performances, and annual student talent showcases.',
+      url: '/gallery',
+      image: '/images/main_gallery/npn3.JPG'
+    },
+    {
+      name: 'Auditorium & Convocation Hall',
+      desc: 'Spacious Golden Jubilee auditorium hosting faculty felicitations, national conferences, and academic symposia.',
+      url: '/gallery',
+      image: '/images/main_gallery/npn6.JPG'
+    },
+    {
+      name: 'Student Community & Ethnic Days',
+      desc: 'Rich campus life celebrating Traditional Day, youth festivals, and vibrant cultural heritage across all departments.',
+      url: '/gallery',
+      image: '/images/main_gallery/npn7.JPG'
+    },
   ];
   return (
     <section className={s.facs}>

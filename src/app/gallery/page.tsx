@@ -121,7 +121,7 @@ export default function GalleryPage() {
                           <div style={{ position: 'relative', height: '240px', overflow: 'hidden' }}>
                             <img
                               src={img.src}
-                              alt={img.title}
+                              alt="Gallery photo"
                               className="img-fluid gallery-image-hover"
                               style={{
                                 height: '100%',
@@ -130,18 +130,6 @@ export default function GalleryPage() {
                                 transition: 'transform 0.4s ease'
                               }}
                             />
-                            <div style={{
-                              position: 'absolute',
-                              inset: 0,
-                              background: 'linear-gradient(to top, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.1) 60%, transparent 100%)',
-                              display: 'flex',
-                              flexDirection: 'column',
-                              justifyContent: 'flex-end',
-                              padding: '16px'
-                            }}>
-                              <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#E8722A', fontWeight: 700 }}>{img.category}</span>
-                              <h3 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 600, margin: '2px 0 0' }}>{img.title}</h3>
-                            </div>
                           </div>
                         </div>
                       </a>
